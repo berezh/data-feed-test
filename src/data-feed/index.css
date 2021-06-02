@@ -1,0 +1,173 @@
+.feed_filter {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #e8e4eb; }
+  .feed_filter > *:not(:last-child) {
+    margin-bottom: 10px; }
+  .feed_filter__search {
+    display: flex;
+    flex-direction: row; }
+    .feed_filter__search > *:not(:last-child) {
+      margin-right: 10px; }
+    .feed_filter__search > * {
+      flex: 1; }
+  .feed_filter__children {
+    display: flex;
+    flex-direction: row; }
+    .feed_filter__children > *:not(:last-child) {
+      margin-right: 10px; }
+  .feed_filter__bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
+  .feed_filter__actions {
+    display: flex;
+    justify-content: flex-end; }
+
+.app-feed__filter {
+  margin-bottom: 15px; }
+
+.app-feed-item {
+  background-color: white;
+  padding: 10px !important; }
+  .app-feed-item__left {
+    margin-right: 10px;
+    float: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .app-feed-item__right {
+    margin-left: 10px;
+    float: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .app-feed-item__date {
+    display: flex;
+    font-size: 10px; }
+    .app-feed-item__date > div {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .app-feed-item__date > div :first-child {
+        margin-right: 3px; }
+
+.data-feed__data > div {
+  border-bottom: 1px solid #e6e6e6; }
+  .data-feed__data > div:last-child {
+    border-bottom: none; }
+
+.data-feed__load {
+  text-align: center;
+  padding: 10px 0; }
+  .data-feed__load-btn {
+    display: inline;
+    cursor: pointer; }
+    .data-feed__load-btn:hover {
+      text-decoration: underline; }
+
+.data-feed__page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 0; }
+  .data-feed__page > div:not(:last-child) {
+    margin-right: 10px; }
+
+.feed-item {
+  padding: 15px 0;
+  display: flex; }
+  .feed-item__content {
+    flex: 1; }
+    .feed-item__content > div:not(:first-child) {
+      margin-top: 10px; }
+  .feed-item__left {
+    display: flex; }
+  .feed-item__right {
+    display: flex; }
+  .feed-item__top {
+    display: flex;
+    align-items: flex-start; }
+  .feed-item__title {
+    flex: 1;
+    font-size: 18px; }
+  .feed-item__top-right {
+    font-size: 10px;
+    margin-left: 5px; }
+  .feed-item__attribute-set {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0 !important; }
+    .feed-item__attribute-set > div {
+      margin: 10px 10px 0 0; }
+      .feed-item__attribute-set > div:last-child {
+        margin-right: 0; }
+  .feed-item__action-set {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-end;
+    justify-content: flex-end;
+    flex-wrap: wrap; }
+    .feed-item__action-set > div {
+      margin-left: 5px; }
+      .feed-item__action-set > div:first-child {
+        margin-left: 0; }
+
+.feed-sort__sort {
+  display: flex;
+  align-items: center; }
+
+.feed-sort__option {
+  font-size: 12px;
+  display: flex;
+  margin: 0 8px 0 0;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  padding: 1px 0; }
+  .feed-sort__option--asc {
+    font-weight: bold;
+    border-top-color: #333; }
+  .feed-sort__option--desc {
+    font-weight: bold;
+    border-bottom-color: #333; }
+  .feed-sort__option > *:not(:last-child) {
+    margin-right: 3px; }
+
+.feed-attribute {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; }
+  .feed-attribute__icon {
+    margin-right: 5px;
+    display: flex; }
+  .feed-attribute__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+  .feed-attribute__name {
+    font-size: 10px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .feed-attribute__value {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+
+.filter-radio {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .filter-radio > *:not(:last-child) {
+    margin-right: 5px; }
