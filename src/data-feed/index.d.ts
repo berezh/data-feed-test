@@ -5,3 +5,4 @@ export * from './filter-feed';
 export * from './feed';
 export * from './item';
 export * from './utils';
+export * from './texts';

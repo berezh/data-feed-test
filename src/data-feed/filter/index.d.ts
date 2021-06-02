@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { FeedSortOption, FeedFilterValues } from '../interfaces';
+import { DataFeedTexts } from '../texts';
 interface ComponentProps {
     children?: React.ReactNode;
     formName: string;
@@ -8,6 +9,7 @@ interface ComponentProps {
     searchContent?: React.ReactNode;
     total?: number;
     className?: string;
+    texts?: Partial<DataFeedTexts>;
 }
 export declare function FeedFilterForm<T = FeedFilterValues>({ ...props }: ComponentProps & {
     initialValues?: Partial<T>;

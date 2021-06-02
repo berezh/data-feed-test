@@ -203,7 +203,7 @@ var FeedArrayUtil = {
 };
 
 var CurrentComponent$2 = function (_a) {
-    var _b = _a.input, inputName = _b.name, value = _b.value, onChange = _b.onChange, options = _a.options;
+    var _b = _a.input, inputName = _b.name, value = _b.value, onChange = _b.onChange, options = _a.options, texts = _a.texts;
     var inputValue = useMemo(function () {
         return value ? SortUtil.toValue(value) : '';
     }, [value]);
@@ -218,7 +218,7 @@ var CurrentComponent$2 = function (_a) {
     return (React.createElement(React.Fragment, null,
         React.createElement("input", { type: "hidden", name: inputName, value: inputValue }),
         options.length ? (React.createElement("div", { className: 'feed-sort__sort' },
-            React.createElement("div", { className: 'feed-sort__option' }, "Sort: "),
+            React.createElement("div", { className: 'feed-sort__option' }, (texts === null || texts === void 0 ? void 0 : texts.sort) || "Sort: "),
             React.createElement(React.Fragment, { key: "list" }, options.map(function (_a, i) {
                 var _b;
                 var label = _a.label, optionName = _a.name, icon = _a.icon;
@@ -270,7 +270,7 @@ var FilterCheckboxField = function (props) {
 };
 
 function DialogComponent(_a) {
-    var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className;
+    var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts;
     var dispatch = useDispatch();
     var handleClean = useCallback(function () {
         dispatch(reset(formName));
@@ -279,15 +279,15 @@ function DialogComponent(_a) {
         React.createElement(FilterHiddenField, { name: "skip" }),
         React.createElement(FilterHiddenField, { name: "page" }),
         options.length ? (React.createElement("div", { className: 'feed_filter__sort' },
-            React.createElement(FilterSortField, { name: "sort", options: options }))) : null,
+            React.createElement(FilterSortField, { texts: texts, name: "sort", options: options }))) : null,
         React.createElement("div", { className: 'feed_filter__search' },
             React.createElement(FilterSearchField, null),
             searchContent),
         children ? React.createElement("div", { className: 'feed_filter__children' }, children) : null,
         React.createElement("div", { className: 'feed_filter__bottom' },
-            React.createElement("div", null, total ? 'Total' + ": " + total : null),
+            React.createElement("div", null, total ? ((texts === null || texts === void 0 ? void 0 : texts.total) || 'Total') + ": " + total : null),
             React.createElement("div", { className: 'feed_filter__actions' },
-                React.createElement("span", { onClick: handleClean }, 'Clean')))));
+                React.createElement("span", { onClick: handleClean }, (texts === null || texts === void 0 ? void 0 : texts.clean) || 'Clean')))));
 }
 function FeedFilterForm(_a) {
     var props = __rest(_a, []);
@@ -311,19 +311,22 @@ function DataFeed(_a) {
     var pages = useMemo(function () {
         return PageUtil.getPages(all, step, page);
     }, [all, step, page]);
+    var seeMoreButton = useMemo(function () {
+        return renderLoadMoreButton
+            ? renderLoadMoreButton(loading)
+            : loading
+                ? texts.loading
+                    ? texts.loading
+                    : 'Loading ...'
+                : texts.loadMore
+                    ? texts.loading
+                    : 'See More';
+    }, [renderLoadMoreButton, loading, texts]);
     return (React.createElement("div", { className: classNames('data-feed', className) },
         children,
         React.createElement("div", { className: "data-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
         data.length < all && page === 1 ? (React.createElement("div", { className: "data-feed__load", ref: loadRef },
-            React.createElement("div", { className: "data-feed__load-btn", onClick: handleLoad }, renderLoadMoreButton
-                ? renderLoadMoreButton(loading)
-                : loading
-                    ? texts['loading']
-                        ? texts['loading']
-                        : 'Loading ...'
-                    : texts['load']
-                        ? texts['load']
-                        : 'See More'))) : null,
+            React.createElement("div", { className: "data-feed__load-btn", onClick: handleLoad }, seeMoreButton))) : null,
         step && step < all && data.length <= step ? (React.createElement("div", { className: "data-feed__page" }, pages.map(function (p, i) {
             return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
@@ -332,7 +335,7 @@ function DataFeed(_a) {
 var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
 var formCount = 0;
 var FilterDataFeed = function (_a) {
-    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d;
+    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts;
     var dispatch = useDispatch();
     var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
     var formName = useMemo(function () {
@@ -379,13 +382,6 @@ var FilterDataFeed = function (_a) {
         }
         return '';
     }, [renderItem, renderRow]);
-    var texts = useMemo(function () {
-        return {
-            sort: 'Sort By',
-            total: 'Total',
-            load: 'Load More',
-        };
-    }, []);
     var currentPage = useMemo(function () {
         var page = (initialValues || {}).page;
         return page;
@@ -398,8 +394,8 @@ var FilterDataFeed = function (_a) {
         var _a = initialValues || {}, _b = _a.skip, skip = _b === void 0 ? 0 : _b, rest = __rest(_a, ["skip"]);
         dispatch(initialize(formName, FilterUtil.toInner(__assign({ skip: skip }, rest))));
     }, []);
-    return (React.createElement(DataFeed, { texts: texts, all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem },
-        React.createElement(FeedFilterForm, { className: "root__filter", total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent }, children)));
+    return (React.createElement(DataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
+        React.createElement(FeedFilterForm, { className: "root__filter", total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent, texts: texts }, children)));
 };
 
 var FeedAttribute = function (_a) {
@@ -433,5 +429,16 @@ var DataFeedItem = function (_a) {
             actionSet.length > 0 ? (React.createElement("div", { className: "feed-item__action-set" }, actionSet.map(function (action, i) { return (React.createElement("div", { key: i }, action)); }))) : null),
         right ? React.createElement("div", { className: "feed-item__right" }, right) : null));
 };
+
+var _a;
+var defaultLocale = (_a = {},
+    _a['sort'] = '',
+    _a['total'] = '',
+    _a['clean'] = '',
+    _a['search'] = '',
+    _a['loadMore'] = '',
+    _a['loading'] = '',
+    _a);
+// export type DataFeedText = keyof DataFeedTexts;
 
 export { DataFeed, DataFeedItem, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterTextField, FilterUtil, PageUtil, SortUtil };

@@ -8,6 +8,7 @@ import { EuState, DataGenerator } from "../../components/data-gererator";
 import { FeedUi } from "../../components/feed-ui";
 import { BaseFeedParams } from "../../../../lib/interfaces";
 import {
+  DataFeedTexts,
   FeedFilterValues,
   FilterCheckboxField,
   FilterDataFeed,
@@ -42,6 +43,12 @@ export const DefaultPage: React.FC = () => {
     console.log("items", items.length);
   }, [items]);
 
+  const texts = useMemo<Partial<DataFeedTexts>>(() => {
+    return {
+      sort: "Сорт",
+    };
+  }, []);
+
   return (
     <MasterPage>
       <FilterDataFeed
@@ -51,6 +58,7 @@ export const DefaultPage: React.FC = () => {
         sortOptions={FeedUi.sortOptions}
         initialValues={initialValues}
         onChange={handleChange}
+        texts={texts}
       >
         <FilterCheckboxField name="isEuro" label="Is Euro" />
         <FilterSelectField
