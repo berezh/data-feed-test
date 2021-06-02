@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useCallback } from "react";
 
 import "./index.scss";
@@ -9,7 +9,7 @@ import { FeedUi } from "../../components/feed-ui";
 import { BaseFeedParams } from "../../../../lib/interfaces";
 import {
   FeedFilterValues,
-  FilterBoolField,
+  FilterCheckboxField,
   FilterDataFeed,
   FilterSelectField,
   FilterTextField,
@@ -23,9 +23,9 @@ export const DefaultPage: React.FC = () => {
     (options: BaseFeedParams) => {
       console.log("default: ", options);
       const feed = DataGenerator.loadEuState(10, options);
-      const newItems = feed.skip === 0 ? feed.items : [...items, ...feed.items];
-      console.log("feed", feed);
-      setItems(newItems);
+      // const newItems = feed.skip === 0 ? feed.items : [...items, ...feed.items];
+      // console.log("feed", feed);
+      setItems(feed.items);
       setAll(feed.all);
     },
     [items]
@@ -38,6 +38,10 @@ export const DefaultPage: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("items", items.length);
+  }, [items]);
+
   return (
     <MasterPage>
       <FilterDataFeed
@@ -48,7 +52,7 @@ export const DefaultPage: React.FC = () => {
         initialValues={initialValues}
         onChange={handleChange}
       >
-        <FilterBoolField name="isEuro" label="Is Euro" />
+        <FilterCheckboxField name="isEuro" label="Is Euro" />
         <FilterSelectField
           name="language"
           placeholder="Select Language"

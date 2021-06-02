@@ -6,7 +6,7 @@ import { MasterPage } from "../../components/master-page";
 import { EuState, DataGenerator } from "../../components/data-gererator";
 import { FeedUi } from "../../components/feed-ui";
 import {
-  FilterBoolField,
+  FilterCheckboxField,
   FilterDataFeed,
   FilterSearchField,
   FilterSelectField,
@@ -41,7 +41,7 @@ export const NoInitialLoadPage: React.FC = () => {
         renderItem={FeedUi.renderItem}
         showTotal={true}
       >
-        <FilterBoolField name="isEuro" label="Is Euro" />
+        <FilterCheckboxField name="isEuro" label="Is Euro" />
         <FilterSelectField
           name="language"
           placeholder="Select Language"

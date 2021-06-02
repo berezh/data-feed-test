@@ -1,15 +1,9 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var React = require('react');
-var React__default = _interopDefault(React);
-var reduxForm = require('redux-form');
-var classNames = _interopDefault(require('classnames'));
-var reactRedux = require('react-redux');
-var debounce = _interopDefault(require('lodash.debounce'));
+/* eslint-disable */
+import React, { useMemo, useCallback, useState, useRef, useEffect } from 'react';
+import { Field, reduxForm, reset, Form, change, initialize } from 'redux-form';
+import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
+import debounce from 'lodash.debounce';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -59,28 +53,28 @@ function __spreadArrays() {
 
 var CurrentComponent = function (_a) {
     var restinput = _a.input, rest = __rest(_a, ["input"]);
-    return React__default.createElement("input", __assign({}, restinput, rest));
+    return React.createElement("input", __assign({}, restinput, rest));
 };
 var FilterTextField = function (_a) {
     var props = __rest(_a, []);
-    return React__default.createElement(reduxForm.Field, __assign({ component: CurrentComponent }, props));
+    return React.createElement(Field, __assign({ component: CurrentComponent }, props));
 };
 
 var FilterSearchField = function (_a) {
     var _b = _a.name, name = _b === void 0 ? 'search' : _b, placeholder = _a.placeholder, props = __rest(_a, ["name", "placeholder"]);
-    return React__default.createElement(FilterTextField, __assign({ placeholder: placeholder || 'Search', name: name }, props));
+    return React.createElement(FilterTextField, __assign({ placeholder: placeholder || 'Search', name: name }, props));
 };
 
 var CurrentComponent$1 = function (_a) {
     var _b = _a.input, value = _b.value, onChange = _b.onChange, options = _a.options, placeholder = _a.placeholder;
-    return (React__default.createElement("select", { value: value, onChange: onChange },
-        placeholder ? React__default.createElement("option", null, placeholder) : null,
+    return (React.createElement("select", { value: value, onChange: onChange },
+        placeholder ? React.createElement("option", null, placeholder) : null,
         options.map(function (x, i) {
-            return (React__default.createElement("option", { value: x.value, key: i }, x.text));
+            return (React.createElement("option", { value: x.value, key: i }, x.text));
         })));
 };
 var FilterSelectField = function (props) {
-    return React__default.createElement(reduxForm.Field, __assign({ component: CurrentComponent$1 }, props));
+    return React.createElement(Field, __assign({ component: CurrentComponent$1 }, props));
 };
 
 var SortUtil = /** @class */ (function () {
@@ -210,121 +204,118 @@ var FeedArrayUtil = {
 
 var CurrentComponent$2 = function (_a) {
     var _b = _a.input, inputName = _b.name, value = _b.value, onChange = _b.onChange, options = _a.options;
-    var inputValue = React.useMemo(function () {
+    var inputValue = useMemo(function () {
         return value ? SortUtil.toValue(value) : '';
     }, [value]);
-    var sortValue = React.useMemo(function () {
+    var sortValue = useMemo(function () {
         return value ? value : { mode: 'asc', name: '' };
     }, [value]);
-    var handleSort = React.useCallback(function (newName) {
+    var handleSort = useCallback(function (newName) {
         var mode = sortValue.mode, name = sortValue.name;
         var newValue = name === newName ? { name: name, mode: mode === 'asc' ? 'desc' : 'asc' } : { name: newName, mode: mode };
         onChange(newValue);
     }, [sortValue]);
-    return (React__default.createElement(React__default.Fragment, null,
-        React__default.createElement("input", { type: "hidden", name: inputName, value: inputValue }),
-        options.length ? (React__default.createElement("div", { className: 'feed-sort__sort' },
-            React__default.createElement("div", { className: 'feed-sort__option' }, "Sort: "),
-            React__default.createElement(React__default.Fragment, { key: "list" }, options.map(function (_a, i) {
+    return (React.createElement(React.Fragment, null,
+        React.createElement("input", { type: "hidden", name: inputName, value: inputValue }),
+        options.length ? (React.createElement("div", { className: 'feed-sort__sort' },
+            React.createElement("div", { className: 'feed-sort__option' }, "Sort: "),
+            React.createElement(React.Fragment, { key: "list" }, options.map(function (_a, i) {
                 var _b;
                 var label = _a.label, optionName = _a.name, icon = _a.icon;
                 var currentMode = optionName === sortValue.name ? sortValue.mode : undefined;
-                return (React__default.createElement("div", { key: i, className: classNames('feed-sort__option', (_b = {},
+                return (React.createElement("div", { key: i, className: classNames('feed-sort__option', (_b = {},
                         _b["feed-sort__option--" + currentMode] = !!currentMode,
                         _b)), onClick: function () { return handleSort(optionName); } },
                     icon,
-                    React__default.createElement("span", null, "" + (label || optionName))));
+                    React.createElement("span", null, "" + (label || optionName))));
             })))) : null));
 };
 var FilterSortField = function (props) {
-    return React__default.createElement(reduxForm.Field, __assign({ component: CurrentComponent$2 }, props));
+    return React.createElement(Field, __assign({ component: CurrentComponent$2 }, props));
 };
 
 var CurrentComponent$3 = function (_a) {
     var input = _a.input;
-    return React__default.createElement("input", __assign({ type: "hidden" }, input));
+    return React.createElement("input", __assign({ type: "hidden" }, input));
 };
 var FilterHiddenField = function (_a) {
     var name = _a.name, props = __rest(_a, ["name"]);
-    return React__default.createElement(reduxForm.Field, __assign({ name: name, component: CurrentComponent$3 }, props));
+    return React.createElement(Field, __assign({ name: name, component: CurrentComponent$3 }, props));
 };
 
 var CurrentComponent$4 = function (_a) {
     var _b = _a.input, inputValue = _b.value, inputName = _b.name, onChange = _b.onChange, options = _a.options;
-    return (React__default.createElement("div", { className: "filter-radio" }, options.map(function (_a, i) {
+    var handleChange = useCallback(function (e) {
+        onChange(e.currentTarget.value);
+    }, [onChange]);
+    return (React.createElement("div", { className: "filter-radio" }, options.map(function (_a, i) {
         var value = _a.value, text = _a.text;
-        return (React__default.createElement("label", { key: i },
-            React__default.createElement("input", { type: "radio", value: value, name: inputName, onChange: onChange, checked: value === inputValue }),
+        return (React.createElement("label", { key: i },
+            React.createElement("input", { type: "radio", value: value, name: inputName, onChange: handleChange, checked: value === inputValue }),
             text));
     })));
 };
 var FilterRadioField = function (props) {
-    return React__default.createElement(reduxForm.Field, __assign({ component: CurrentComponent$4 }, props));
+    return React.createElement(Field, __assign({ component: CurrentComponent$4 }, props));
 };
 
-var FilterBoolField = function (props) {
-    var yesNoOptions = React.useMemo(function () {
-        return [
-            {
-                text: 'Yes',
-                value: true,
-            },
-            {
-                text: 'No',
-                value: false,
-            },
-        ];
-    }, []);
-    return React__default.createElement(FilterRadioField, __assign({ options: yesNoOptions }, props));
+var CurrentComponent$5 = function (_a) {
+    var label = _a.label, _b = _a.input, value = _b.value, name = _b.name, onChange = _b.onChange, checked = _b.checked;
+    return (React.createElement("label", null,
+        React.createElement("input", { type: "checkbox", value: value, name: name, onChange: onChange, checked: checked }),
+        label));
+};
+var FilterCheckboxField = function (props) {
+    return React.createElement(Field, __assign({ component: CurrentComponent$5 }, props));
 };
 
 function DialogComponent(_a) {
     var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className;
-    var dispatch = reactRedux.useDispatch();
-    var handleClean = React.useCallback(function () {
-        dispatch(reduxForm.reset(formName));
+    var dispatch = useDispatch();
+    var handleClean = useCallback(function () {
+        dispatch(reset(formName));
     }, [formName]);
-    return (React__default.createElement(reduxForm.Form, { onSubmit: handleSubmit, className: classNames('feed_filter', className) },
-        React__default.createElement(FilterHiddenField, { name: "skip" }),
-        React__default.createElement(FilterHiddenField, { name: "page" }),
-        options.length ? (React__default.createElement("div", { className: 'feed_filter__sort' },
-            React__default.createElement(FilterSortField, { name: "sort", options: options }))) : null,
-        React__default.createElement("div", { className: 'feed_filter__search' },
-            React__default.createElement(FilterSearchField, null),
+    return (React.createElement(Form, { onSubmit: handleSubmit, className: classNames('feed_filter', className) },
+        React.createElement(FilterHiddenField, { name: "skip" }),
+        React.createElement(FilterHiddenField, { name: "page" }),
+        options.length ? (React.createElement("div", { className: 'feed_filter__sort' },
+            React.createElement(FilterSortField, { name: "sort", options: options }))) : null,
+        React.createElement("div", { className: 'feed_filter__search' },
+            React.createElement(FilterSearchField, null),
             searchContent),
-        children ? React__default.createElement("div", { className: 'feed_filter__children' }, children) : null,
-        React__default.createElement("div", { className: 'feed_filter__bottom' },
-            React__default.createElement("div", null, total ? 'Total' + ": " + total : null),
-            React__default.createElement("div", { className: 'feed_filter__actions' },
-                React__default.createElement("span", { onClick: handleClean }, 'Clean')))));
+        children ? React.createElement("div", { className: 'feed_filter__children' }, children) : null,
+        React.createElement("div", { className: 'feed_filter__bottom' },
+            React.createElement("div", null, total ? 'Total' + ": " + total : null),
+            React.createElement("div", { className: 'feed_filter__actions' },
+                React.createElement("span", { onClick: handleClean }, 'Clean')))));
 }
 function FeedFilterForm(_a) {
     var props = __rest(_a, []);
-    var Component = React.useState(reduxForm.reduxForm({
+    var Component = useState(reduxForm({
         form: props.formName,
     })(DialogComponent))[0];
-    return React__default.createElement(Component, __assign({}, props));
+    return React.createElement(Component, __assign({}, props));
 }
 
 function useDebouncedCallback(wait, callback, deps) {
     if (deps === void 0) { deps = []; }
-    return React.useCallback(debounce(callback, wait), deps);
+    return useCallback(debounce(callback, wait), deps);
 }
 
 function DataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, renderLoadMoreButton = _a.renderLoadMoreButton, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
-    var loadRef = React.useRef(null);
-    var handleLoad = React.useCallback(function () {
+    var loadRef = useRef(null);
+    var handleLoad = useCallback(function () {
         onChange && onChange(data.length);
     }, [data, onChange]);
-    var pages = React.useMemo(function () {
+    var pages = useMemo(function () {
         return PageUtil.getPages(all, step, page);
     }, [all, step, page]);
-    return (React__default.createElement("div", { className: classNames('data-feed', className) },
+    return (React.createElement("div", { className: classNames('data-feed', className) },
         children,
-        React__default.createElement("div", { className: "data-feed__data" }, data.map(function (item, i) { return (React__default.createElement("div", { key: i }, renderItem(item))); })),
-        data.length < all && page === 1 ? (React__default.createElement("div", { className: "data-feed__load", ref: loadRef },
-            React__default.createElement("div", { className: "data-feed__load-btn", onClick: handleLoad }, renderLoadMoreButton
+        React.createElement("div", { className: "data-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
+        data.length < all && page === 1 ? (React.createElement("div", { className: "data-feed__load", ref: loadRef },
+            React.createElement("div", { className: "data-feed__load-btn", onClick: handleLoad }, renderLoadMoreButton
                 ? renderLoadMoreButton(loading)
                 : loading
                     ? texts['loading']
@@ -333,8 +324,8 @@ function DataFeed(_a) {
                     : texts['load']
                         ? texts['load']
                         : 'See More'))) : null,
-        step && step < all && data.length <= step ? (React__default.createElement("div", { className: "data-feed__page" }, pages.map(function (p, i) {
-            return (React__default.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React__default.createElement("span", null, p ? p : '...')));
+        step && step < all && data.length <= step ? (React.createElement("div", { className: "data-feed__page" }, pages.map(function (p, i) {
+            return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
 }
 
@@ -342,9 +333,9 @@ var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
 var formCount = 0;
 var FilterDataFeed = function (_a) {
     var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d;
-    var dispatch = reactRedux.useDispatch();
-    var _e = React.useState(initialLoad), init = _e[0], setInit = _e[1];
-    var formName = React.useMemo(function () {
+    var dispatch = useDispatch();
+    var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
+    var formName = useMemo(function () {
         return FILTER_FORM_NAME + "_" + formCount;
     }, []);
     var debounceFilterChange = useDebouncedCallback(500, function (data) {
@@ -355,31 +346,31 @@ var FilterDataFeed = function (_a) {
             setInit(true);
         }
     }, [init, onChange]);
-    var handleFilterChange = React.useCallback(function (_a, _dispatch, _form, _b) {
+    var handleFilterChange = useCallback(function (_a, _dispatch, _form, _b) {
         var prevSkip = _b.skip;
         var skip = _a.skip, data = __rest(_a, ["skip"]);
         if (skip === 0 || skip !== prevSkip) {
             debounceFilterChange(__assign({ skip: skip }, data));
         }
         else {
-            dispatch(reduxForm.change(formName, 'skip', 0));
+            dispatch(change(formName, 'skip', 0));
         }
     }, [init, onChange]);
-    var handleFeedChange = React.useCallback(function (skip) {
-        dispatch(reduxForm.change(formName, 'skip', skip));
+    var handleFeedChange = useCallback(function (skip) {
+        dispatch(change(formName, 'skip', skip));
     }, [formName]);
-    var renderPageItem = React.useCallback(function (page, current) {
+    var renderPageItem = useCallback(function (page, current) {
         if (page === null) {
-            return React__default.createElement("span", null, "...");
+            return React.createElement("span", null, "...");
         }
         else if (current) {
-            return React__default.createElement("b", null, page);
+            return React.createElement("b", null, page);
         }
         else {
-            return renderPageLink ? renderPageLink(page) : React__default.createElement("b", null, page);
+            return renderPageLink ? renderPageLink(page) : React.createElement("b", null, page);
         }
     }, [renderPageLink]);
-    var handleRenderItem = React.useCallback(function (item) {
+    var handleRenderItem = useCallback(function (item) {
         if (renderItem) {
             return renderItem(item);
         }
@@ -388,27 +379,27 @@ var FilterDataFeed = function (_a) {
         }
         return '';
     }, [renderItem, renderRow]);
-    var texts = React.useMemo(function () {
+    var texts = useMemo(function () {
         return {
             sort: 'Sort By',
             total: 'Total',
             load: 'Load More',
         };
     }, []);
-    var currentPage = React.useMemo(function () {
+    var currentPage = useMemo(function () {
         var page = (initialValues || {}).page;
         return page;
     }, [initialValues]);
-    var searchContent = React.useMemo(function () {
-        return languageOptions.length ? (React__default.createElement(FilterSelectField, { placeholder: 'Language', name: "languageCode", options: languageOptions })) : null;
+    var searchContent = useMemo(function () {
+        return languageOptions.length ? (React.createElement(FilterSelectField, { placeholder: 'Language', name: "languageCode", options: languageOptions })) : null;
     }, [languageOptions]);
-    React.useEffect(function () {
+    useEffect(function () {
         formCount = +1;
         var _a = initialValues || {}, _b = _a.skip, skip = _b === void 0 ? 0 : _b, rest = __rest(_a, ["skip"]);
-        dispatch(reduxForm.initialize(formName, FilterUtil.toInner(__assign({ skip: skip }, rest))));
+        dispatch(initialize(formName, FilterUtil.toInner(__assign({ skip: skip }, rest))));
     }, []);
-    return (React__default.createElement(DataFeed, { texts: texts, all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem },
-        React__default.createElement(FeedFilterForm, { className: "root__filter", total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent }, children)));
+    return (React.createElement(DataFeed, { texts: texts, all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem },
+        React.createElement(FeedFilterForm, { className: "root__filter", total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent }, children)));
 };
 
 var FeedAttribute = function (_a) {
@@ -417,44 +408,30 @@ var FeedAttribute = function (_a) {
         width: width,
         maxWidth: maxWidth,
     };
-    return (React__default.createElement("div", { className: "feed-attribute" },
-        icon ? React__default.createElement("div", { className: "feed-attribute__icon" }, icon) : null,
-        React__default.createElement("div", { className: "feed-attribute__text", style: style },
-            React__default.createElement("div", { className: "feed-attribute__name" }, label),
-            React__default.createElement("div", { className: "feed-attribute__value" }, content))));
+    return (React.createElement("div", { className: "feed-attribute" },
+        icon ? React.createElement("div", { className: "feed-attribute__icon" }, icon) : null,
+        React.createElement("div", { className: "feed-attribute__text", style: style },
+            React.createElement("div", { className: "feed-attribute__name" }, label),
+            React.createElement("div", { className: "feed-attribute__value" }, content))));
 };
 
 var DataFeedItem = function (_a) {
     var title = _a.title, titleRight = _a.titleRight, attributes = _a.attributes, actions = _a.actions, attributeWidth = _a.attributeWidth, right = _a.right, left = _a.left, className = _a.className;
     var attributeSet = FeedArrayUtil.toDobleArray(attributes);
     var actionSet = FeedArrayUtil.toArray(actions);
-    return (React__default.createElement("div", { className: classNames('feed-item', className) },
-        left ? React__default.createElement("div", { className: "feed-item__left" }, left) : null,
-        React__default.createElement("div", { className: "feed-item__content" },
-            title || titleRight ? (React__default.createElement("div", { className: "feed-item__top" },
-                React__default.createElement("div", { className: "feed-item__title" }, title),
-                React__default.createElement("div", { className: "feed-item__top-right" }, titleRight))) : null,
-            attributeSet.map(function (set, setKey) { return (React__default.createElement("div", { key: setKey, className: "feed-item__attribute-set" }, set.map(function (_a, i) {
+    return (React.createElement("div", { className: classNames('feed-item', className) },
+        left ? React.createElement("div", { className: "feed-item__left" }, left) : null,
+        React.createElement("div", { className: "feed-item__content" },
+            title || titleRight ? (React.createElement("div", { className: "feed-item__top" },
+                React.createElement("div", { className: "feed-item__title" }, title),
+                React.createElement("div", { className: "feed-item__top-right" }, titleRight))) : null,
+            attributeSet.map(function (set, setKey) { return (React.createElement("div", { key: setKey, className: "feed-item__attribute-set" }, set.map(function (_a, i) {
                 var width = _a.width, attrProps = __rest(_a, ["width"]);
-                return (React__default.createElement("div", { key: i },
-                    React__default.createElement(FeedAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
+                return (React.createElement("div", { key: i },
+                    React.createElement(FeedAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
             }))); }),
-            actionSet.length > 0 ? (React__default.createElement("div", { className: "feed-item__action-set" }, actionSet.map(function (action, i) { return (React__default.createElement("div", { key: i }, action)); }))) : null),
-        right ? React__default.createElement("div", { className: "feed-item__right" }, right) : null));
+            actionSet.length > 0 ? (React.createElement("div", { className: "feed-item__action-set" }, actionSet.map(function (action, i) { return (React.createElement("div", { key: i }, action)); }))) : null),
+        right ? React.createElement("div", { className: "feed-item__right" }, right) : null));
 };
 
-exports.DataFeed = DataFeed;
-exports.DataFeedItem = DataFeedItem;
-exports.FeedArrayUtil = FeedArrayUtil;
-exports.FeedFilterForm = FeedFilterForm;
-exports.FilterBoolField = FilterBoolField;
-exports.FilterDataFeed = FilterDataFeed;
-exports.FilterHiddenField = FilterHiddenField;
-exports.FilterRadioField = FilterRadioField;
-exports.FilterSearchField = FilterSearchField;
-exports.FilterSelectField = FilterSelectField;
-exports.FilterSortField = FilterSortField;
-exports.FilterTextField = FilterTextField;
-exports.FilterUtil = FilterUtil;
-exports.PageUtil = PageUtil;
-exports.SortUtil = SortUtil;
+export { DataFeed, DataFeedItem, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterTextField, FilterUtil, PageUtil, SortUtil };
