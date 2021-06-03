@@ -1,17 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { AppUrls } from "../../../../lib/urls";
 
-import './index.scss';
+import "./index.scss";
 
 export const Sidebar: React.FC = () => {
-    return (
-        <div className="sidebar">
-            <Link to="/">Simple Feed</Link>
-            <Link to="/paging">Paging</Link>
-            <Link to="/no-initial-load">No Initial Load</Link>
-            <Link to="/no-filter">No Filter</Link>
-            <Link to="/autoload">Autoload</Link>
-            <Link to="/autoload-fixed">Autoload Fixed</Link>
-        </div>
-    );
+  return (
+    <div className="sidebar">
+      <Link to={AppUrls.default.build()}>Simple Feed</Link>
+      <Link to={AppUrls.paging.build()}>Paging</Link>
+      <Link to={AppUrls.noInitialLoad.build()}>No Initial Load</Link>
+      <Link to={AppUrls.noFilter.build()}>No Filter</Link>
+      <Link to={AppUrls.autoload.build()}>Autoload</Link>
+      <Link to={AppUrls.autoloadFixed.build()}>Autoload Fixed</Link>
+    </div>
+  );
 };

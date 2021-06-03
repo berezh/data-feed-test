@@ -19,6 +19,7 @@
         "monolite": "^0.4.6",
         "node-sass": "^4.13.0",
         "numeral": "^2.0.6",
+        "page-path": "0.0.15",
         "query-string": "^6.13.1",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
