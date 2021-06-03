@@ -6,7 +6,7 @@ export function useLoadMoreBtn(): {
     setLoading: (value: boolean) => void;
     loadMoreBtn: () => JSX.Element;
     filterLoading: JSX.Element;
-} {
+    } {
     const [loading, setLoading] = useState(false);
     const filterLoading = (
         <div style={{ display: 'inline-flex', width: 90, justifyContent: 'space-between' }}>
