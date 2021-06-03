@@ -1,9 +1,7 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["varp"],
-  rules: {
-    indent: ["error", 4],
-  },
+  rules: {},
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
