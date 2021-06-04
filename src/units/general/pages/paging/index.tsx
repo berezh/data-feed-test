@@ -1,5 +1,4 @@
-import React, { useMemo, useState } from "react";
-import { useCallback } from "react";
+import React, { useMemo, useState , useCallback } from "react";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 
@@ -17,8 +16,8 @@ export const PagingPage: React.FC = () => {
     const [all, setAll] = useState<number>(0);
     const { search } = useLocation();
     const { page } = queryString.parse(search, { parseNumbers: true }) as {
-    page?: number;
-  };
+        page?: number;
+    };
 
     const handleChange = useCallback(
         (options: FeedFilterValues) => {

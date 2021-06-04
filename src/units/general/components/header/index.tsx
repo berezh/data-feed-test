@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.scss';
+import React from "react";
+import "./index.scss";
 
 export class Header extends React.PureComponent {
     public render(): React.ReactNode {

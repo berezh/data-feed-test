@@ -2,9 +2,10 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 
 import "./index.scss";
 
+import moment from "moment";
+
 import { MasterPage } from "../../components/master-page";
 import { EuState, DataGenerator } from "../../components/data-gererator";
-import moment from "moment";
 import { DataFeed, DataFeedItem } from "../../../../data-feed";
 
 const count = 3;

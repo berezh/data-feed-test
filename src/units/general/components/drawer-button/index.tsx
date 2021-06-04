@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import './index.scss';
-import { Icon, Switch } from '@blueprintjs/core';
-import { useInputCheckboxCallback } from '../hooks';
+import React, { useState } from "react";
+import "./index.scss";
+import { Icon, Switch } from "@blueprintjs/core";
+
+import { useInputCheckboxCallback } from "../hooks";
 
 export interface ControlOptions {
     // header -------------------------

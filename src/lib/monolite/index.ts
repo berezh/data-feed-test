@@ -1,6 +1,7 @@
-import * as monolite from 'monolite';
-import { Feed } from '../interfaces';
-import { FeedUtil } from '../utils/feed-util';
+import * as monolite from "monolite";
+
+import { Feed } from "../interfaces";
+import { FeedUtil } from "../utils/feed-util";
 
 export class MonoliteHelper<T> {
     private state: T;

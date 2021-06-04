@@ -1,22 +1,23 @@
-import { EuStates } from "./data/eu-states";
 import moment from "moment";
 import { orderBy } from "lodash";
+
+import { EuStates } from "./data/eu-states";
 import { Feed } from "../../../../lib/interfaces";
 import { FeedFilterValues } from "../../../../data-feed";
 
 export interface EuState {
-  name: string;
-  nativeName: string;
-  code: string;
-  capital: string;
-  accession: Date;
-  population: number;
-  area: number;
-  totalGdp: number;
-  capitalGdp: number;
-  currency: string;
-  epSeats: number;
-  languages: string[];
+    name: string;
+    nativeName: string;
+    code: string;
+    capital: string;
+    accession: Date;
+    population: number;
+    area: number;
+    totalGdp: number;
+    capitalGdp: number;
+    currency: string;
+    epSeats: number;
+    languages: string[];
 }
 
 const euStates: EuState[] = EuStates.map<EuState>((x) => {

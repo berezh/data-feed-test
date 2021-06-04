@@ -1,9 +1,10 @@
-import { SagaIterator } from 'redux-saga';
-import { takeLatest, put } from 'redux-saga/effects';
-import { GeneralActionTypes } from './types';
-import { ActionWith } from '../../../redux/interfaces';
-import { DataGenerator } from '../components/data-gererator';
-import { GeneralActions } from './actions';
+import { SagaIterator } from "redux-saga";
+import { takeLatest, put } from "redux-saga/effects";
+
+import { GeneralActionTypes } from "./types";
+import { ActionWith } from "../../../redux/interfaces";
+import { DataGenerator } from "../components/data-gererator";
+import { GeneralActions } from "./actions";
 
 function* loadStateFeed({ payload }: ActionWith): SagaIterator {
     try {
