@@ -1,13 +1,12 @@
-import React, { useMemo, useState , useCallback } from "react";
 import queryString from "query-string";
+import React, { useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import "./index.scss";
-
-import { MasterPage } from "../../components/master-page";
-import { EuState, DataGenerator } from "../../components/data-gererator";
-import { FeedUi } from "../../components/feed-ui";
 import { FeedFilterValues, FilterDataFeed } from "../../../../data-feed";
+import { DataGenerator, EuState } from "../../components/data-gererator";
+import { FeedUi } from "../../components/feed-ui";
+import { MasterPage } from "../../components/master-page";
+import "./index.scss";
 
 const step = 3;
 

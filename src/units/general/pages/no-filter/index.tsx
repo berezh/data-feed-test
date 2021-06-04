@@ -1,12 +1,12 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import moment from "moment";
+import React, { useCallback, useEffect, useState } from "react";
 
+import { DataFeed, DataFeedItem } from "../../../../data-feed";
+import { DataGenerator, EuState } from "../../components/data-gererator";
+import { MasterPage } from "../../components/master-page";
 import "./index.scss";
 
-import moment from "moment";
 
-import { MasterPage } from "../../components/master-page";
-import { EuState, DataGenerator } from "../../components/data-gererator";
-import { DataFeed, DataFeedItem } from "../../../../data-feed";
 
 const count = 3;
 
