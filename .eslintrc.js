@@ -1,12 +1,13 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  plugins: ["varp"],
-  rules: {},
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: true,
+    parser: "@typescript-eslint/parser",
+    ignorePatterns: ["**/data-feed", "**/data-feed-blueprintjs"],
+    extends: [],
+    plugins: ["varp"],
+    rules: {
+        'quotes': 'off',
+        '@typescript-eslint/quotes':['error', 'single']
     },
-  },
+    parserOptions: {
+        sourceType: "module"
+    },
 };
