@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 
-import "./index.scss";
+import './index.scss';
 
-import { EuState, DataGenerator } from "../../components/data-gererator";
-import { FeedUi } from "../../components/feed-ui";
-import { MasterPage } from "../../components/master-page";
-import { FilterDataFeed } from "../../../../data-feed";
+import { EuState, DataGenerator } from '../../components/data-gererator';
+import { FeedUi } from '../../components/feed-ui';
+import { MasterPage } from '../../components/master-page';
+import { FilterDataFeed } from '../../../../data-feed';
 
 export const AutoloadPage: React.FC = () => {
     const [items, setItems] = useState<EuState[]>([]);

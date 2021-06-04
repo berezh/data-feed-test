@@ -1,11 +1,11 @@
-import { newReducer } from "redux-sputnik";
+import { newReducer } from 'redux-sputnik';
 
-import { GeneralState } from "../interfaces";
-import { FeedUtil } from "../../../lib/utils/feed-util";
-import { GeneralActionTypes } from "./types";
-import { EuState } from "../components/data-gererator";
-import { Feed } from "../../../lib/interfaces";
-import { monoliteFeedCombine } from "../../../lib/monolite";
+import { GeneralState } from '../interfaces';
+import { FeedUtil } from '../../../lib/utils/feed-util';
+import { GeneralActionTypes } from './types';
+import { EuState } from '../components/data-gererator';
+import { Feed } from '../../../lib/interfaces';
+import { monoliteFeedCombine } from '../../../lib/monolite';
 
 const initialState: GeneralState = {
     stateFeed: FeedUtil.empty(),

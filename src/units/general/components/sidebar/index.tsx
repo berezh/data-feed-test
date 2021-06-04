@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { AppUrls } from "../../../../lib/urls";
+import { AppUrls } from '../../../../lib/urls';
 
-import "./index.scss";
+import './index.scss';
 
 export const Sidebar: React.FC = () => {
     return (

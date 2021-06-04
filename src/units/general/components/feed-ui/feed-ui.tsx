@@ -1,23 +1,23 @@
-import React from "react";
-import moment from "moment";
-import numeral from "numeral";
+import React from 'react';
+import moment from 'moment';
+import numeral from 'numeral';
 
-import { EuState } from "../data-gererator";
-import { DataFeedItem, FeedSortOption } from "../../../../data-feed";
+import { EuState } from '../data-gererator';
+import { DataFeedItem, FeedSortOption } from '../../../../data-feed';
 
 export class FeedUi {
     public static sortOptions: FeedSortOption[] = [
         {
-            label: "Name",
-            name: "name",
+            label: 'Name',
+            name: 'name',
         },
         {
-            label: "Population",
-            name: "population",
+            label: 'Population',
+            name: 'population',
         },
         {
-            label: "Area",
-            name: "area",
+            label: 'Area',
+            name: 'area',
         },
     ];
     public static renderItem(item: EuState): React.ReactElement {
@@ -27,40 +27,40 @@ export class FeedUi {
                 titleRight={moment(item.accession).fromNow()}
                 attributes={[
                     {
-                        label: "Native Name",
+                        label: 'Native Name',
                         content: item.nativeName,
                     },
                     {
-                        label: "Capital",
+                        label: 'Capital',
                         content: item.capital,
                     },
                     {
-                        label: "Population",
+                        label: 'Population',
                         content: item.population,
                     },
                     {
-                        label: "Area (km²)",
+                        label: 'Area (km²)',
                         content: item.area,
                     },
                     {
-                        label: "GDP (Milions)",
-                        content: numeral(item.totalGdp).format("$0,0"),
+                        label: 'GDP (Milions)',
+                        content: numeral(item.totalGdp).format('$0,0'),
                     },
                     {
-                        label: "GDP (Per cap.)",
-                        content: numeral(item.capitalGdp).format("0,0"),
+                        label: 'GDP (Per cap.)',
+                        content: numeral(item.capitalGdp).format('0,0'),
                     },
                     {
-                        label: "Currency",
+                        label: 'Currency',
                         content: item.currency,
                     },
                     {
-                        label: "EP seats",
+                        label: 'EP seats',
                         content: item.epSeats,
                     },
                     {
-                        label: "Lanugages",
-                        content: item.languages.join(", "),
+                        label: 'Lanugages',
+                        content: item.languages.join(', '),
                         maxWidth: 100,
                     },
                 ]}

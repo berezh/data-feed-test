@@ -1,16 +1,16 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 
-import "./index.scss";
+import './index.scss';
 
-import { MasterPage } from "../../components/master-page";
-import { EuState, DataGenerator } from "../../components/data-gererator";
-import { FeedUi } from "../../components/feed-ui";
+import { MasterPage } from '../../components/master-page';
+import { EuState, DataGenerator } from '../../components/data-gererator';
+import { FeedUi } from '../../components/feed-ui';
 import {
     FilterCheckboxField,
     FilterDataFeed,
     FilterSearchField,
     FilterSelectField,
-} from "../../../../data-feed";
+} from '../../../../data-feed';
 
 export const NoInitialLoadPage: React.FC = () => {
     const [items, setItems] = useState<EuState[]>([]);
@@ -46,17 +46,17 @@ export const NoInitialLoadPage: React.FC = () => {
                     name="language"
                     placeholder="Select Language"
                     options={[
-                        { text: "German", value: "german" },
-                        { text: "English", value: "english" },
+                        { text: 'German', value: 'german' },
+                        { text: 'English', value: 'english' },
                     ]}
                 />
                 <FilterSelectField
                     name="currency"
                     placeholder="Select Language"
                     options={[
-                        { text: "Euro", value: "euro" },
-                        { text: "Krona", value: "krona" },
-                        { text: "Kuna", value: "kuna" },
+                        { text: 'Euro', value: 'euro' },
+                        { text: 'Krona', value: 'krona' },
+                        { text: 'Kuna', value: 'kuna' },
                     ]}
                 />
                 <FilterSearchField

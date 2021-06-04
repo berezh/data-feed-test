@@ -1,10 +1,10 @@
-import moment from "moment";
-import React, { useCallback, useEffect, useState } from "react";
+import moment from 'moment';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { DataFeed, DataFeedItem } from "../../../../data-feed";
-import { DataGenerator, EuState } from "../../components/data-gererator";
-import { MasterPage } from "../../components/master-page";
-import "./index.scss";
+import { DataFeed, DataFeedItem } from '../../../../data-feed';
+import { DataGenerator, EuState } from '../../components/data-gererator';
+import { MasterPage } from '../../components/master-page';
+import './index.scss';
 
 
 
@@ -46,7 +46,7 @@ export const NoFilterPage: React.FC = () => {
                             titleRight={moment(item.accession).fromNow()}
                             attributes={[
                                 {
-                                    label: "Native Name",
+                                    label: 'Native Name',
                                     content: item.nativeName,
                                 },
                             ]}

@@ -1,12 +1,12 @@
-import React, { useRef, useCallback, useState } from "react";
-import moment from "moment";
-import { Button, AnchorButton } from "@blueprintjs/core";
+import React, { useRef, useCallback, useState } from 'react';
+import moment from 'moment';
+import { Button, AnchorButton } from '@blueprintjs/core';
 
-import "./index.scss";
+import './index.scss';
 
-import { MasterPage } from "../../components/master-page";
-import { EuState, DataGenerator } from "../../components/data-gererator";
-import { DataFeedItem, FilterDataFeed } from "../../../../data-feed";
+import { MasterPage } from '../../components/master-page';
+import { EuState, DataGenerator } from '../../components/data-gererator';
+import { DataFeedItem, FilterDataFeed } from '../../../../data-feed';
 
 export const AutoloadFixedPage: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export const AutoloadFixedPage: React.FC = () => {
 
     return (
         <MasterPage>
-            <div ref={containerRef} style={{ height: 500, overflow: "auto" }}>
+            <div ref={containerRef} style={{ height: 500, overflow: 'auto' }}>
                 <FilterDataFeed
                     // containerRef={containerRef}
                     // autoLoad={true}
@@ -43,7 +43,7 @@ export const AutoloadFixedPage: React.FC = () => {
                                 titleRight={moment(item.accession).fromNow()}
                                 attributes={[
                                     {
-                                        label: "Native Name",
+                                        label: 'Native Name',
                                         content: item.nativeName,
                                     },
                                 ]}

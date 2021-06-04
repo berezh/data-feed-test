@@ -1,6 +1,6 @@
-import { FormStateMap } from "redux-form";
+import { FormStateMap } from 'redux-form';
 
-import { GeneralState } from "../../units/general/interfaces";
+import { GeneralState } from '../../units/general/interfaces';
 
 interface MutableState {
     form: Readonly<FormStateMap>;

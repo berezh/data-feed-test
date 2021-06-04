@@ -1,9 +1,9 @@
-import moment from "moment";
-import { orderBy } from "lodash";
+import moment from 'moment';
+import { orderBy } from 'lodash';
 
-import { EuStates } from "./data/eu-states";
-import { Feed } from "../../../../lib/interfaces";
-import { FeedFilterValues } from "../../../../data-feed";
+import { EuStates } from './data/eu-states';
+import { Feed } from '../../../../lib/interfaces';
+import { FeedFilterValues } from '../../../../data-feed';
 
 export interface EuState {
     name: string;
@@ -26,7 +26,7 @@ const euStates: EuState[] = EuStates.map<EuState>((x) => {
         nativeName: x[1],
         code: x[2],
         capital: x[3],
-        accession: moment(x[4], "M/D/YYYY").toDate(),
+        accession: moment(x[4], 'M/D/YYYY').toDate(),
         population: x[5],
         area: x[6],
         totalGdp: x[7],
@@ -80,7 +80,7 @@ export const DataGenerator = {
         }
 
         if (isEuro === true) {
-            filterItems = filterItems.filter((x) => x.currency === "euro");
+            filterItems = filterItems.filter((x) => x.currency === 'euro');
         }
 
         if (language) {
@@ -120,7 +120,7 @@ export const DataGenerator = {
         //     }),
         // ];
         const all = filterItems.length;
-        console.log("data-generator", extraParam, options);
+        console.log('data-generator', extraParam, options);
 
         let items: EuState[] = [];
 

@@ -1,12 +1,12 @@
-import queryString from "query-string";
-import React, { useCallback, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import queryString from 'query-string';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import { FeedFilterValues, FilterDataFeed } from "../../../../data-feed";
-import { DataGenerator, EuState } from "../../components/data-gererator";
-import { FeedUi } from "../../components/feed-ui";
-import { MasterPage } from "../../components/master-page";
-import "./index.scss";
+import { FeedFilterValues, FilterDataFeed } from '../../../../data-feed';
+import { DataGenerator, EuState } from '../../components/data-gererator';
+import { FeedUi } from '../../components/feed-ui';
+import { MasterPage } from '../../components/master-page';
+import './index.scss';
 
 const step = 3;
 
@@ -45,8 +45,8 @@ export const PagingPage: React.FC = () => {
 
     const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
         return {
-            direction: "desc",
-            order: "name",
+            direction: 'desc',
+            order: 'name',
             page,
         };
     }, [page]);

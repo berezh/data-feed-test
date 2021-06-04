@@ -1,13 +1,13 @@
-import React from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import React from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
-import { DefaultPage } from "../units/general/pages/default";
-import { AutoloadFixedPage } from "../units/general/pages/autoload-fixed";
-import { AutoloadPage } from "../units/general/pages/autoload";
-import { NoFilterPage } from "../units/general/pages/no-filter";
-import { NoInitialLoadPage } from "../units/general/pages/no-initial-load";
-import { PagingPage } from "../units/general/pages/paging";
-import { AppUrls } from "../lib/urls";
+import { DefaultPage } from '../units/general/pages/default';
+import { AutoloadFixedPage } from '../units/general/pages/autoload-fixed';
+import { AutoloadPage } from '../units/general/pages/autoload';
+import { NoFilterPage } from '../units/general/pages/no-filter';
+import { NoInitialLoadPage } from '../units/general/pages/no-initial-load';
+import { PagingPage } from '../units/general/pages/paging';
+import { AppUrls } from '../lib/urls';
 
 export class Root extends React.PureComponent {
     public render(): React.ReactNode {

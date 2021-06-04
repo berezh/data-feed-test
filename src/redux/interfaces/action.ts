@@ -1,4 +1,4 @@
-import { Action } from "redux";
+import { Action } from 'redux';
 
 /**
  * @description use it to reducer-methods. Extend Action, payload added.

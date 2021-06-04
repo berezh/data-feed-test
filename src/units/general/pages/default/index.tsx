@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useState , useCallback } from "react";
+import React, { useEffect, useMemo, useState , useCallback } from 'react';
 
 
-import "./index.scss";
+import './index.scss';
 
-import { MasterPage } from "../../components/master-page";
-import { EuState, DataGenerator } from "../../components/data-gererator";
-import { FeedUi } from "../../components/feed-ui";
-import { BaseFeedParams } from "../../../../lib/interfaces";
+import { MasterPage } from '../../components/master-page';
+import { EuState, DataGenerator } from '../../components/data-gererator';
+import { FeedUi } from '../../components/feed-ui';
+import { BaseFeedParams } from '../../../../lib/interfaces';
 import {
     DataFeedTexts,
     FeedFilterValues,
@@ -14,7 +14,7 @@ import {
     FilterDataFeed,
     FilterSelectField,
     FilterTextField,
-} from "../../../../data-feed";
+} from '../../../../data-feed';
 
 export const DefaultPage: React.FC = () => {
     const [items, setItems] = useState<EuState[]>([]);
@@ -22,7 +22,7 @@ export const DefaultPage: React.FC = () => {
 
     const handleChange = useCallback(
         (options: BaseFeedParams) => {
-            console.log("default: ", options);
+            console.log('default: ', options);
             const feed = DataGenerator.loadEuState(10, options);
             // const newItems = feed.skip === 0 ? feed.items : [...items, ...feed.items];
             // console.log("feed", feed);
@@ -34,18 +34,18 @@ export const DefaultPage: React.FC = () => {
 
     const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
         return {
-            direction: "desc",
-            order: "population",
+            direction: 'desc',
+            order: 'population',
         };
     }, []);
 
     useEffect(() => {
-        console.log("items", items.length);
+        console.log('items', items.length);
     }, [items]);
 
     const texts = useMemo<Partial<DataFeedTexts>>(() => {
         return {
-            sort: "Сорт",
+            sort: 'Сорт',
         };
     }, []);
 
@@ -65,17 +65,17 @@ export const DefaultPage: React.FC = () => {
                     name="language"
                     placeholder="Select Language"
                     options={[
-                        { text: "German", value: "german" },
-                        { text: "English", value: "english" },
+                        { text: 'German', value: 'german' },
+                        { text: 'English', value: 'english' },
                     ]}
                 />
                 <FilterSelectField
                     name="currency"
                     placeholder="Select Language"
                     options={[
-                        { text: "Euro", value: "euro" },
-                        { text: "Krona", value: "krona" },
-                        { text: "Kuna", value: "kuna" },
+                        { text: 'Euro', value: 'euro' },
+                        { text: 'Krona', value: 'krona' },
+                        { text: 'Kuna', value: 'kuna' },
                     ]}
                 />
                 <FilterTextField
