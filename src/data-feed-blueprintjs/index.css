@@ -1,6 +1,7 @@
-.filter-radio {
+.df-bp-field-radio {
   display: flex;
   flex-direction: row;
-  align-items: center; }
-  .filter-radio > *:not(:last-child) {
+  align-items: center;
+  flex-wrap: nowrap; }
+  .df-bp-field-radio > *:not(:last-child) {
     margin-right: 5px; }

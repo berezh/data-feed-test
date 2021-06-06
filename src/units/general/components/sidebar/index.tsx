@@ -19,7 +19,11 @@ export const Sidebar: React.FC = () => {
         return [
             {
                 path: AppUrls.default,
-                title: 'Simple Feed'
+                title: 'Default'
+            },
+            {
+                path: AppUrls.blueprint,
+                title: 'BluePrint'
             },
             {
                 path: AppUrls.paging,

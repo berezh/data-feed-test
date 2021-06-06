@@ -26,4 +26,4 @@ export interface DataFeedProps<T> {
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
 }
-export declare function DataFeed<T = any>({ data, all, step, page, renderItem, texts, className, loading, renderLoadMoreButton, onChange, children, renderPageItem, }: DataFeedProps<T>): JSX.Element;
+export declare function DataFeed<T = any>({ data, all, step, page, renderItem, texts, className, loading, onChange, children, renderPageItem, }: DataFeedProps<T>): JSX.Element;

@@ -7,10 +7,13 @@
   --dbFilterPadding: 10px;
   --dbFilterSpacing: 10px;
   --dbSortFontSize: 12px;
+  --dbControlSpacing: 5px;
   --dfControlBorderColor: #bebebe;
   --dfControlBorderWidth: 1px;
   --dfControlHeight: 26px;
-  --dfControlPadding: 5px; }
+  --dfControlPadding: 5px;
+  --dfButtomLinkColor: rgb(42, 41, 59);
+  --dfButtomLinkDisabledColor: rgb(116, 116, 129); }
 
 .df-filter {
   display: flex;
@@ -29,9 +32,12 @@
       flex: 1; }
   .df-filter__children {
     display: flex;
-    flex-direction: row; }
-    .df-filter__children > *:not(:last-child) {
-      margin-right: var(--dbFilterSpacing); }
+    flex-direction: row;
+    flex-wrap: wrap; }
+    .df-filter__children > * {
+      margin: var(--dbControlSpacing); }
+      .df-filter__children > *:first-child {
+        margin-left: 0; }
   .df-filter__bottom {
     display: flex;
     flex-direction: row;
@@ -50,10 +56,13 @@
   --dbFilterPadding: 10px;
   --dbFilterSpacing: 10px;
   --dbSortFontSize: 12px;
+  --dbControlSpacing: 5px;
   --dfControlBorderColor: #bebebe;
   --dfControlBorderWidth: 1px;
   --dfControlHeight: 26px;
-  --dfControlPadding: 5px; }
+  --dfControlPadding: 5px;
+  --dfButtomLinkColor: rgb(42, 41, 59);
+  --dfButtomLinkDisabledColor: rgb(116, 116, 129); }
 
 .df-feed__data > div {
   border-bottom: 1px solid #e6e6e6; }
@@ -63,11 +72,6 @@
 .df-feed__load {
   text-align: center;
   padding: 10px 0; }
-  .df-feed__load-btn {
-    display: inline;
-    cursor: pointer; }
-    .df-feed__load-btn:hover {
-      text-decoration: underline; }
 
 .df-feed__page {
   display: flex;
@@ -165,6 +169,15 @@
   align-items: center; }
   .df-field-checkbox__input {
     margin-right: 5px; }
+
+.df-buttom-link {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--dfButtomLinkColor); }
+  .df-buttom-link--disabled {
+    cursor: default;
+    color: var(--dfButtomLinkDisabledColor); }
 
 .df-attribute {
   display: flex;

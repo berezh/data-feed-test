@@ -4,5 +4,5 @@ interface Prpops {
     label?: string;
     placeholder?: string;
 }
-export declare const FilterSearchField: React.FC<Prpops>;
+export declare const BpFilterSearchField: React.FC<Prpops>;
 export {};

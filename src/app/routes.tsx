@@ -8,6 +8,7 @@ import { NoFilterPage } from '../units/general/pages/no-filter';
 import { NoInitialLoadPage } from '../units/general/pages/no-initial-load';
 import { PagingPage } from '../units/general/pages/paging';
 import { AppUrls } from '../lib/urls';
+import { BluePrintPage } from 'src/units/general/pages/blueprint';
 
 export class Root extends React.PureComponent {
     public render(): React.ReactNode {
@@ -15,6 +16,7 @@ export class Root extends React.PureComponent {
             <BrowserRouter>
                 <Switch>
                     <Route exact path={AppUrls.default.build()} component={DefaultPage} />
+                    <Route exact path={AppUrls.blueprint.build()} component={BluePrintPage} />
                     <Route exact path={AppUrls.paging.build()} component={PagingPage} />
                     <Route
                         exact

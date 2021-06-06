@@ -46,14 +46,14 @@ var CurrentComponent = function (_a) {
     var restinput = _a.input, rest = __rest(_a, ["input"]);
     return React.createElement(InputGroup, __assign({}, restinput, rest));
 };
-var FilterTextField = function (_a) {
+var BpFilterTextField = function (_a) {
     var props = __rest(_a, []);
     return React.createElement(Field, __assign({ component: CurrentComponent }, props));
 };
 
-var FilterSearchField = function (_a) {
+var BpFilterSearchField = function (_a) {
     var _b = _a.name, name = _b === void 0 ? 'search' : _b, placeholder = _a.placeholder, props = __rest(_a, ["name", "placeholder"]);
-    return React.createElement(FilterTextField, __assign({ placeholder: placeholder || 'Search', leftIcon: "search", name: name }, props));
+    return React.createElement(BpFilterTextField, __assign({ placeholder: placeholder || 'Search', leftIcon: "search", name: name }, props));
 };
 
 var OptionSelect = Select.ofType();
@@ -90,37 +90,28 @@ var CurrentComponent$1 = function (_a) {
         React.createElement(ButtonGroup, { style: { width: '100%', display: 'flex' } },
             React.createElement(Button, { style: { flex: 1 }, alignText: "left", text: caption, rightIcon: "caret-down" }))));
 };
-var FilterSelectField = function (props) {
+var BpFilterSelectField = function (props) {
     return React.createElement(Field, __assign({ component: CurrentComponent$1 }, props));
 };
 
 var CurrentComponent$2 = function (_a) {
-    var input = _a.input;
-    return React.createElement("input", __assign({ type: "hidden" }, input));
-};
-var FilterHiddenField = function (_a) {
-    var name = _a.name, props = __rest(_a, ["name"]);
-    return React.createElement(Field, __assign({ name: name, component: CurrentComponent$2 }, props));
-};
-
-var CurrentComponent$3 = function (_a) {
     var label = _a.label, _b = _a.input, inputValue = _b.value, inputName = _b.name, onChange = _b.onChange, options = _a.options;
     var handleClick = useCallback(function (value) {
         onChange(value === inputValue ? '' : value);
     }, [inputValue]);
-    return (React.createElement("div", { className: "filter-radio" },
+    return (React.createElement("div", { className: "df-bp-field-radio" },
         React.createElement("input", { type: "hidden", name: inputName, value: inputValue }),
-        label ? React.createElement("div", { className: "filter-radio__label" }, label) : null,
+        label ? React.createElement("div", { className: "df-bp-field-radio__label" }, label) : null,
         React.createElement(ButtonGroup, null, options.map(function (_a, i) {
             var value = _a.value, text = _a.text;
             return (React.createElement(Button, { small: true, key: i, onClick: function () { return handleClick(value); }, active: value === inputValue }, text));
         }))));
 };
-var FilterRadioField = function (props) {
-    return React.createElement(Field, __assign({ component: CurrentComponent$3 }, props));
+var BpFilterRadioField = function (props) {
+    return React.createElement(Field, __assign({ component: CurrentComponent$2 }, props));
 };
 
-var FilterBoolField = function (props) {
+var BpFilterBoolField = function (props) {
     var yesNoOptions = useMemo(function () {
         return [
             {
@@ -133,7 +124,7 @@ var FilterBoolField = function (props) {
             },
         ];
     }, []);
-    return React.createElement(FilterRadioField, __assign({ options: yesNoOptions }, props));
+    return React.createElement(BpFilterRadioField, __assign({ options: yesNoOptions }, props));
 };
 
-export { FilterBoolField, FilterHiddenField, FilterRadioField, FilterSearchField, FilterSelectField, FilterTextField };
+export { BpFilterBoolField, BpFilterRadioField, BpFilterSearchField, BpFilterSelectField, BpFilterTextField };

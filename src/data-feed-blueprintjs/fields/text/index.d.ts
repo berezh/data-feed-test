@@ -8,5 +8,5 @@ interface OwnProps {
 interface Prpops extends OwnProps {
     name?: string;
 }
-export declare const FilterTextField: React.FC<Prpops>;
+export declare const BpFilterTextField: React.FC<Prpops>;
 export {};

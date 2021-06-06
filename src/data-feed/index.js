@@ -269,6 +269,19 @@ var FilterCheckboxField = function (props) {
     return React.createElement(Field, __assign({ component: CurrentComponent$5 }, props));
 };
 
+var ButtonLink = function (_a) {
+    var _b;
+    var children = _a.children, disabled = _a.disabled, onClick = _a.onClick;
+    var handleClick = useCallback(function () {
+        if (disabled !== true) {
+            onClick();
+        }
+    }, [disabled]);
+    return (React.createElement("div", { className: classNames('df-buttom-link', (_b = {},
+            _b['df-buttom-link--disabled'] = disabled,
+            _b)), onClick: handleClick }, children));
+};
+
 function DialogComponent(_a) {
     var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts;
     var dispatch = useDispatch();
@@ -287,7 +300,7 @@ function DialogComponent(_a) {
         React.createElement("div", { className: 'df-filter__bottom' },
             React.createElement("div", null, total ? ((texts === null || texts === void 0 ? void 0 : texts.total) || 'Total') + ": " + total : null),
             React.createElement("div", { className: 'df-filter__actions' },
-                React.createElement("span", { onClick: handleClean }, (texts === null || texts === void 0 ? void 0 : texts.clean) || 'Clean')))));
+                React.createElement(ButtonLink, { onClick: handleClean }, (texts === null || texts === void 0 ? void 0 : texts.clean) || 'Clean')))));
 }
 function FeedFilterForm(_a) {
     var props = __rest(_a, []);
@@ -303,7 +316,7 @@ function useDebouncedCallback(wait, callback, deps) {
 }
 
 function DataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, renderLoadMoreButton = _a.renderLoadMoreButton, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = useRef(null);
     var handleLoad = useCallback(function () {
         onChange && onChange(data.length);
@@ -311,22 +324,11 @@ function DataFeed(_a) {
     var pages = useMemo(function () {
         return PageUtil.getPages(all, step, page);
     }, [all, step, page]);
-    var seeMoreButton = useMemo(function () {
-        return renderLoadMoreButton
-            ? renderLoadMoreButton(loading)
-            : loading
-                ? texts.loading
-                    ? texts.loading
-                    : 'Loading ...'
-                : texts.loadMore
-                    ? texts.loading
-                    : 'See More';
-    }, [renderLoadMoreButton, loading, texts]);
     return (React.createElement("div", { className: classNames('data-feed', className) },
         children,
         React.createElement("div", { className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
         data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
-            React.createElement("div", { className: "df-feed__load-btn", onClick: handleLoad }, seeMoreButton))) : null,
+            React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
         step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
             return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
