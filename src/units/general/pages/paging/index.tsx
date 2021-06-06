@@ -1,4 +1,4 @@
-import queryString from 'query-string';
+import { parse } from 'query-string';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ export const PagingPage: React.FC = () => {
     const [items, setItems] = useState<EuState[]>([]);
     const [all, setAll] = useState<number>(0);
     const { search } = useLocation();
-    const { page } = queryString.parse(search, { parseNumbers: true }) as {
+    const { page } = parse(search, { parseNumbers: true }) as {
         page?: number;
     };
 

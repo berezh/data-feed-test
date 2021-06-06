@@ -8,11 +8,3 @@ interface MutableState {
 }
 
 export type ReduxState = Readonly<MutableState>;
-
-export interface LocalStorageState {
-    /** test */
-}
-
-export interface LocalStorageVersionState extends LocalStorageState {
-    version: number;
-}

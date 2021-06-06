@@ -2,10 +2,10 @@ import React from 'react';
 import { Layout } from 'react-html-layout';
 
 import { Sidebar } from '../sidebar';
-
-import './index.scss';
 import { Header } from '../header';
 import { Footer } from '../footer';
+
+import './index.scss';
 
 export const MasterPage: React.FC = props => {
     const { children } = props;

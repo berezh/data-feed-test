@@ -6,8 +6,6 @@ import { DataGenerator, EuState } from '../../components/data-gererator';
 import { MasterPage } from '../../components/master-page';
 import './index.scss';
 
-
-
 const count = 3;
 
 export const NoFilterPage: React.FC = () => {
@@ -20,7 +18,7 @@ export const NoFilterPage: React.FC = () => {
                 count,
                 { skip }
             );
-            console.log(skip, dataItems, all);
+            console.info(skip, dataItems, all);
             const newItems = skip === 0 ? dataItems : [...items, ...dataItems];
             setItems(newItems);
             setAll(allItems);

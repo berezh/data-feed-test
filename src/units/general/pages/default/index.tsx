@@ -1,8 +1,5 @@
 import React, { useEffect, useMemo, useState , useCallback } from 'react';
 
-
-import './index.scss';
-
 import { MasterPage } from '../../components/master-page';
 import { EuState, DataGenerator } from '../../components/data-gererator';
 import { FeedUi } from '../../components/feed-ui';
@@ -15,6 +12,7 @@ import {
     FilterSelectField,
     FilterTextField,
 } from '../../../../data-feed';
+import './index.scss';
 
 export const DefaultPage: React.FC = () => {
     const [items, setItems] = useState<EuState[]>([]);
@@ -22,7 +20,7 @@ export const DefaultPage: React.FC = () => {
 
     const handleChange = useCallback(
         (options: BaseFeedParams) => {
-            console.log('default: ', options);
+            console.info('default: ', options);
             const feed = DataGenerator.loadEuState(10, options);
             // const newItems = feed.skip === 0 ? feed.items : [...items, ...feed.items];
             // console.log("feed", feed);
@@ -40,7 +38,7 @@ export const DefaultPage: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        console.log('items', items.length);
+        console.info('items', items.length);
     }, [items]);
 
     const texts = useMemo<Partial<DataFeedTexts>>(() => {

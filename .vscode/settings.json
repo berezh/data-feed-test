@@ -14,5 +14,8 @@
         "markdown"
     ],
     "eslint.run": "onSave",
-    "eslint.nodePath": "./node_modules"
+    "eslint.nodePath": "./node_modules",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }

@@ -120,7 +120,7 @@ export const DataGenerator = {
         //     }),
         // ];
         const all = filterItems.length;
-        console.log('data-generator', extraParam, options);
+        console.info('data-generator', extraParam, options);
 
         let items: EuState[] = [];
 
