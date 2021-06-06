@@ -52,22 +52,22 @@ function __spreadArrays() {
 }
 
 var CurrentComponent = function (_a) {
-    var restinput = _a.input, rest = __rest(_a, ["input"]);
-    return React.createElement("input", __assign({}, restinput, rest));
+    var restinput = _a.input, className = _a.className, rest = __rest(_a, ["input", "className"]);
+    return React.createElement("input", __assign({ className: classNames('df-field-input', className) }, restinput, rest));
 };
-var FilterTextField = function (_a) {
+var FilterInputField = function (_a) {
     var props = __rest(_a, []);
     return React.createElement(Field, __assign({ component: CurrentComponent }, props));
 };
 
 var FilterSearchField = function (_a) {
     var _b = _a.name, name = _b === void 0 ? 'search' : _b, placeholder = _a.placeholder, props = __rest(_a, ["name", "placeholder"]);
-    return React.createElement(FilterTextField, __assign({ placeholder: placeholder || 'Search', name: name }, props));
+    return React.createElement(FilterInputField, __assign({ placeholder: placeholder || 'Search', name: name }, props));
 };
 
 var CurrentComponent$1 = function (_a) {
-    var _b = _a.input, value = _b.value, onChange = _b.onChange, options = _a.options, placeholder = _a.placeholder;
-    return (React.createElement("select", { value: value, onChange: onChange },
+    var _b = _a.input, value = _b.value, onChange = _b.onChange, options = _a.options, placeholder = _a.placeholder, className = _a.className;
+    return (React.createElement("select", { className: classNames('df-field-select', className), value: value, onChange: onChange },
         placeholder ? React.createElement("option", null, placeholder) : null,
         options.map(function (x, i) {
             return (React.createElement("option", { value: x.value, key: i }, x.text));
@@ -217,14 +217,14 @@ var CurrentComponent$2 = function (_a) {
     }, [sortValue]);
     return (React.createElement(React.Fragment, null,
         React.createElement("input", { type: "hidden", name: inputName, value: inputValue }),
-        options.length ? (React.createElement("div", { className: 'feed-sort__sort' },
-            React.createElement("div", { className: 'feed-sort__option' }, (texts === null || texts === void 0 ? void 0 : texts.sort) || "Sort: "),
+        options.length ? (React.createElement("div", { className: 'df-sort__sort' },
+            React.createElement("div", { className: 'df-sort__option' }, (texts === null || texts === void 0 ? void 0 : texts.sort) || 'Sort: '),
             React.createElement(React.Fragment, { key: "list" }, options.map(function (_a, i) {
                 var _b;
                 var label = _a.label, optionName = _a.name, icon = _a.icon;
                 var currentMode = optionName === sortValue.name ? sortValue.mode : undefined;
-                return (React.createElement("div", { key: i, className: classNames('feed-sort__option', (_b = {},
-                        _b["feed-sort__option--" + currentMode] = !!currentMode,
+                return (React.createElement("div", { key: i, className: classNames('df-sort__option', (_b = {},
+                        _b["df-sort__option--" + currentMode] = !!currentMode,
                         _b)), onClick: function () { return handleSort(optionName); } },
                     icon,
                     React.createElement("span", null, "" + (label || optionName))));
@@ -260,9 +260,9 @@ var FilterRadioField = function (props) {
 };
 
 var CurrentComponent$5 = function (_a) {
-    var label = _a.label, _b = _a.input, value = _b.value, name = _b.name, onChange = _b.onChange, checked = _b.checked;
-    return (React.createElement("label", null,
-        React.createElement("input", { type: "checkbox", value: value, name: name, onChange: onChange, checked: checked }),
+    var label = _a.label, _b = _a.input, value = _b.value, name = _b.name, onChange = _b.onChange, checked = _b.checked, className = _a.className;
+    return (React.createElement("label", { className: classNames('df-field-checkbox', className) },
+        React.createElement("input", { className: "df-field-checkbox__input", type: "checkbox", value: value, name: name, onChange: onChange, checked: checked }),
         label));
 };
 var FilterCheckboxField = function (props) {
@@ -275,18 +275,18 @@ function DialogComponent(_a) {
     var handleClean = useCallback(function () {
         dispatch(reset(formName));
     }, [formName]);
-    return (React.createElement(Form, { onSubmit: handleSubmit, className: classNames('feed_filter', className) },
+    return (React.createElement(Form, { onSubmit: handleSubmit, className: classNames('df-filter', className) },
         React.createElement(FilterHiddenField, { name: "skip" }),
         React.createElement(FilterHiddenField, { name: "page" }),
-        options.length ? (React.createElement("div", { className: 'feed_filter__sort' },
+        options.length ? (React.createElement("div", { className: 'df-filter__sort' },
             React.createElement(FilterSortField, { texts: texts, name: "sort", options: options }))) : null,
-        React.createElement("div", { className: 'feed_filter__search' },
+        React.createElement("div", { className: 'df-filter__search' },
             React.createElement(FilterSearchField, null),
             searchContent),
-        children ? React.createElement("div", { className: 'feed_filter__children' }, children) : null,
-        React.createElement("div", { className: 'feed_filter__bottom' },
+        children ? React.createElement("div", { className: 'df-filter__children' }, children) : null,
+        React.createElement("div", { className: 'df-filter__bottom' },
             React.createElement("div", null, total ? ((texts === null || texts === void 0 ? void 0 : texts.total) || 'Total') + ": " + total : null),
-            React.createElement("div", { className: 'feed_filter__actions' },
+            React.createElement("div", { className: 'df-filter__actions' },
                 React.createElement("span", { onClick: handleClean }, (texts === null || texts === void 0 ? void 0 : texts.clean) || 'Clean')))));
 }
 function FeedFilterForm(_a) {
@@ -324,10 +324,10 @@ function DataFeed(_a) {
     }, [renderLoadMoreButton, loading, texts]);
     return (React.createElement("div", { className: classNames('data-feed', className) },
         children,
-        React.createElement("div", { className: "data-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
-        data.length < all && page === 1 ? (React.createElement("div", { className: "data-feed__load", ref: loadRef },
-            React.createElement("div", { className: "data-feed__load-btn", onClick: handleLoad }, seeMoreButton))) : null,
-        step && step < all && data.length <= step ? (React.createElement("div", { className: "data-feed__page" }, pages.map(function (p, i) {
+        React.createElement("div", { className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
+        data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
+            React.createElement("div", { className: "df-feed__load-btn", onClick: handleLoad }, seeMoreButton))) : null,
+        step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
             return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
 }
@@ -395,7 +395,7 @@ var FilterDataFeed = function (_a) {
         dispatch(initialize(formName, FilterUtil.toInner(__assign({ skip: skip }, rest))));
     }, []);
     return (React.createElement(DataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
-        React.createElement(FeedFilterForm, { className: "root__filter", total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent, texts: texts }, children)));
+        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent, texts: texts }, children)));
 };
 
 var FeedAttribute = function (_a) {
@@ -404,11 +404,11 @@ var FeedAttribute = function (_a) {
         width: width,
         maxWidth: maxWidth,
     };
-    return (React.createElement("div", { className: "feed-attribute" },
-        icon ? React.createElement("div", { className: "feed-attribute__icon" }, icon) : null,
-        React.createElement("div", { className: "feed-attribute__text", style: style },
-            React.createElement("div", { className: "feed-attribute__name" }, label),
-            React.createElement("div", { className: "feed-attribute__value" }, content))));
+    return (React.createElement("div", { className: "df-attribute" },
+        icon ? React.createElement("div", { className: "df-attribute__icon" }, icon) : null,
+        React.createElement("div", { className: "df-attribute__text", style: style },
+            React.createElement("div", { className: "df-attribute__name" }, label),
+            React.createElement("div", { className: "df-attribute__value" }, content))));
 };
 
 var DataFeedItem = function (_a) {
@@ -441,4 +441,4 @@ var defaultLocale = (_a = {},
     _a);
 // export type DataFeedText = keyof DataFeedTexts;
 
-export { DataFeed, DataFeedItem, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterTextField, FilterUtil, PageUtil, SortUtil };
+export { DataFeed, DataFeedItem, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, PageUtil, SortUtil };

@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.scss';
 import { FeedFilterValues, FeedSortOption, ValueOption } from '../interfaces';
 import { DataFeedProps } from '../feed';
 import { DataFeedTexts } from '../texts';

@@ -3,5 +3,5 @@ export * from './select';
 export * from './sort';
 export * from './hidden';
 export * from './radio';
-export * from './text';
+export * from './input';
 export * from './checkbox';

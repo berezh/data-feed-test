@@ -9,7 +9,7 @@ import {
     FilterCheckboxField,
     FilterDataFeed,
     FilterSelectField,
-    FilterTextField,
+    FilterInputField,
 } from '../../../../data-feed';
 import { GeneralActions } from '../../redux';
 import { useReduxSelector } from 'src/lib/hooks';
@@ -71,7 +71,8 @@ export const DefaultPage: React.FC = () => {
                         { text: 'Kuna', value: 'kuna' },
                     ]}
                 />
-                <FilterTextField
+                <FilterInputField
+                    className="custom-input"
                     name="capital"
                     label="Capital"
                     placeholder="Enter Capital"

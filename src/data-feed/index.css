@@ -1,81 +1,80 @@
-.feed_filter {
+:root {
+  --dfFontSize: 14px;
+  --dfColor: #333;
+  --dfBorderColor: #e8e4eb;
+  --dfBorderWidth: 1px;
+  --dbFilterBackgroundColor: white;
+  --dbFilterPadding: 10px;
+  --dbFilterSpacing: 10px;
+  --dbSortFontSize: 12px;
+  --dfControlBorderColor: #bebebe;
+  --dfControlBorderWidth: 1px;
+  --dfControlHeight: 26px;
+  --dfControlPadding: 5px; }
+
+.df-filter {
   display: flex;
   flex-direction: column;
-  background-color: white;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #e8e4eb; }
-  .feed_filter > *:not(:last-child) {
-    margin-bottom: 10px; }
-  .feed_filter__search {
+  background-color: var(--dbFilterBackgroundColor);
+  padding: var(--dbFilterPadding);
+  border: var(--dfBorderWidth) solid var(--dfBorderColor); }
+  .df-filter > *:not(:last-child) {
+    margin-bottom: var(--dbFilterSpacing); }
+  .df-filter__search {
     display: flex;
     flex-direction: row; }
-    .feed_filter__search > *:not(:last-child) {
-      margin-right: 10px; }
-    .feed_filter__search > * {
+    .df-filter__search > *:not(:last-child) {
+      margin-right: var(--dbFilterSpacing); }
+    .df-filter__search > * {
       flex: 1; }
-  .feed_filter__children {
+  .df-filter__children {
     display: flex;
     flex-direction: row; }
-    .feed_filter__children > *:not(:last-child) {
-      margin-right: 10px; }
-  .feed_filter__bottom {
+    .df-filter__children > *:not(:last-child) {
+      margin-right: var(--dbFilterSpacing); }
+  .df-filter__bottom {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center; }
-  .feed_filter__actions {
+  .df-filter__actions {
     display: flex;
     justify-content: flex-end; }
 
-.app-feed__filter {
-  margin-bottom: 15px; }
+:root {
+  --dfFontSize: 14px;
+  --dfColor: #333;
+  --dfBorderColor: #e8e4eb;
+  --dfBorderWidth: 1px;
+  --dbFilterBackgroundColor: white;
+  --dbFilterPadding: 10px;
+  --dbFilterSpacing: 10px;
+  --dbSortFontSize: 12px;
+  --dfControlBorderColor: #bebebe;
+  --dfControlBorderWidth: 1px;
+  --dfControlHeight: 26px;
+  --dfControlPadding: 5px; }
 
-.app-feed-item {
-  background-color: white;
-  padding: 10px !important; }
-  .app-feed-item__left {
-    margin-right: 10px;
-    float: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-  .app-feed-item__right {
-    margin-left: 10px;
-    float: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-  .app-feed-item__date {
-    display: flex;
-    font-size: 10px; }
-    .app-feed-item__date > div {
-      display: flex;
-      align-items: center;
-      justify-content: center; }
-      .app-feed-item__date > div :first-child {
-        margin-right: 3px; }
-
-.data-feed__data > div {
+.df-feed__data > div {
   border-bottom: 1px solid #e6e6e6; }
-  .data-feed__data > div:last-child {
+  .df-feed__data > div:last-child {
     border-bottom: none; }
 
-.data-feed__load {
+.df-feed__load {
   text-align: center;
   padding: 10px 0; }
-  .data-feed__load-btn {
+  .df-feed__load-btn {
     display: inline;
     cursor: pointer; }
-    .data-feed__load-btn:hover {
+    .df-feed__load-btn:hover {
       text-decoration: underline; }
 
-.data-feed__page {
+.df-feed__page {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 10px 0; }
-  .data-feed__page > div:not(:last-child) {
+  .df-feed__page > div:not(:last-child) {
     margin-right: 10px; }
 
 .feed-item {
@@ -118,11 +117,17 @@
       .feed-item__action-set > div:first-child {
         margin-left: 0; }
 
-.feed-sort__sort {
+.df-field-select {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
+
+.df-sort__sort {
   display: flex;
   align-items: center; }
 
-.feed-sort__option {
+.df-sort__option {
   font-size: 12px;
   display: flex;
   margin: 0 8px 0 0;
@@ -132,13 +137,13 @@
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
   padding: 1px 0; }
-  .feed-sort__option--asc {
+  .df-sort__option--asc {
     font-weight: bold;
-    border-top-color: #333; }
-  .feed-sort__option--desc {
+    border-top-color: var(--dfFontSize); }
+  .df-sort__option--desc {
     font-weight: bold;
-    border-bottom-color: #333; }
-  .feed-sort__option > *:not(:last-child) {
+    border-bottom-color: var(--dfFontSize); }
+  .df-sort__option > *:not(:last-child) {
     margin-right: 3px; }
 
 .filter-radio {
@@ -148,32 +153,38 @@
   .filter-radio > *:not(:last-child) {
     margin-right: 5px; }
 
-.filter-radio {
+.df-field-input {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
+
+.df-field-checkbox {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .filter-radio > *:not(:last-child) {
+  .df-field-checkbox__input {
     margin-right: 5px; }
 
-.feed-attribute {
+.df-attribute {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center; }
-  .feed-attribute__icon {
+  .df-attribute__icon {
     margin-right: 5px;
     display: flex; }
-  .feed-attribute__text {
+  .df-attribute__text {
     flex: 1;
     display: flex;
     flex-direction: column; }
-  .feed-attribute__name {
+  .df-attribute__name {
     font-size: 10px;
     color: #666;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; }
-  .feed-attribute__value {
+  .df-attribute__value {
     font-size: 14px;
     white-space: nowrap;
     overflow: hidden;

@@ -2,6 +2,7 @@ import React from 'react';
 import './index.scss';
 interface OwnProps {
     label: string;
+    className?: string;
 }
 interface Prpops extends OwnProps {
     name: string;
