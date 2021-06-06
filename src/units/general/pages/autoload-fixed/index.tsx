@@ -1,30 +1,27 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
 import moment from 'moment';
 import { Button, AnchorButton } from '@blueprintjs/core';
+import { useDispatch } from 'react-redux';
+
+import { MasterPage } from '../../components/master-page';
+import { EuState } from '../../components/data-gererator';
+import { DataFeedItem, FilterDataFeed } from '../../../../data-feed';
+import { useReduxSelector } from 'src/lib/hooks';
+import { BaseFeedParams } from 'src/lib/interfaces';
+import { GeneralActions } from '../../redux';
 
 import './index.scss';
 
-import { MasterPage } from '../../components/master-page';
-import { EuState, DataGenerator } from '../../components/data-gererator';
-import { DataFeedItem, FilterDataFeed } from '../../../../data-feed';
-
 export const AutoloadFixedPage: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [items, setItems] = useState<EuState[]>([]);
-    const [all, setAll] = useState<number>(0);
+    const dispatch = useDispatch();
+    const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
     const handleChange = useCallback(
-        (options: any) => {
-            const { skip } = options;
-            const { items: dataItems, all: allItems } = DataGenerator.loadEuState(
-                10,
-                options
-            );
-            const newItems = skip === 0 ? dataItems : [...items, ...dataItems];
-            setItems(newItems);
-            setAll(allItems);
+        (options: BaseFeedParams) => {
+            dispatch(GeneralActions.loadStateFeedRequest(options));
         },
-        [items, all]
+        []
     );
 
     return (
@@ -65,7 +62,7 @@ export const AutoloadFixedPage: React.FC = () => {
                                         target="blank"
                                         small={true}
                                     >
-                    View
+                                        View
                                     </AnchorButton>,
                                 ]}
                             />

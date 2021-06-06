@@ -1,28 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
-import './index.scss';
-
-import { EuState, DataGenerator } from '../../components/data-gererator';
 import { FeedUi } from '../../components/feed-ui';
 import { MasterPage } from '../../components/master-page';
 import { FilterDataFeed } from '../../../../data-feed';
+import { useReduxSelector } from 'src/lib/hooks';
+import { BaseFeedParams } from 'src/lib/interfaces';
+import { GeneralActions } from '../../redux';
+
+import './index.scss';
 
 export const AutoloadPage: React.FC = () => {
-    const [items, setItems] = useState<EuState[]>([]);
-    const [all, setAll] = useState<number>(0);
+    const dispatch = useDispatch();
+    const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
     const handleChange = useCallback(
-        (options: any) => {
-            const { skip } = options;
-            const { items: dataItems, all: allItems } = DataGenerator.loadEuState(
-                10,
-                options
-            );
-            const newItems = skip === 0 ? dataItems : [...items, ...dataItems];
-            setItems(newItems);
-            setAll(allItems);
+        (options: BaseFeedParams) => {
+            dispatch(GeneralActions.loadStateFeedRequest(options));
         },
-        [items, all]
+        []
     );
 
     return (

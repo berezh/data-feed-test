@@ -1,14 +1,31 @@
 .sidebar {
-    padding: 20px;
     // width: 200px;
+    padding-top: 20px;
     display: flex;
     background-color: #444;
     flex: 1;
     display: flex;
     flex-direction: column;
-    > a {
+
+    &__link {
+        margin: 0 !important; 
+        padding: 10px;
         display: block;
         margin: 10px;
         color: white;
+
+        &:hover{
+            color: white;
+            text-decoration: none;
+            background-color: rgb(51, 51, 51);
+        }
+
+        &--active{
+            background-color: black;
+            
+            &:hover{
+                background-color: black;
+            }
+        }
     }
 }

@@ -27,16 +27,6 @@ export const PagingPage: React.FC = () => {
         [items]
     );
 
-    // const handleRenderPageItem = useCallback((page: number | null, current: boolean) => {
-    //     if (page === null) {
-    //         return <span>...</span>;
-    //     } else if (current) {
-    //         return <b>{page}</b>;
-    //     } else {
-    //         return <a href={`/paging?page=${page}`}>{page}</a>;
-    //     }
-    // }, []);
-
     const handleRenderPageLink = useCallback((page: number) => {
         return <a href={`/paging?page=${page}`}>{page}</a>;
     }, []);
