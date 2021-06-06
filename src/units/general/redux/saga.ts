@@ -1,5 +1,5 @@
 import { SagaIterator } from 'redux-saga';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, debounce } from 'redux-saga/effects';
 
 import { ActionWith } from '../../../redux/interfaces';
 import { DataGenerator } from '../components/data-gererator';
@@ -16,5 +16,5 @@ function* loadStateFeed({ payload }: ActionWith): SagaIterator {
 }
 
 export function* generalSaga(): SagaIterator {
-    yield takeLatest(GeneralActionTypes.LOAD_STATE_FEED_REQUEST, loadStateFeed);
+    yield debounce(200, GeneralActionTypes.LOAD_STATE_FEED_REQUEST, loadStateFeed);
 }

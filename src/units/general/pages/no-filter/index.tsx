@@ -1,35 +1,28 @@
 import moment from 'moment';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { useReduxSelector } from 'src/lib/hooks';
 import { DataFeed, DataFeedItem } from '../../../../data-feed';
-import { DataGenerator, EuState } from '../../components/data-gererator';
+import { EuState } from '../../components/data-gererator';
 import { MasterPage } from '../../components/master-page';
+import { GeneralActions } from '../../redux';
 import './index.scss';
 
-const count = 3;
 
 export const NoFilterPage: React.FC = () => {
-    const [items, setItems] = useState<EuState[]>([]);
-    const [all, setAll] = useState<number>(0);
+    const dispatch = useDispatch();
+    const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
     const handleChange = useCallback(
         (skip: number) => {
-            const { items: dataItems, all: allItems } = DataGenerator.loadEuState(
-                count,
-                { skip }
-            );
-            console.info(skip, dataItems, all);
-            const newItems = skip === 0 ? dataItems : [...items, ...dataItems];
-            setItems(newItems);
-            setAll(allItems);
+            dispatch(GeneralActions.loadStateFeedRequest({ skip }));
         },
         [items, all]
     );
 
     useEffect(() => {
-        const { items, all } = DataGenerator.loadEuState(count, { skip: 0 });
-        setItems(items);
-        setAll(all);
+        dispatch(GeneralActions.loadStateFeedRequest({ skip: 0 }));
     }, []);
 
     return (

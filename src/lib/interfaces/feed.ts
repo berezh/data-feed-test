@@ -1,8 +1,3 @@
-export enum OrderMode {
-    Asc = 1,
-    Desc = 0,
-}
-
 export interface BaseFeedParams {
     page?: number;
     skip: number;

@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState , useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { MasterPage } from '../../components/master-page';
-import { EuState, DataGenerator } from '../../components/data-gererator';
-import { FeedUi } from '../../components/feed-ui';
-import { BaseFeedParams } from '../../../../lib/interfaces';
+import { BaseFeedParams } from 'src/lib/interfaces';
 import {
     DataFeedTexts,
     FeedFilterValues,
@@ -12,22 +11,21 @@ import {
     FilterSelectField,
     FilterTextField,
 } from '../../../../data-feed';
+import { GeneralActions } from '../../redux';
+import { useReduxSelector } from 'src/lib/hooks';
+import { FeedUi } from '../../components/feed-ui';
+
 import './index.scss';
 
 export const DefaultPage: React.FC = () => {
-    const [items, setItems] = useState<EuState[]>([]);
-    const [all, setAll] = useState<number>(0);
+    const dispatch = useDispatch();
+    const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
     const handleChange = useCallback(
         (options: BaseFeedParams) => {
-            console.info('default: ', options);
-            const feed = DataGenerator.loadEuState(10, options);
-            // const newItems = feed.skip === 0 ? feed.items : [...items, ...feed.items];
-            // console.log("feed", feed);
-            setItems(feed.items);
-            setAll(feed.all);
+            dispatch(GeneralActions.loadStateFeedRequest(options));
         },
-        [items]
+        []
     );
 
     const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
@@ -36,10 +34,6 @@ export const DefaultPage: React.FC = () => {
             order: 'population',
         };
     }, []);
-
-    useEffect(() => {
-        console.info('items', items.length);
-    }, [items]);
 
     const texts = useMemo<Partial<DataFeedTexts>>(() => {
         return {
@@ -56,6 +50,7 @@ export const DefaultPage: React.FC = () => {
                 sortOptions={FeedUi.sortOptions}
                 initialValues={initialValues}
                 onChange={handleChange}
+                initialLoad={true}
                 texts={texts}
             >
                 <FilterCheckboxField name="isEuro" label="Is Euro" />

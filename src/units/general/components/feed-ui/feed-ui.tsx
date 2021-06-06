@@ -20,6 +20,7 @@ export class FeedUi {
             name: 'area',
         },
     ];
+
     public static renderItem(item: EuState): React.ReactElement {
         return (
             <DataFeedItem
@@ -78,7 +79,7 @@ export class FeedUi {
                         href="https://${item.code}.wikipedia.org/"
                         target="blank"
                     >
-            View
+                        View
                     </a>,
                 ]}
             />

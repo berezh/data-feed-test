@@ -1,18 +1,20 @@
 import { parse } from 'query-string';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
+import { useReduxSelector } from 'src/lib/hooks';
 import { FeedFilterValues, FilterDataFeed } from '../../../../data-feed';
-import { DataGenerator, EuState } from '../../components/data-gererator';
 import { FeedUi } from '../../components/feed-ui';
 import { MasterPage } from '../../components/master-page';
+import { GeneralActions } from '../../redux';
 import './index.scss';
 
-const step = 3;
+const step = 10;
 
 export const PagingPage: React.FC = () => {
-    const [items, setItems] = useState<EuState[]>([]);
-    const [all, setAll] = useState<number>(0);
+    const dispatch = useDispatch();
+    const { all, items } = useReduxSelector(x => x.general.stateFeed);
     const { search } = useLocation();
     const { page } = parse(search, { parseNumbers: true }) as {
         page?: number;
@@ -20,11 +22,7 @@ export const PagingPage: React.FC = () => {
 
     const handleChange = useCallback(
         (options: FeedFilterValues) => {
-            const feed = DataGenerator.loadEuState(step, options, page, step);
-            // const newItems = feed.skip === 0 ? feed.items : [...items, ...feed.items];
-            setItems(feed.items);
-            // console.log('change: ', options, feed.items.length);
-            setAll(feed.all);
+            dispatch(GeneralActions.loadStateFeedRequest(options));
         },
         [items]
     );
@@ -47,7 +45,6 @@ export const PagingPage: React.FC = () => {
         return {
             direction: 'desc',
             order: 'name',
-            page,
         };
     }, [page]);
 
@@ -57,10 +54,12 @@ export const PagingPage: React.FC = () => {
                 all={all}
                 data={items}
                 step={step}
+                page={page}
                 renderItem={FeedUi.renderItem}
                 sortOptions={FeedUi.sortOptions}
                 // renderPageItem={handleRenderPageItem}
                 renderPageLink={handleRenderPageLink}
+
                 initialValues={initialValues}
                 onChange={handleChange}
             />

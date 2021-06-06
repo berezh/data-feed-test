@@ -12,9 +12,6 @@ const initialState: GeneralState = {
 };
 
 export const generalReducer = newReducer(initialState, {
-    // [GeneralActionTypes.LOAD_LOCALE_TEXT_FEED_SUCCEEDED]: (state, payload: Feed<SpAdminLocaleText>) => {
-    //     return monoliteFeedCombine(state, s => s.localeFeed, payload);
-    // },
     [GeneralActionTypes.LOAD_STATE_FEED_SUCCESS]: (state, payload: Feed<EuState>) => {
         return monoliteFeedCombine(state, s => s.stateFeed, payload);
     },

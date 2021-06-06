@@ -1,34 +1,37 @@
-import React, { useState, useCallback } from 'react';
-
-import './index.scss';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { MasterPage } from '../../components/master-page';
-import { EuState, DataGenerator } from '../../components/data-gererator';
 import { FeedUi } from '../../components/feed-ui';
 import {
+    FeedFilterValues,
     FilterCheckboxField,
     FilterDataFeed,
     FilterSearchField,
     FilterSelectField,
 } from '../../../../data-feed';
+import { useReduxSelector } from 'src/lib/hooks';
+import { GeneralActions } from '../../redux';
+
+import './index.scss';
 
 export const NoInitialLoadPage: React.FC = () => {
-    const [items, setItems] = useState<EuState[]>([]);
-    const [all, setAll] = useState<number>(0);
+    const dispatch = useDispatch();
+    const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
     const handleChange = useCallback(
         (options: any) => {
-            const { skip } = options;
-            const { items: dataItems, all: allItems } = DataGenerator.loadEuState(
-                10,
-                options
-            );
-            const newItems = skip === 0 ? dataItems : [...items, ...dataItems];
-            setItems(newItems);
-            setAll(allItems);
+            dispatch(GeneralActions.loadStateFeedRequest(options));
         },
         [items, all]
     );
+
+    const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
+        return {
+            direction: 'desc',
+            order: 'population',
+        };
+    }, []);
 
     return (
         <MasterPage>
@@ -40,6 +43,7 @@ export const NoInitialLoadPage: React.FC = () => {
                 sortOptions={FeedUi.sortOptions}
                 renderItem={FeedUi.renderItem}
                 showTotal={true}
+                initialValues={initialValues}
             >
                 <FilterCheckboxField name="isEuro" label="Is Euro" />
                 <FilterSelectField
