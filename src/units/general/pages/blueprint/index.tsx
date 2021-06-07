@@ -11,7 +11,10 @@ import {
 import { GeneralActions } from '../../redux';
 import { useReduxSelector } from 'src/lib/hooks';
 import { FeedUi } from '../../components/feed-ui';
-import { BpFilterBoolField, BpFilterSelectField, BpFilterTextField } from '../../../../data-feed-blueprintjs';
+import {
+    BpFilterBoolField, BpFilterSearchField, BpFilterSelectField,
+    BpFilterTextField
+} from '../../../../data-feed-blueprintjs';
 
 import './index.scss';
 
@@ -50,6 +53,7 @@ export const BluePrintPage: React.FC = () => {
                 onChange={handleChange}
                 initialLoad={true}
                 texts={texts}
+                searchField={<BpFilterSearchField />}
             >
                 <BpFilterBoolField name="isEuro" label="Is Euro" />
                 <BpFilterSelectField

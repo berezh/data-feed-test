@@ -283,7 +283,7 @@ var ButtonLink = function (_a) {
 };
 
 function DialogComponent(_a) {
-    var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts;
+    var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var handleClean = useCallback(function () {
         dispatch(reset(formName));
@@ -294,7 +294,7 @@ function DialogComponent(_a) {
         options.length ? (React.createElement("div", { className: 'df-filter__sort' },
             React.createElement(FilterSortField, { texts: texts, name: "sort", options: options }))) : null,
         React.createElement("div", { className: 'df-filter__search' },
-            React.createElement(FilterSearchField, null),
+            searchField ? searchField : React.createElement(FilterSearchField, null),
             searchContent),
         children ? React.createElement("div", { className: 'df-filter__children' }, children) : null,
         React.createElement("div", { className: 'df-filter__bottom' },
@@ -337,7 +337,7 @@ function DataFeed(_a) {
 var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
 var formCount = 0;
 var FilterDataFeed = function (_a) {
-    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts;
+    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
     var formName = useMemo(function () {
@@ -397,7 +397,7 @@ var FilterDataFeed = function (_a) {
         dispatch(initialize(formName, FilterUtil.toInner(__assign({ skip: skip }, rest))));
     }, []);
     return (React.createElement(DataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
-        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent, texts: texts }, children)));
+        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent, texts: texts, searchField: searchField }, children)));
 };
 
 var FeedAttribute = function (_a) {

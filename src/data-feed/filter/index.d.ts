@@ -10,6 +10,7 @@ interface ComponentProps {
     total?: number;
     className?: string;
     texts?: Partial<DataFeedTexts>;
+    searchField?: React.ReactElement;
 }
 export declare function FeedFilterForm<T = FeedFilterValues>({ ...props }: ComponentProps & {
     initialValues?: Partial<T>;

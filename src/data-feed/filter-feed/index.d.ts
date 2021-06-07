@@ -13,5 +13,6 @@ export interface FilterDataFeedProps<T = any> extends Omit<DataFeedProps<T>, 're
     languageOptions?: ValueOption[];
     showTotal?: boolean;
     texts?: Partial<DataFeedTexts>;
+    searchField?: React.ReactElement;
 }
 export declare const FilterDataFeed: React.FC<FilterDataFeedProps>;

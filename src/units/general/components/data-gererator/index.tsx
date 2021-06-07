@@ -47,6 +47,7 @@ export const DataGenerator = {
         const {
             skip,
             name,
+            search,
             isEuro,
             language,
             currency,
@@ -65,6 +66,12 @@ export const DataGenerator = {
         if (name) {
             filterItems = filterItems.filter((x) =>
                 x.name.toLowerCase().includes((name as string).toLowerCase())
+            );
+        }
+
+        if (search) {
+            filterItems = filterItems.filter((x) =>
+                x.name.toLowerCase().includes((search as string).toLowerCase())
             );
         }
 
@@ -101,7 +108,7 @@ export const DataGenerator = {
             filterItems = filterItems.filter(
                 (x) =>
                     x.capital.toLowerCase().indexOf((capital as string).toLowerCase()) >=
-          0
+                    0
             );
         }
 
@@ -110,7 +117,7 @@ export const DataGenerator = {
             filterItems = filterItems.filter(
                 (x) =>
                     x.name.toLowerCase().indexOf((extraParam as string).toLowerCase()) >=
-          0
+                    0
             );
         }
 

@@ -121,12 +121,6 @@
       .feed-item__action-set > div:first-child {
         margin-left: 0; }
 
-.df-field-select {
-  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
-  padding-left: var(--dfControlPadding);
-  padding-right: var(--dfControlPadding);
-  height: var(--dfControlHeight); }
-
 .df-sort__sort {
   display: flex;
   align-items: center; }
@@ -150,18 +144,24 @@
   .df-sort__option > *:not(:last-child) {
     margin-right: 3px; }
 
-.filter-radio {
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-  .filter-radio > *:not(:last-child) {
-    margin-right: 5px; }
+.df-field-select {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
 
 .df-field-input {
   border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
   padding-left: var(--dfControlPadding);
   padding-right: var(--dfControlPadding);
   height: var(--dfControlHeight); }
+
+.filter-radio {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .filter-radio > *:not(:last-child) {
+    margin-right: 5px; }
 
 .df-field-checkbox {
   display: flex;
