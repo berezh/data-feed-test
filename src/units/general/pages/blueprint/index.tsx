@@ -11,6 +11,7 @@ import {
     BpFilterBoolField,
     BpFilterSearchField,
     BpFilterSelectField,
+    BpFilterSelectItem,
     BpFilterTextField,
 } from '../../../../data-feed-blueprintjs';
 
@@ -37,6 +38,10 @@ export const BluePrintPage: React.FC = () => {
         };
     }, []);
 
+    const renderLanguageOption = useCallback(({ item, onClick }: BpFilterSelectItem) => {
+        return <div key={item.value} onClick={onClick}>{`${item.text} (${item.value})`}</div>;
+    }, []);
+
     return (
         <MasterPage>
             <FilterDataFeed
@@ -61,6 +66,7 @@ export const BluePrintPage: React.FC = () => {
                 />
                 <BpFilterSelectField
                     name="currency"
+                    renderItem={renderLanguageOption}
                     options={[
                         { text: 'Euro', value: 'euro' },
                         { text: 'Krona', value: 'krona' },

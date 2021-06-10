@@ -61,7 +61,7 @@ function getValue(option, valueField) {
     return option ? option[valueField || 'value'] : undefined;
 }
 var CurrentComponent$1 = function (_a) {
-    var _b = _a.input, value = _b.value, onChange = _b.onChange, options = _a.options, placeholder = _a.placeholder, valueField = _a.valueField;
+    var _b = _a.input, value = _b.value, onChange = _b.onChange, options = _a.options, placeholder = _a.placeholder, valueField = _a.valueField, renderItem = _a.renderItem;
     var activeItem = useMemo(function () {
         return options.find(function (x) { return getValue(x, valueField) === value; });
     }, [value]);
@@ -76,8 +76,11 @@ var CurrentComponent$1 = function (_a) {
         if (!modifiers.matchesPredicate) {
             return null;
         }
+        if (renderItem) {
+            return renderItem({ item: option, onClick: handleClick, modifiers: modifiers });
+        }
         return (React.createElement(MenuItem, { active: modifiers.active, disabled: modifiers.disabled, key: getValue(option, valueField), onClick: handleClick, text: option.text }));
-    }, [valueField]);
+    }, [valueField, renderItem]);
     var handleInterPredicate = useCallback(function (query, item) {
         return ("" + item.text.toLowerCase()).indexOf(query.toLowerCase()) >= 0;
     }, []);

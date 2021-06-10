@@ -1,6 +1,7 @@
 import { OrderDirection } from './base';
 import { FeedSortValue } from './value';
 export interface FeedFilterValues {
+    search?: string;
     page?: number;
     skip: number;
     order?: string;

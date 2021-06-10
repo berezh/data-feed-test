@@ -315,24 +315,30 @@ function useDebouncedCallback(wait, callback, deps) {
     return useCallback(debounce(callback, wait), deps);
 }
 
-function DataFeed(_a) {
+var DataFeed = function (_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = useRef(null);
+    var _g = useState(data.length), count = _g[0], setCount = _g[1];
+    useEffect(function () {
+        console.log('updated data', data);
+        setCount(data.length);
+    }, [data]);
     var handleLoad = useCallback(function () {
-        onChange && onChange(data.length);
-    }, [data, onChange]);
+        console.log('feed onclick', count);
+        onChange(count);
+    }, [count, onChange]);
     var pages = useMemo(function () {
         return PageUtil.getPages(all, step, page);
     }, [all, step, page]);
     return (React.createElement("div", { className: classNames('data-feed', className) },
         children,
-        React.createElement("div", { className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
-        data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
-            React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
-        step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
+        React.createElement("div", { key: "data", className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
+        data.length < all && page === 1 ? (React.createElement("div", { key: "load", className: "df-feed__load", ref: loadRef },
+            React.createElement(ButtonLink, { key: data.length, onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
+        step && step < all && data.length <= step ? (React.createElement("div", { key: "page", className: "df-feed__page" }, pages.map(function (p, i) {
             return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
-}
+};
 
 var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
 var formCount = 0;
@@ -361,9 +367,9 @@ var FilterDataFeed = function (_a) {
             dispatch(change(formName, 'skip', 0));
         }
     }, [init, onChange]);
-    var handleFeedChange = useCallback(function (skip) {
-        dispatch(change(formName, 'skip', skip));
-    }, [formName]);
+    var handleFeedChange = useCallback(function () {
+        dispatch(change(formName, 'skip', data === null || data === void 0 ? void 0 : data.length));
+    }, [formName, data]);
     var renderPageItem = useCallback(function (page, current) {
         if (page === null) {
             return React.createElement("span", null, "...");

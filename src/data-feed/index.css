@@ -13,7 +13,9 @@
   --dfControlHeight: 26px;
   --dfControlPadding: 5px;
   --dfButtomLinkColor: rgb(42, 41, 59);
-  --dfButtomLinkDisabledColor: rgb(116, 116, 129); }
+  --dfButtomLinkDisabledColor: rgb(116, 116, 129);
+  --dfLineBorderWidth: 1px;
+  --dfLineBorderColor: #e9e9e9; }
 
 .df-filter {
   display: flex;
@@ -62,10 +64,12 @@
   --dfControlHeight: 26px;
   --dfControlPadding: 5px;
   --dfButtomLinkColor: rgb(42, 41, 59);
-  --dfButtomLinkDisabledColor: rgb(116, 116, 129); }
+  --dfButtomLinkDisabledColor: rgb(116, 116, 129);
+  --dfLineBorderWidth: 1px;
+  --dfLineBorderColor: #e9e9e9; }
 
 .df-feed__data > div {
-  border-bottom: 1px solid #e6e6e6; }
+  border-bottom: var(--dfLineBorderWidth) solid var(--dfLineBorderColor); }
   .df-feed__data > div:last-child {
     border-bottom: none; }
 
@@ -78,7 +82,7 @@
   flex-direction: row;
   justify-content: center;
   padding: 10px 0; }
-  .df-feed__page > div:not(:last-child) {
+  .df-feed__page > *:not(:last-child) {
     margin-right: 10px; }
 
 .feed-item {
@@ -121,6 +125,12 @@
       .feed-item__action-set > div:first-child {
         margin-left: 0; }
 
+.df-field-select {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
+
 .df-sort__sort {
   display: flex;
   align-items: center; }
@@ -144,24 +154,18 @@
   .df-sort__option > *:not(:last-child) {
     margin-right: 3px; }
 
-.df-field-select {
-  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
-  padding-left: var(--dfControlPadding);
-  padding-right: var(--dfControlPadding);
-  height: var(--dfControlHeight); }
-
-.df-field-input {
-  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
-  padding-left: var(--dfControlPadding);
-  padding-right: var(--dfControlPadding);
-  height: var(--dfControlHeight); }
-
 .filter-radio {
   display: flex;
   flex-direction: row;
   align-items: center; }
   .filter-radio > *:not(:last-child) {
     margin-right: 5px; }
+
+.df-field-input {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
 
 .df-field-checkbox {
   display: flex;

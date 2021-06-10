@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { DataFeedTexts } from '../texts';
-export interface DataFeedProps<T> {
+export interface DataFeedProps<T = any> {
     /** Items data array */
     data?: T[];
     /** Total count of items */
@@ -19,11 +19,11 @@ export interface DataFeedProps<T> {
     filterLoading?: JSX.Element;
     /** Button to load new data */
     renderLoadMoreButton?: (loading: boolean) => JSX.Element;
-    onChange?: (skip: number) => void;
+    onChange: (skip: number) => void;
     children?: React.ReactNode;
     /** used with autoLoad property */
     containerRef?: React.RefObject<HTMLElement>;
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
 }
-export declare function DataFeed<T = any>({ data, all, step, page, renderItem, texts, className, loading, onChange, children, renderPageItem, }: DataFeedProps<T>): JSX.Element;
+export declare const DataFeed: React.FC<DataFeedProps>;
