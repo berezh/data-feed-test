@@ -7,7 +7,7 @@ import { Footer } from '../footer';
 
 import './index.scss';
 
-export const MasterPage: React.FC = props => {
+export const MasterPage: React.FC = (props) => {
     const { children } = props;
     return (
         <Layout

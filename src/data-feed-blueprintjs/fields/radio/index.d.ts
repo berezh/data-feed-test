@@ -4,6 +4,7 @@ import './index.scss';
 interface OwnProps {
     options: ValueOption[];
     label?: string;
+    small?: boolean;
 }
 interface Prpops extends OwnProps {
     name: string;

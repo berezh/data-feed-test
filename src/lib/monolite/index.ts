@@ -50,9 +50,9 @@ export function monoliteUtil<TState>(state: TState, accessor: (sourceState: Mono
 export function monoliteFeedCombine<TState, TFeedItem>(
     state: TState,
     feedAccessor: (state: TState) => Feed<TFeedItem>,
-    payload: Feed<TFeedItem>,
+    payload: Feed<TFeedItem>
 ): TState {
-    return monoliteUtil(state, unit => {
+    return monoliteUtil(state, (unit) => {
         return unit.set(feedAccessor, FeedUtil.combine(feedAccessor(state), payload));
     });
 }

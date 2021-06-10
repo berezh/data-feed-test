@@ -38,12 +38,7 @@ const euStates: EuState[] = EuStates.map<EuState>((x) => {
 });
 
 export const DataGenerator = {
-    loadEuState: (
-        count: number,
-        options: FeedFilterValues,
-        page?: number,
-        step?: number
-    ): Feed<EuState> => {
+    loadEuState: (count: number, options: FeedFilterValues, page?: number, step?: number): Feed<EuState> => {
         const {
             skip,
             name,
@@ -64,15 +59,11 @@ export const DataGenerator = {
         let filterItems: EuState[] = orderBy(euStates, order, direction) as any;
 
         if (name) {
-            filterItems = filterItems.filter((x) =>
-                x.name.toLowerCase().includes((name as string).toLowerCase())
-            );
+            filterItems = filterItems.filter((x) => x.name.toLowerCase().includes((name as string).toLowerCase()));
         }
 
         if (search) {
-            filterItems = filterItems.filter((x) =>
-                x.name.toLowerCase().includes((search as string).toLowerCase())
-            );
+            filterItems = filterItems.filter((x) => x.name.toLowerCase().includes((search as string).toLowerCase()));
         }
 
         if (population1M === true) {
@@ -92,32 +83,24 @@ export const DataGenerator = {
 
         if (language) {
             filterItems = filterItems.filter((x) =>
-                x.languages.find(
-                    (l) => l.toLowerCase() === (language as string).toLowerCase()
-                )
+                x.languages.find((l) => l.toLowerCase() === (language as string).toLowerCase())
             );
         }
 
         if (currency) {
-            filterItems = filterItems.filter(
-                (x) => x.currency.indexOf(currency as string) >= 0
-            );
+            filterItems = filterItems.filter((x) => x.currency.indexOf(currency as string) >= 0);
         }
 
         if (capital) {
             filterItems = filterItems.filter(
-                (x) =>
-                    x.capital.toLowerCase().indexOf((capital as string).toLowerCase()) >=
-                    0
+                (x) => x.capital.toLowerCase().indexOf((capital as string).toLowerCase()) >= 0
             );
         }
 
         // console.log('data-generator', extraParam, options);
         if (extraParam) {
             filterItems = filterItems.filter(
-                (x) =>
-                    x.name.toLowerCase().indexOf((extraParam as string).toLowerCase()) >=
-                    0
+                (x) => x.name.toLowerCase().indexOf((extraParam as string).toLowerCase()) >= 0
             );
         }
 

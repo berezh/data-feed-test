@@ -14,7 +14,7 @@ const step = 10;
 
 export const PagingPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { all, items } = useReduxSelector(x => x.general.stateFeed);
+    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
     const { search } = useLocation();
     const { page } = parse(search, { parseNumbers: true }) as {
         page?: number;
@@ -49,7 +49,6 @@ export const PagingPage: React.FC = () => {
                 sortOptions={FeedUi.sortOptions}
                 // renderPageItem={handleRenderPageItem}
                 renderPageLink={handleRenderPageLink}
-
                 initialValues={initialValues}
                 onChange={handleChange}
             />

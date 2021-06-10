@@ -13,6 +13,6 @@ const initialState: GeneralState = {
 
 export const generalReducer = newReducer(initialState, {
     [GeneralActionTypes.LOAD_STATE_FEED_SUCCESS]: (state, payload: Feed<EuState>) => {
-        return monoliteFeedCombine(state, s => s.stateFeed, payload);
+        return monoliteFeedCombine(state, (s) => s.stateFeed, payload);
     },
 });

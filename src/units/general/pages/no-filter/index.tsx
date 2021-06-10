@@ -9,10 +9,9 @@ import { MasterPage } from '../../components/master-page';
 import { GeneralActions } from '../../redux';
 import './index.scss';
 
-
 export const NoFilterPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { all, items } = useReduxSelector(x => x.general.stateFeed);
+    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
 
     const handleChange = useCallback(
         (skip: number) => {

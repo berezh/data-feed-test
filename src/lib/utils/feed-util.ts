@@ -15,12 +15,7 @@ export const FeedUtil = {
         const result = {
             skip: next.skip,
             all: next.all,
-            items: [
-                ...(prev.skip < next.skip && next.items.length !== next.all
-                    ? prev.items
-                    : []),
-                ...next.items,
-            ],
+            items: [...(prev.skip < next.skip && next.items.length !== next.all ? prev.items : []), ...next.items],
         };
         return result;
     },

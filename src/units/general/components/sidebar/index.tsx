@@ -7,35 +7,35 @@ import { AppUrls } from '../../../../lib/urls';
 
 import './index.scss';
 
-
 export const Sidebar: React.FC = () => {
-
     const { pathname } = useLocation();
 
-    const options = useMemo<{
-        path: PagePath,
-        title: string
-    }[]>(() => {
+    const options = useMemo<
+        {
+            path: PagePath;
+            title: string;
+        }[]
+    >(() => {
         return [
             {
                 path: AppUrls.default,
-                title: 'Default'
+                title: 'Default',
             },
             {
                 path: AppUrls.blueprint,
-                title: 'BluePrint'
+                title: 'BluePrint',
             },
             {
                 path: AppUrls.paging,
-                title: 'Paging'
+                title: 'Paging',
             },
             {
                 path: AppUrls.noInitialLoad,
-                title: 'No Initial Load'
+                title: 'No Initial Load',
             },
             {
                 path: AppUrls.noFilter,
-                title: 'No Filter'
+                title: 'No Filter',
             },
             // {
             //     path: AppUrls.autoload,
@@ -51,10 +51,18 @@ export const Sidebar: React.FC = () => {
     return (
         <div className="sidebar">
             {options.map((x, i) => {
-                return <Link key={i} to={x.path.build()} className={classNames('sidebar__link', {
-                    ['sidebar__link--active']: x.path.isActive(pathname)
-                })}>{x.title}</Link>
+                return (
+                    <Link
+                        key={i}
+                        to={x.path.build()}
+                        className={classNames('sidebar__link', {
+                            ['sidebar__link--active']: x.path.isActive(pathname),
+                        })}
+                    >
+                        {x.title}
+                    </Link>
+                );
             })}
-        </div >
+        </div>
     );
 };

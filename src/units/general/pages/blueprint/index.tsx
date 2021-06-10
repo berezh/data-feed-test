@@ -3,31 +3,26 @@ import { useDispatch } from 'react-redux';
 
 import { MasterPage } from '../../components/master-page';
 import { BaseFeedParams } from 'src/lib/interfaces';
-import {
-    DataFeedTexts,
-    FeedFilterValues,
-    FilterDataFeed
-} from '../../../../data-feed';
+import { DataFeedTexts, FeedFilterValues, FilterDataFeed } from '../../../../data-feed';
 import { GeneralActions } from '../../redux';
 import { useReduxSelector } from 'src/lib/hooks';
 import { FeedUi } from '../../components/feed-ui';
 import {
-    BpFilterBoolField, BpFilterSearchField, BpFilterSelectField,
-    BpFilterTextField
+    BpFilterBoolField,
+    BpFilterSearchField,
+    BpFilterSelectField,
+    BpFilterTextField,
 } from '../../../../data-feed-blueprintjs';
 
 import './index.scss';
 
 export const BluePrintPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { all, items } = useReduxSelector(x => x.general.stateFeed);
+    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
 
-    const handleChange = useCallback(
-        (options: BaseFeedParams) => {
-            dispatch(GeneralActions.loadStateFeedRequest(options));
-        },
-        []
-    );
+    const handleChange = useCallback((options: BaseFeedParams) => {
+        dispatch(GeneralActions.loadStateFeedRequest(options));
+    }, []);
 
     const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
         return {
@@ -72,11 +67,7 @@ export const BluePrintPage: React.FC = () => {
                         { text: 'Kuna', value: 'kuna' },
                     ]}
                 />
-                <BpFilterTextField
-                    name="capital"
-                    label="Capital"
-                    placeholder="Enter Capital"
-                />
+                <BpFilterTextField name="capital" label="Capital" placeholder="Enter Capital" />
             </FilterDataFeed>
         </MasterPage>
     );

@@ -19,14 +19,11 @@ import './index.scss';
 
 export const DefaultPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { all, items } = useReduxSelector(x => x.general.stateFeed);
+    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
 
-    const handleChange = useCallback(
-        (options: BaseFeedParams) => {
-            dispatch(GeneralActions.loadStateFeedRequest(options));
-        },
-        []
-    );
+    const handleChange = useCallback((options: BaseFeedParams) => {
+        dispatch(GeneralActions.loadStateFeedRequest(options));
+    }, []);
 
     const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
         return {
@@ -71,12 +68,7 @@ export const DefaultPage: React.FC = () => {
                         { text: 'Kuna', value: 'kuna' },
                     ]}
                 />
-                <FilterInputField
-                    className="custom-input"
-                    name="capital"
-                    label="Capital"
-                    placeholder="Enter Capital"
-                />
+                <FilterInputField className="custom-input" name="capital" label="Capital" placeholder="Enter Capital" />
             </FilterDataFeed>
         </MasterPage>
     );

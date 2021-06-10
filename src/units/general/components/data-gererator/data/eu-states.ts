@@ -10,7 +10,7 @@ export const EuStates: [
     number,
     string,
     number,
-    string[],
+    string[]
 ][] = [
     ['Austria', 'Österreich', 'AT', 'Vienna', '1/1/1995', 8792500, 83855, 437582, 53558, 'euro', 18, ['German']],
     [

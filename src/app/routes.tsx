@@ -18,26 +18,10 @@ export class Root extends React.PureComponent {
                     <Route exact path={AppUrls.default.build()} component={DefaultPage} />
                     <Route exact path={AppUrls.blueprint.build()} component={BluePrintPage} />
                     <Route exact path={AppUrls.paging.build()} component={PagingPage} />
-                    <Route
-                        exact
-                        path={AppUrls.noFilter.build()}
-                        component={NoFilterPage}
-                    />
-                    <Route
-                        exact
-                        path={AppUrls.noInitialLoad.build()}
-                        component={NoInitialLoadPage}
-                    />
-                    <Route
-                        exact
-                        path={AppUrls.autoload.build()}
-                        component={AutoloadPage}
-                    />
-                    <Route
-                        exact
-                        path={AppUrls.autoloadFixed.build()}
-                        component={AutoloadFixedPage}
-                    />
+                    <Route exact path={AppUrls.noFilter.build()} component={NoFilterPage} />
+                    <Route exact path={AppUrls.noInitialLoad.build()} component={NoInitialLoadPage} />
+                    <Route exact path={AppUrls.autoload.build()} component={AutoloadPage} />
+                    <Route exact path={AppUrls.autoloadFixed.build()} component={AutoloadFixedPage} />
                     <Route component={DefaultPage} />
                 </Switch>
             </BrowserRouter>

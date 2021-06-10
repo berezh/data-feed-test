@@ -74,11 +74,7 @@ export class FeedUi {
                             alert(`Edit ${item.name}`);
                         }}
                     />,
-                    <a
-                        key="view-link"
-                        href="https://${item.code}.wikipedia.org/"
-                        target="blank"
-                    >
+                    <a key="view-link" href="https://${item.code}.wikipedia.org/" target="blank">
                         View
                     </a>,
                 ]}

@@ -17,7 +17,7 @@ import './index.scss';
 
 export const NoInitialLoadPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { all, items } = useReduxSelector(x => x.general.stateFeed);
+    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
 
     const handleChange = useCallback(
         (options: any) => {
@@ -63,11 +63,7 @@ export const NoInitialLoadPage: React.FC = () => {
                         { text: 'Kuna', value: 'kuna' },
                     ]}
                 />
-                <FilterSearchField
-                    name="capital"
-                    label="Capital"
-                    placeholder="Enter Capital"
-                />
+                <FilterSearchField name="capital" label="Capital" placeholder="Enter Capital" />
             </FilterDataFeed>
         </MasterPage>
     );

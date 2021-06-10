@@ -12,14 +12,11 @@ import './index.scss';
 
 export const AutoloadPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { all, items } = useReduxSelector(x => x.general.stateFeed);
+    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
 
-    const handleChange = useCallback(
-        (options: BaseFeedParams) => {
-            dispatch(GeneralActions.loadStateFeedRequest(options));
-        },
-        []
-    );
+    const handleChange = useCallback((options: BaseFeedParams) => {
+        dispatch(GeneralActions.loadStateFeedRequest(options));
+    }, []);
 
     return (
         <MasterPage>

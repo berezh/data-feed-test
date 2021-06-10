@@ -24,7 +24,7 @@ const store = createLocalStorageStore<ReduxState>(
         },
     },
     RootReducer(appHistory),
-    middleware as any,
+    middleware as any
 );
 
 // then run the saga

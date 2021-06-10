@@ -95,7 +95,7 @@ var BpFilterSelectField = function (props) {
 };
 
 var CurrentComponent$2 = function (_a) {
-    var label = _a.label, _b = _a.input, inputValue = _b.value, inputName = _b.name, onChange = _b.onChange, options = _a.options;
+    var label = _a.label, _b = _a.input, inputValue = _b.value, inputName = _b.name, onChange = _b.onChange, options = _a.options, small = _a.small;
     var handleClick = useCallback(function (value) {
         onChange(value === inputValue ? '' : value);
     }, [inputValue]);
@@ -104,7 +104,7 @@ var CurrentComponent$2 = function (_a) {
         label ? React.createElement("div", { className: "df-bp-field-radio__label" }, label) : null,
         React.createElement(ButtonGroup, null, options.map(function (_a, i) {
             var value = _a.value, text = _a.text;
-            return (React.createElement(Button, { small: true, key: i, onClick: function () { return handleClick(value); }, active: value === inputValue }, text));
+            return (React.createElement(Button, { small: small, key: i, onClick: function () { return handleClick(value); }, active: value === inputValue }, text));
         }))));
 };
 var BpFilterRadioField = function (props) {
