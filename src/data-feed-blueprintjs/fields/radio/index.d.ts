@@ -1,5 +1,5 @@
 import React from 'react';
-import ValueOption from '../../interfaces/value-option';
+import { ValueOption } from 'data-feed';
 import './index.scss';
 interface OwnProps {
     options: ValueOption[];

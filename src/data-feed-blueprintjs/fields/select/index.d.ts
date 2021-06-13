@@ -1,6 +1,6 @@
 import React from 'react';
 import { IItemModifiers } from '@blueprintjs/select';
-import ValueOption from '../../interfaces/value-option';
+import { ValueOption } from 'data-feed';
 export interface BpFilterSelectItem {
     item: ValueOption;
     onClick: (event: React.MouseEvent<HTMLElement>) => void;
