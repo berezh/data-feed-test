@@ -1,6 +1,8 @@
 /* eslint-disable */
+import { newActionType, newReducer, setState, newAction } from 'redux-sputnik';
+import { change, Field, reduxForm, reset, Form, initialize } from 'redux-form';
+import { takeEvery, put, select } from 'redux-saga/effects';
 import React, { useMemo, useCallback, useState, useRef, useEffect } from 'react';
-import { Field, reduxForm, reset, Form, change, initialize } from 'redux-form';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
@@ -43,12 +45,84 @@ function __rest(s, e) {
     return t;
 }
 
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
 function __spreadArrays() {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
         for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
             r[k] = a[j];
     return r;
+}
+
+var prefix = '@feed';
+var FeedActionTypes = {
+    SET_COUNT: newActionType(prefix, 'SET_COUNT'),
+    SET_SKIP: newActionType(prefix, 'SET_SKIP'),
+};
+
+var _a;
+var FEED_INITIAL_STATE = {
+    count: {},
+};
+var feedReducer = newReducer(FEED_INITIAL_STATE, (_a = {},
+    _a[FeedActionTypes.SET_COUNT] = function (state, _a) {
+        var form = _a.form, count = _a.count;
+        state.count[form] = count;
+        return setState(state, function (_) { return _.count; }, __assign({}, state.count));
+    },
+    _a));
+
+function setSkip(_a) {
+    var count;
+    var payload = _a.payload;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0: return [4 /*yield*/, select(function (x) { return x.feed.count[payload]; }) || 0];
+            case 1:
+                count = _b.sent();
+                return [4 /*yield*/, put(change(payload, 'skip', count))];
+            case 2:
+                _b.sent();
+                return [2 /*return*/];
+        }
+    });
+}
+function FeedSaga() {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, takeEvery(FeedActionTypes.SET_SKIP, setSkip)];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
 }
 
 var CurrentComponent = function (_a) {
@@ -269,6 +343,8 @@ var FilterCheckboxField = function (props) {
     return React.createElement(Field, __assign({ component: CurrentComponent$5 }, props));
 };
 
+var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
+
 var ButtonLink = function (_a) {
     var _b;
     var children = _a.children, disabled = _a.disabled, onClick = _a.onClick;
@@ -283,11 +359,11 @@ var ButtonLink = function (_a) {
 };
 
 function DialogComponent(_a) {
-    var formName = _a.formName, handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts, searchField = _a.searchField;
+    var handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var handleClean = useCallback(function () {
-        dispatch(reset(formName));
-    }, [formName]);
+        dispatch(reset(FILTER_FORM_NAME));
+    }, [FILTER_FORM_NAME]);
     return (React.createElement(Form, { onSubmit: handleSubmit, className: classNames('df-filter', className) },
         React.createElement(FilterHiddenField, { name: "skip" }),
         React.createElement(FilterHiddenField, { name: "page" }),
@@ -302,6 +378,9 @@ function DialogComponent(_a) {
             React.createElement("div", { className: 'df-filter__actions' },
                 React.createElement(ButtonLink, { onClick: handleClean }, (texts === null || texts === void 0 ? void 0 : texts.clean) || 'Clean')))));
 }
+// export const FeedFilterForm = reduxForm<FeedFilterValues, ComponentProps>({
+//     form: FILTER_FORM_NAME,
+// })(DialogComponent);
 function FeedFilterForm(_a) {
     var props = __rest(_a, []);
     var Component = useState(reduxForm({
@@ -315,40 +394,34 @@ function useDebouncedCallback(wait, callback, deps) {
     return useCallback(debounce(callback, wait), deps);
 }
 
-var DataFeed = function (_a) {
+function DataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = useRef(null);
-    var _g = useState(data.length), count = _g[0], setCount = _g[1];
-    useEffect(function () {
-        console.log('updated data', data);
-        setCount(data.length);
-    }, [data]);
     var handleLoad = useCallback(function () {
-        console.log('feed onclick', count);
-        onChange(count);
-    }, [count, onChange]);
+        onChange(data.length);
+    }, [data, onChange]);
     var pages = useMemo(function () {
         return PageUtil.getPages(all, step, page);
     }, [all, step, page]);
     return (React.createElement("div", { className: classNames('data-feed', className) },
         children,
-        React.createElement("div", { key: "data", className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
-        data.length < all && page === 1 ? (React.createElement("div", { key: "load", className: "df-feed__load", ref: loadRef },
-            React.createElement(ButtonLink, { key: data.length, onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
-        step && step < all && data.length <= step ? (React.createElement("div", { key: "page", className: "df-feed__page" }, pages.map(function (p, i) {
+        React.createElement("div", { className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
+        data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
+            React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
+        step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
             return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
+}
+
+var FeedActions = {
+    setCount: function (payload) { return newAction(FeedActionTypes.SET_COUNT, payload); },
+    setSkip: function (payload) { return newAction(FeedActionTypes.SET_SKIP, payload); },
 };
 
-var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
-var formCount = 0;
 var FilterDataFeed = function (_a) {
     var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
-    var formName = useMemo(function () {
-        return FILTER_FORM_NAME + "_" + formCount;
-    }, []);
     var debounceFilterChange = useDebouncedCallback(500, function (data) {
         if (init) {
             onChange(FilterUtil.toOuter(data));
@@ -364,12 +437,12 @@ var FilterDataFeed = function (_a) {
             debounceFilterChange(__assign({ skip: skip }, data));
         }
         else {
-            dispatch(change(formName, 'skip', 0));
+            dispatch(change(FILTER_FORM_NAME, 'skip', 0));
         }
     }, [init, onChange]);
     var handleFeedChange = useCallback(function () {
-        dispatch(change(formName, 'skip', data === null || data === void 0 ? void 0 : data.length));
-    }, [formName, data]);
+        dispatch(FeedActions.setSkip(FILTER_FORM_NAME));
+    }, []);
     var renderPageItem = useCallback(function (page, current) {
         if (page === null) {
             return React.createElement("span", null, "...");
@@ -398,12 +471,14 @@ var FilterDataFeed = function (_a) {
         return languageOptions.length ? (React.createElement(FilterSelectField, { placeholder: 'Language', name: "languageCode", options: languageOptions })) : null;
     }, [languageOptions]);
     useEffect(function () {
-        formCount = +1;
         var _a = initialValues || {}, _b = _a.skip, skip = _b === void 0 ? 0 : _b, rest = __rest(_a, ["skip"]);
-        dispatch(initialize(formName, FilterUtil.toInner(__assign({ skip: skip }, rest))));
+        dispatch(initialize(FILTER_FORM_NAME, FilterUtil.toInner(__assign({ skip: skip }, rest))));
     }, []);
+    useEffect(function () {
+        dispatch(FeedActions.setCount({ form: FILTER_FORM_NAME, count: (data === null || data === void 0 ? void 0 : data.length) || 0 }));
+    }, [data]);
     return (React.createElement(DataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
-        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, formName: formName, searchContent: searchContent, texts: texts, searchField: searchField }, children)));
+        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, searchContent: searchContent, texts: texts, formName: FILTER_FORM_NAME, searchField: searchField }, children)));
 };
 
 var FeedAttribute = function (_a) {
@@ -438,15 +513,15 @@ var DataFeedItem = function (_a) {
         right ? React.createElement("div", { className: "feed-item__right" }, right) : null));
 };
 
-var _a;
-var defaultLocale = (_a = {},
-    _a['sort'] = '',
-    _a['total'] = '',
-    _a['clean'] = '',
-    _a['search'] = '',
-    _a['loadMore'] = '',
-    _a['loading'] = '',
-    _a);
+var _a$1;
+var defaultLocale = (_a$1 = {},
+    _a$1['sort'] = '',
+    _a$1['total'] = '',
+    _a$1['clean'] = '',
+    _a$1['search'] = '',
+    _a$1['loadMore'] = '',
+    _a$1['loading'] = '',
+    _a$1);
 // export type DataFeedText = keyof DataFeedTexts;
 
-export { DataFeed, DataFeedItem, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, PageUtil, SortUtil };
+export { DataFeed, DataFeedItem, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FeedSaga, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, PageUtil, SortUtil, feedReducer };

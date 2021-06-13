@@ -4,9 +4,9 @@ import { FeedSortOption, FeedFilterValues } from '../interfaces';
 import { DataFeedTexts } from '../texts';
 interface ComponentProps {
     children?: React.ReactNode;
-    formName: string;
     options?: FeedSortOption[];
     searchContent?: React.ReactNode;
+    formName: string;
     total?: number;
     className?: string;
     texts?: Partial<DataFeedTexts>;

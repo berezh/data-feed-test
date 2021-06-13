@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { DataFeedTexts } from '../texts';
-export interface DataFeedProps<T = any> {
+export interface DataFeedProps<T> {
     /** Items data array */
     data?: T[];
     /** Total count of items */
@@ -26,4 +26,4 @@ export interface DataFeedProps<T = any> {
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
 }
-export declare const DataFeed: React.FC<DataFeedProps>;
+export declare function DataFeed<T = any>({ data, all, step, page, renderItem, texts, className, loading, onChange, children, renderPageItem, }: DataFeedProps<T>): JSX.Element;

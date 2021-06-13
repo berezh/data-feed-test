@@ -4,10 +4,12 @@ import { History } from 'history';
 import { reducer as form } from 'redux-form';
 
 import { generalReducer } from '../units/general/redux';
+import { feedReducer } from '../data-feed';
 
 export function RootReducer(history: History): any {
     return combineReducers({
         router: connectRouter(history) as any,
+        feed: feedReducer,
         form,
         general: generalReducer,
     } as any);
