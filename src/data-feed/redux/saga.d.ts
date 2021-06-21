@@ -1,2 +1,2 @@
 import { SagaIterator } from 'redux-saga';
-export declare function FeedSaga(): SagaIterator;
+export declare function feedSaga(): SagaIterator;

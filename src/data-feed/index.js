@@ -114,7 +114,7 @@ function setSkip(_a) {
         }
     });
 }
-function FeedSaga() {
+function feedSaga() {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, takeEvery(FeedActionTypes.SET_SKIP, setSkip)];
@@ -124,6 +124,8 @@ function FeedSaga() {
         }
     });
 }
+
+var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
 
 var CurrentComponent = function (_a) {
     var restinput = _a.input, className = _a.className, rest = __rest(_a, ["input", "className"]);
@@ -343,8 +345,6 @@ var FilterCheckboxField = function (props) {
     return React.createElement(Field, __assign({ component: CurrentComponent$5 }, props));
 };
 
-var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
-
 var ButtonLink = function (_a) {
     var _b;
     var children = _a.children, disabled = _a.disabled, onClick = _a.onClick;
@@ -524,4 +524,4 @@ var defaultLocale = (_a$1 = {},
     _a$1);
 // export type DataFeedText = keyof DataFeedTexts;
 
-export { DataFeed, DataFeedItem, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FeedSaga, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, PageUtil, SortUtil, feedReducer };
+export { DataFeed, DataFeedItem, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, PageUtil, SortUtil, feedReducer, feedSaga };
