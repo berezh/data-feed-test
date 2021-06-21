@@ -15,8 +15,6 @@ import { GeneralActions } from '../../redux';
 import { useReduxSelector } from 'src/lib/hooks';
 import { FeedUi } from '../../components/feed-ui';
 
-import './index.scss';
-
 export const DefaultPage: React.FC = () => {
     const dispatch = useDispatch();
     const { all, items } = useReduxSelector((x) => x.general.stateFeed);

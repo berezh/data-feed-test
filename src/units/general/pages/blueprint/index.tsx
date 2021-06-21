@@ -15,8 +15,6 @@ import {
     BpFilterTextField,
 } from '../../../../data-feed-blueprintjs';
 
-import './index.scss';
-
 export const BluePrintPage: React.FC = () => {
     const dispatch = useDispatch();
     const { all, items } = useReduxSelector((x) => x.general.stateFeed);

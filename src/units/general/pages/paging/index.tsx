@@ -8,7 +8,6 @@ import { FeedFilterValues, FilterDataFeed } from '../../../../data-feed';
 import { FeedUi } from '../../components/feed-ui';
 import { MasterPage } from '../../components/master-page';
 import { GeneralActions } from '../../redux';
-import './index.scss';
 
 const step = 10;
 

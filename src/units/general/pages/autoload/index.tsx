@@ -8,8 +8,6 @@ import { useReduxSelector } from 'src/lib/hooks';
 import { BaseFeedParams } from 'src/lib/interfaces';
 import { GeneralActions } from '../../redux';
 
-import './index.scss';
-
 export const AutoloadPage: React.FC = () => {
     const dispatch = useDispatch();
     const { all, items } = useReduxSelector((x) => x.general.stateFeed);

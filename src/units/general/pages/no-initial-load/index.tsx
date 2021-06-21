@@ -13,8 +13,6 @@ import {
 import { useReduxSelector } from 'src/lib/hooks';
 import { GeneralActions } from '../../redux';
 
-import './index.scss';
-
 export const NoInitialLoadPage: React.FC = () => {
     const dispatch = useDispatch();
     const { all, items } = useReduxSelector((x) => x.general.stateFeed);

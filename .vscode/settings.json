@@ -10,5 +10,14 @@
         "typescriptreact"
     ],
     "eslint.run": "onSave",
-    "eslint.nodePath": "./node_modules"
-}
+    "[scss]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+      }
+    },
+    "stylelint.validate": [
+      "scss"
+    ],
+    "stylelint.snippet": [
+      "scss"
+    ]

@@ -7,7 +7,6 @@ import { DataFeed, DataFeedItem } from '../../../../data-feed';
 import { EuState } from '../../components/data-gererator';
 import { MasterPage } from '../../components/master-page';
 import { GeneralActions } from '../../redux';
-import './index.scss';
 
 export const NoFilterPage: React.FC = () => {
     const dispatch = useDispatch();

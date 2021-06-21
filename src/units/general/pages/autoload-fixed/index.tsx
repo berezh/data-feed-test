@@ -10,8 +10,6 @@ import { useReduxSelector } from 'src/lib/hooks';
 import { BaseFeedParams } from 'src/lib/interfaces';
 import { GeneralActions } from '../../redux';
 
-import './index.scss';
-
 export const AutoloadFixedPage: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
