@@ -7,7 +7,7 @@ import {
     DataFeedTexts,
     FeedFilterValues,
     FilterCheckboxField,
-    FilterDataFeed,
+    DataFeed,
     FilterSelectField,
     FilterInputField,
 } from '../../../../data-feed';
@@ -38,7 +38,7 @@ export const DefaultPage: React.FC = () => {
 
     return (
         <MasterPage>
-            <FilterDataFeed
+            <DataFeed
                 all={all}
                 data={items}
                 renderItem={FeedUi.renderItem}
@@ -67,7 +67,7 @@ export const DefaultPage: React.FC = () => {
                     ]}
                 />
                 <FilterInputField className="custom-input" name="capital" label="Capital" placeholder="Enter Capital" />
-            </FilterDataFeed>
+            </DataFeed>
         </MasterPage>
     );
 };

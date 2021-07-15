@@ -2,7 +2,7 @@ import React from 'react';
 import { FeedFilterValues, FeedSortOption, ValueOption } from '../../interfaces';
 import { LightDataFeedProps } from '../../light-feed';
 import { DataFeedTexts } from '../../texts';
-export interface FilterDataFeedProps<T = any> extends Omit<LightDataFeedProps<T>, 'renderPageItem' | 'onChange'> {
+export interface DataFeedProps<T = any> extends Omit<LightDataFeedProps<T>, 'renderPageItem' | 'onChange'> {
     children?: React.ReactNode;
     initialValues?: Partial<FeedFilterValues>;
     renderRow?: (item: T) => React.ReactNode;
@@ -15,4 +15,4 @@ export interface FilterDataFeedProps<T = any> extends Omit<LightDataFeedProps<T>
     texts?: Partial<DataFeedTexts>;
     searchField?: React.ReactElement;
 }
-export declare const FilterDataFeed: React.FC<FilterDataFeedProps>;
+export declare const DataFeed: React.FC<DataFeedProps>;

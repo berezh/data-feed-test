@@ -6,7 +6,7 @@ import { FeedUi } from '../../components/feed-ui';
 import {
     FeedFilterValues,
     FilterCheckboxField,
-    FilterDataFeed,
+    DataFeed,
     FilterSearchField,
     FilterSelectField,
 } from '../../../../data-feed';
@@ -33,7 +33,7 @@ export const NoInitialLoadPage: React.FC = () => {
 
     return (
         <MasterPage>
-            <FilterDataFeed
+            <DataFeed
                 all={all}
                 data={items}
                 initialLoad={false}
@@ -62,7 +62,7 @@ export const NoInitialLoadPage: React.FC = () => {
                     ]}
                 />
                 <FilterSearchField name="capital" label="Capital" placeholder="Enter Capital" />
-            </FilterDataFeed>
+            </DataFeed>
         </MasterPage>
     );
 };

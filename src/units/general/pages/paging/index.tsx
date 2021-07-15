@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { useReduxSelector } from 'src/lib/hooks';
-import { FeedFilterValues, FilterDataFeed } from '../../../../data-feed';
+import { FeedFilterValues, DataFeed } from '../../../../data-feed';
 import { FeedUi } from '../../components/feed-ui';
 import { MasterPage } from '../../components/master-page';
 import { GeneralActions } from '../../redux';
@@ -39,7 +39,7 @@ export const PagingPage: React.FC = () => {
 
     return (
         <MasterPage>
-            <FilterDataFeed
+            <DataFeed
                 all={all}
                 data={items}
                 step={step}

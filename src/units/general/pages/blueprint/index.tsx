@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { MasterPage } from '../../components/master-page';
 import { BaseFeedParams } from 'src/lib/interfaces';
-import { DataFeedTexts, FeedFilterValues, FilterDataFeed } from '../../../../data-feed';
+import { DataFeedTexts, FeedFilterValues, DataFeed } from '../../../../data-feed';
 import { GeneralActions } from '../../redux';
 import { useReduxSelector } from 'src/lib/hooks';
 import { FeedUi } from '../../components/feed-ui';
@@ -42,7 +42,7 @@ export const BluePrintPage: React.FC = () => {
 
     return (
         <MasterPage>
-            <FilterDataFeed
+            <DataFeed
                 all={all}
                 data={items}
                 renderItem={FeedUi.renderItem}
@@ -72,7 +72,7 @@ export const BluePrintPage: React.FC = () => {
                     ]}
                 />
                 <BpFilterTextField name="capital" label="Capital" placeholder="Enter Capital" />
-            </FilterDataFeed>
+            </DataFeed>
         </MasterPage>
     );
 };

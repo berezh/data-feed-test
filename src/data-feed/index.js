@@ -358,7 +358,7 @@ var ButtonLink = function (_a) {
             _b)), onClick: handleClick }, children));
 };
 
-function DialogComponent(_a) {
+function FormComponent(_a) {
     var handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var handleClean = useCallback(function () {
@@ -385,7 +385,7 @@ function FeedFilterForm(_a) {
     var props = __rest(_a, []);
     var Component = useState(reduxForm({
         form: props.formName,
-    })(DialogComponent))[0];
+    })(FormComponent))[0];
     return React.createElement(Component, __assign({}, props));
 }
 
@@ -394,7 +394,7 @@ function useDebouncedCallback(wait, callback, deps) {
     return useCallback(debounce(callback, wait), deps);
 }
 
-function DataFeed(_a) {
+function LightDataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = useRef(null);
     var handleLoad = useCallback(function () {
@@ -418,7 +418,7 @@ var FeedActions = {
     setSkip: function (payload) { return newAction(FeedActionTypes.SET_SKIP, payload); },
 };
 
-var FilterDataFeed = function (_a) {
+var DataFeed = function (_a) {
     var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
@@ -477,7 +477,7 @@ var FilterDataFeed = function (_a) {
     useEffect(function () {
         dispatch(FeedActions.setCount({ form: FILTER_FORM_NAME, count: (data === null || data === void 0 ? void 0 : data.length) || 0 }));
     }, [data]);
-    return (React.createElement(DataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
+    return (React.createElement(LightDataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
         React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, searchContent: searchContent, texts: texts, formName: FILTER_FORM_NAME, searchField: searchField }, children)));
 };
 
@@ -524,4 +524,4 @@ var defaultLocale = (_a$1 = {},
     _a$1);
 // export type DataFeedText = keyof DataFeedTexts;
 
-export { DataFeed, DataFeedItem, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterDataFeed, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, PageUtil, SortUtil, feedReducer, feedSaga };
+export { DataFeed, DataFeedItem, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, SortUtil, feedReducer, feedSaga };

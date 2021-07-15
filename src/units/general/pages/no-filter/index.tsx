@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useReduxSelector } from 'src/lib/hooks';
-import { DataFeed, DataFeedItem } from '../../../../data-feed';
+import { LightDataFeed, DataFeedItem } from '../../../../data-feed';
 import { EuState } from '../../components/data-gererator';
 import { MasterPage } from '../../components/master-page';
 import { GeneralActions } from '../../redux';
@@ -25,7 +25,7 @@ export const NoFilterPage: React.FC = () => {
 
     return (
         <MasterPage>
-            <DataFeed
+            <LightDataFeed
                 all={all}
                 data={items}
                 renderItem={(item: EuState) => {

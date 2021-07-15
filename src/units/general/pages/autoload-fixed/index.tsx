@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { MasterPage } from '../../components/master-page';
 import { EuState } from '../../components/data-gererator';
-import { DataFeedItem, FilterDataFeed } from '../../../../data-feed';
+import { DataFeedItem, DataFeed } from '../../../../data-feed';
 import { useReduxSelector } from 'src/lib/hooks';
 import { BaseFeedParams } from 'src/lib/interfaces';
 import { GeneralActions } from '../../redux';
@@ -22,7 +22,7 @@ export const AutoloadFixedPage: React.FC = () => {
     return (
         <MasterPage>
             <div ref={containerRef} style={{ height: 500, overflow: 'auto' }}>
-                <FilterDataFeed
+                <DataFeed
                     // containerRef={containerRef}
                     // autoLoad={true}
                     all={all}
