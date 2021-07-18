@@ -403,7 +403,7 @@ function LightDataFeed(_a) {
     var pages = useMemo(function () {
         return PageUtil.getPages(all, step, page);
     }, [all, step, page]);
-    return (React.createElement("div", { className: classNames('data-feed', className) },
+    return (React.createElement("div", { className: classNames('df-feed', className) },
         children,
         React.createElement("div", { className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
         data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },

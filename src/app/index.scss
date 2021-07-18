@@ -2,6 +2,10 @@
 @import "../data-feed-blueprintjs/index.css";
 @import "../../node_modules/@blueprintjs/core/src/blueprint.scss";
 
+:root {    
+    --dfFontSize: 12px;
+}
+
 html {
     font-family: Arial, Helvetica, sans-serif;
 }

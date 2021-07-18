@@ -1,38 +1,19 @@
-:root {
-  --dfFontSize: 14px;
-  --dfColor: #333;
-  --dfBorderColor: #e8e4eb;
-  --dfBorderWidth: 1px;
-  --dbFilterBackgroundColor: white;
-  --dbFilterPadding: 10px;
-  --dbFilterSpacing: 10px;
-  --dbSortFontSize: 12px;
-  --dbControlSpacing: 5px;
-  --dfControlBorderColor: #bebebe;
-  --dfControlBorderWidth: 1px;
-  --dfControlHeight: 26px;
-  --dfControlPadding: 5px;
-  --dfButtomLinkColor: rgb(42, 41, 59);
-  --dfButtomLinkDisabledColor: rgb(116, 116, 129);
-  --dfLineBorderWidth: 1px;
-  --dfLineBorderColor: #e9e9e9; }
-
-.df-feed__data > div {
-  border-bottom: var(--dfLineBorderWidth) solid var(--dfLineBorderColor); }
-  .df-feed__data > div:last-child {
-    border-bottom: none; }
-
-.df-feed__load {
-  text-align: center;
-  padding: 10px 0; }
-
-.df-feed__page {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 10px 0; }
-  .df-feed__page > *:not(:last-child) {
-    margin-right: 10px; }
+.df-feed {
+  font-size: var(--dfFontSize); }
+  .df-feed__data > div {
+    border-bottom: var(--dfLineBorderWidth) solid var(--dfLineBorderColor); }
+    .df-feed__data > div:last-child {
+      border-bottom: none; }
+  .df-feed__load {
+    text-align: center;
+    padding: 10px 0; }
+  .df-feed__page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0; }
+    .df-feed__page > *:not(:last-child) {
+      margin-right: 10px; }
 
 .feed-item {
   padding: 15px 0;
@@ -200,9 +181,9 @@
   padding: 1px 0; }
   .df-sort__option--asc {
     font-weight: bold;
-    border-top-color: var(--dfFontSize); }
+    border-top-color: var(--dfFontColor); }
   .df-sort__option--desc {
     font-weight: bold;
-    border-bottom-color: var(--dfFontSize); }
+    border-bottom-color: var(--dfFontColor); }
   .df-sort__option > *:not(:last-child) {
     margin-right: 3px; }
