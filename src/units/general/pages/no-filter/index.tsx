@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useReduxSelector } from 'src/lib/hooks';
-import { LightDataFeed, DataFeedItem } from '../../../../data-feed';
+import { LightDataFeed, StandardRow } from '../../../../data-feed';
 import { EuState } from '../../components/data-gererator';
 import { MasterPage } from '../../components/master-page';
 import { GeneralActions } from '../../redux';
@@ -30,16 +30,17 @@ export const NoFilterPage: React.FC = () => {
                 data={items}
                 renderItem={(item: EuState) => {
                     return (
-                        <DataFeedItem
-                            title={<div>{item.name}</div>}
-                            titleRight={moment(item.accession).fromNow()}
+                        <StandardRow
+                            topRight={moment(item.accession).fromNow()}
                             attributes={[
                                 {
                                     label: 'Native Name',
                                     content: item.nativeName,
                                 },
                             ]}
-                        />
+                        >
+                            {item.name}
+                        </StandardRow>
                     );
                 }}
                 onChange={handleChange}

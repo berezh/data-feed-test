@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { MasterPage } from '../../components/master-page';
 import { EuState } from '../../components/data-gererator';
-import { DataFeedItem, DataFeed } from '../../../../data-feed';
+import { StandardRow, DataFeed } from '../../../../data-feed';
 import { useReduxSelector } from 'src/lib/hooks';
 import { BaseFeedParams } from 'src/lib/interfaces';
 import { GeneralActions } from '../../redux';
@@ -30,9 +30,8 @@ export const AutoloadFixedPage: React.FC = () => {
                     onChange={handleChange}
                     renderItem={(item: EuState) => {
                         return (
-                            <DataFeedItem
-                                title={<div>{item.name}</div>}
-                                titleRight={moment(item.accession).fromNow()}
+                            <StandardRow
+                                topRight={moment(item.accession).fromNow()}
                                 attributes={[
                                     {
                                         label: 'Native Name',
@@ -60,7 +59,9 @@ export const AutoloadFixedPage: React.FC = () => {
                                         View
                                     </AnchorButton>,
                                 ]}
-                            />
+                            >
+                                {item.name}
+                            </StandardRow>
                         );
                     }}
                 />

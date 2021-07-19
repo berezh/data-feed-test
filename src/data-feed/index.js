@@ -481,36 +481,38 @@ var DataFeed = function (_a) {
         React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, searchContent: searchContent, texts: texts, formName: FILTER_FORM_NAME, searchField: searchField }, children)));
 };
 
-var FeedAttribute = function (_a) {
+var RowAttribute = function (_a) {
     var label = _a.label, content = _a.content, icon = _a.icon, width = _a.width, maxWidth = _a.maxWidth;
-    var style = {
-        width: width,
-        maxWidth: maxWidth,
-    };
+    var style = useMemo(function () {
+        return { width: width, maxWidth: maxWidth };
+    }, [width, maxWidth]);
     return (React.createElement("div", { className: "df-attribute" },
         icon ? React.createElement("div", { className: "df-attribute__icon" }, icon) : null,
         React.createElement("div", { className: "df-attribute__text", style: style },
-            React.createElement("div", { className: "df-attribute__name" }, label),
-            React.createElement("div", { className: "df-attribute__value" }, content))));
+            label ? React.createElement("div", { className: "df-attribute__label" }, label) : null,
+            React.createElement("div", { className: "df-attribute__content" }, content))));
 };
 
-var DataFeedItem = function (_a) {
-    var title = _a.title, titleRight = _a.titleRight, attributes = _a.attributes, actions = _a.actions, attributeWidth = _a.attributeWidth, right = _a.right, left = _a.left, className = _a.className;
-    var attributeSet = FeedArrayUtil.toDobleArray(attributes);
-    var actionSet = FeedArrayUtil.toArray(actions);
-    return (React.createElement("div", { className: classNames('feed-item', className) },
-        left ? React.createElement("div", { className: "feed-item__left" }, left) : null,
-        React.createElement("div", { className: "feed-item__content" },
-            title || titleRight ? (React.createElement("div", { className: "feed-item__top" },
-                React.createElement("div", { className: "feed-item__title" }, title),
-                React.createElement("div", { className: "feed-item__top-right" }, titleRight))) : null,
-            attributeSet.map(function (set, setKey) { return (React.createElement("div", { key: setKey, className: "feed-item__attribute-set" }, set.map(function (_a, i) {
-                var width = _a.width, attrProps = __rest(_a, ["width"]);
-                return (React.createElement("div", { key: i },
-                    React.createElement(FeedAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
-            }))); }),
-            actionSet.length > 0 ? (React.createElement("div", { className: "feed-item__action-set" }, actionSet.map(function (action, i) { return (React.createElement("div", { key: i }, action)); }))) : null),
-        right ? React.createElement("div", { className: "feed-item__right" }, right) : null));
+var StandardRow = function (_a) {
+    var children = _a.children, attributes = _a.attributes, actions = _a.actions, attributeWidth = _a.attributeWidth, right = _a.right, left = _a.left, className = _a.className, contentClassName = _a.contentClassName, topRight = _a.topRight;
+    var attributeSet = useMemo(function () { return FeedArrayUtil.toDobleArray(attributes); }, [attributes]);
+    var actionSet = useMemo(function () { return FeedArrayUtil.toArray(actions); }, [actions]);
+    var showPanel = useMemo(function () {
+        return attributeSet.length || actionSet.length;
+    }, []);
+    return (React.createElement("div", { className: classNames('df-standard-row', className) },
+        left ? React.createElement("div", { className: "df-standard-row__left" }, left) : null,
+        React.createElement("div", { className: "df-standard-row__middle" },
+            children ? (React.createElement("div", { className: classNames('df-standard-row__content', contentClassName) }, children)) : null,
+            showPanel ? (React.createElement("div", { className: "df-standard-row__panel" },
+                attributeSet.map(function (set, setKey) { return (React.createElement("div", { key: setKey, className: "df-standard-row__attribute" }, set.map(function (_a, i) {
+                    var width = _a.width, attrProps = __rest(_a, ["width"]);
+                    return (React.createElement("div", { className: "df-standard-row__attribute-set", key: i },
+                        React.createElement(RowAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
+                }))); }),
+                actionSet.length > 0 ? (React.createElement("div", { className: "df-standard-row__action" }, actionSet.map(function (action, i) { return (React.createElement("div", { className: "df-standard-row__action-set", key: i }, action)); }))) : null)) : null),
+        right ? React.createElement("div", { className: "df-standard-row__right" }, right) : null,
+        topRight ? React.createElement("div", { className: "df-standard-row__top-right" }, topRight) : null));
 };
 
 var _a$1;
@@ -524,4 +526,4 @@ var defaultLocale = (_a$1 = {},
     _a$1);
 // export type DataFeedText = keyof DataFeedTexts;
 
-export { DataFeed, DataFeedItem, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, SortUtil, feedReducer, feedSaga };
+export { DataFeed, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, SortUtil, StandardRow, feedReducer, feedSaga };

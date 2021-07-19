@@ -3,7 +3,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 
 import { EuState } from '../data-gererator';
-import { DataFeedItem, FeedSortOption } from '../../../../data-feed';
+import { StandardRow, FeedSortOption } from '../../../../data-feed';
 
 export class FeedUi {
     public static sortOptions: FeedSortOption[] = [
@@ -23,9 +23,8 @@ export class FeedUi {
 
     public static renderItem(item: EuState): React.ReactElement {
         return (
-            <DataFeedItem
-                title={item.name}
-                titleRight={moment(item.accession).fromNow()}
+            <StandardRow
+                topRight={moment(item.accession).fromNow()}
                 attributes={[
                     {
                         label: 'Native Name',
@@ -78,7 +77,9 @@ export class FeedUi {
                         View
                     </a>,
                 ]}
-            />
+            >
+                {item.name}
+            </StandardRow>
         );
     }
 }

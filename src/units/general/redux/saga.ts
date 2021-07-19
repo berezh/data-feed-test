@@ -8,7 +8,7 @@ import { GeneralActionTypes } from './types';
 
 function* loadStateFeed({ payload }: ActionWith): SagaIterator {
     try {
-        const feed = DataGenerator.loadEuState(1, payload);
+        const feed = DataGenerator.loadEuState(10, payload);
         yield put(GeneralActions.loadStateFeedSuccess(feed));
     } catch (exception) {
         console.error(exception);
