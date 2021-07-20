@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import numeral from 'numeral';
+import { Icon } from '@blueprintjs/core';
 
 import { EuState } from '../data-gererator';
 import { StandardRow, FeedSortOption } from '../../../../data-feed';
@@ -43,11 +44,12 @@ export class FeedUi {
                         content: item.area,
                     },
                     {
+                        icon: <Icon icon="dollar" />,
                         label: 'GDP (Milions)',
                         content: numeral(item.totalGdp).format('$0,0'),
                     },
                     {
-                        label: 'GDP (Per cap.)',
+                        icon: <Icon icon="dollar" />,
                         content: numeral(item.capitalGdp).format('0,0'),
                     },
                     {

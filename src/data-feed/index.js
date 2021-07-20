@@ -514,10 +514,9 @@ var StandardRow = function (_a) {
                 showPanel ? (React.createElement("div", { className: "df-standard-row__panel" },
                     attributeSet.map(function (set, setKey) { return (React.createElement("div", { key: setKey, className: "df-standard-row__attribute" }, set.map(function (_a, i) {
                         var width = _a.width, attrProps = __rest(_a, ["width"]);
-                        return (React.createElement("div", { className: "df-standard-row__attribute-set", key: i },
-                            React.createElement(RowAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
+                        return (React.createElement(RowAttribute, __assign({ className: "df-standard-row__attribute-item", key: i, width: width ? width : attributeWidth }, attrProps)));
                     }))); }),
-                    actionSet.length > 0 ? (React.createElement("div", { className: "df-standard-row__action" }, actionSet.map(function (action, i) { return (React.createElement("div", { className: "df-standard-row__action-set", key: i }, action)); }))) : null)) : null),
+                    actionSet.length > 0 ? (React.createElement("div", { className: "df-standard-row__action" }, actionSet.map(function (action, i) { return (React.createElement("div", { className: "df-standard-row__action-item", key: i }, action)); }))) : null)) : null),
             topRight ? React.createElement("div", { className: "df-standard-row__top-right" }, topRight) : null),
         right ? React.createElement("div", { className: "df-standard-row__right" }, right) : null));
 };
