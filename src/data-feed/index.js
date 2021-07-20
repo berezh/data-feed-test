@@ -395,7 +395,7 @@ function useDebouncedCallback(wait, callback, deps) {
 }
 
 function LightDataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = useRef(null);
     var handleLoad = useCallback(function () {
         onChange(data.length);
@@ -405,7 +405,7 @@ function LightDataFeed(_a) {
     }, [all, step, page]);
     return (React.createElement("div", { className: classNames('df-feed', className) },
         children,
-        React.createElement("div", { className: "df-feed__data" }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
+        React.createElement("div", { className: classNames('df-feed__data', dataClassName) }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
         data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
             React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
         step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
@@ -419,7 +419,7 @@ var FeedActions = {
 };
 
 var DataFeed = function (_a) {
-    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts, searchField = _a.searchField;
+    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts, searchField = _a.searchField;
     var dispatch = useDispatch();
     var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
     var debounceFilterChange = useDebouncedCallback(500, function (data) {
@@ -477,16 +477,16 @@ var DataFeed = function (_a) {
     useEffect(function () {
         dispatch(FeedActions.setCount({ form: FILTER_FORM_NAME, count: (data === null || data === void 0 ? void 0 : data.length) || 0 }));
     }, [data]);
-    return (React.createElement(LightDataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
+    return (React.createElement(LightDataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, dataClassName: dataClassName, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
         React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, searchContent: searchContent, texts: texts, formName: FILTER_FORM_NAME, searchField: searchField }, children)));
 };
 
 var RowAttribute = function (_a) {
-    var label = _a.label, content = _a.content, icon = _a.icon, width = _a.width, maxWidth = _a.maxWidth;
+    var label = _a.label, content = _a.content, icon = _a.icon, width = _a.width, maxWidth = _a.maxWidth, className = _a.className;
     var style = useMemo(function () {
         return { width: width, maxWidth: maxWidth };
     }, [width, maxWidth]);
-    return (React.createElement("div", { className: "df-attribute" },
+    return (React.createElement("div", { className: classNames('df-attribute', className) },
         icon ? React.createElement("div", { className: "df-attribute__icon" }, icon) : null,
         React.createElement("div", { className: "df-attribute__text", style: style },
             label ? React.createElement("div", { className: "df-attribute__label" }, label) : null,
@@ -494,25 +494,32 @@ var RowAttribute = function (_a) {
 };
 
 var StandardRow = function (_a) {
-    var children = _a.children, attributes = _a.attributes, actions = _a.actions, attributeWidth = _a.attributeWidth, right = _a.right, left = _a.left, className = _a.className, contentClassName = _a.contentClassName, topRight = _a.topRight;
+    var children = _a.children, content = _a.content, leftContent = _a.leftContent, rightContent = _a.rightContent, attributes = _a.attributes, actions = _a.actions, attributeWidth = _a.attributeWidth, right = _a.right, left = _a.left, className = _a.className, contentClassName = _a.contentClassName, topRight = _a.topRight;
     var attributeSet = useMemo(function () { return FeedArrayUtil.toDobleArray(attributes); }, [attributes]);
     var actionSet = useMemo(function () { return FeedArrayUtil.toArray(actions); }, [actions]);
     var showPanel = useMemo(function () {
         return attributeSet.length || actionSet.length;
     }, []);
+    var showContent = useMemo(function () {
+        return !!(children || content || rightContent || leftContent);
+    }, [children, content, rightContent, leftContent]);
     return (React.createElement("div", { className: classNames('df-standard-row', className) },
         left ? React.createElement("div", { className: "df-standard-row__left" }, left) : null,
         React.createElement("div", { className: "df-standard-row__middle" },
-            children ? (React.createElement("div", { className: classNames('df-standard-row__content', contentClassName) }, children)) : null,
-            showPanel ? (React.createElement("div", { className: "df-standard-row__panel" },
-                attributeSet.map(function (set, setKey) { return (React.createElement("div", { key: setKey, className: "df-standard-row__attribute" }, set.map(function (_a, i) {
-                    var width = _a.width, attrProps = __rest(_a, ["width"]);
-                    return (React.createElement("div", { className: "df-standard-row__attribute-set", key: i },
-                        React.createElement(RowAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
-                }))); }),
-                actionSet.length > 0 ? (React.createElement("div", { className: "df-standard-row__action" }, actionSet.map(function (action, i) { return (React.createElement("div", { className: "df-standard-row__action-set", key: i }, action)); }))) : null)) : null),
-        right ? React.createElement("div", { className: "df-standard-row__right" }, right) : null,
-        topRight ? React.createElement("div", { className: "df-standard-row__top-right" }, topRight) : null));
+            React.createElement("div", { className: "df-standard-row__middle-static" },
+                showContent ? (React.createElement("div", { className: classNames('df-standard-row__content', contentClassName) },
+                    leftContent ? React.createElement("div", { className: "df-standard-row__content-left" }, leftContent) : null,
+                    children || content ? (React.createElement("div", { className: "df-standard-row__content-middle" }, children || content)) : null,
+                    rightContent ? React.createElement("div", { className: "df-standard-row__content-right" }, rightContent) : null)) : null,
+                showPanel ? (React.createElement("div", { className: "df-standard-row__panel" },
+                    attributeSet.map(function (set, setKey) { return (React.createElement("div", { key: setKey, className: "df-standard-row__attribute" }, set.map(function (_a, i) {
+                        var width = _a.width, attrProps = __rest(_a, ["width"]);
+                        return (React.createElement("div", { className: "df-standard-row__attribute-set", key: i },
+                            React.createElement(RowAttribute, __assign({ width: width ? width : attributeWidth }, attrProps))));
+                    }))); }),
+                    actionSet.length > 0 ? (React.createElement("div", { className: "df-standard-row__action" }, actionSet.map(function (action, i) { return (React.createElement("div", { className: "df-standard-row__action-set", key: i }, action)); }))) : null)) : null),
+            topRight ? React.createElement("div", { className: "df-standard-row__top-right" }, topRight) : null),
+        right ? React.createElement("div", { className: "df-standard-row__right" }, right) : null));
 };
 
 var _a$1;
@@ -526,4 +533,4 @@ var defaultLocale = (_a$1 = {},
     _a$1);
 // export type DataFeedText = keyof DataFeedTexts;
 
-export { DataFeed, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, SortUtil, StandardRow, feedReducer, feedSaga };
+export { DataFeed, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, RowAttribute, SortUtil, StandardRow, feedReducer, feedSaga };

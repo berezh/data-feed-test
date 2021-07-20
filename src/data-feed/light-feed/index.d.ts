@@ -13,6 +13,7 @@ export interface LightDataFeedProps<T> {
     renderItem: (item: T) => React.ReactNode;
     /** Root class name */
     className?: string;
+    dataClassName?: string;
     /** Define loading state */
     loading?: boolean;
     /** Filter loading element*/
@@ -26,4 +27,4 @@ export interface LightDataFeedProps<T> {
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
 }
-export declare function LightDataFeed<T = any>({ data, all, step, page, renderItem, texts, className, loading, onChange, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;
+export declare function LightDataFeed<T = any>({ data, all, step, page, renderItem, texts, className, dataClassName, loading, onChange, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;
