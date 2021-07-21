@@ -1,5 +1,5 @@
 export interface BaseFeedParams {
-    page?: number;
+    page?: number | string;
     skip: number;
     search?: string;
     orderColumn?: string;

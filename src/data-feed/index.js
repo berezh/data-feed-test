@@ -395,8 +395,11 @@ function useDebouncedCallback(wait, callback, deps) {
 }
 
 function LightDataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, page = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, propPage = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = useRef(null);
+    var page = useMemo(function () {
+        return typeof propPage === 'string' ? parseInt(propPage) : propPage;
+    }, [propPage]);
     var handleLoad = useCallback(function () {
         onChange(data.length);
     }, [data, onChange]);

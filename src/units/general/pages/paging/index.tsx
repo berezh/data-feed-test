@@ -34,6 +34,7 @@ export const PagingPage: React.FC = () => {
         return {
             direction: 'desc',
             order: 'name',
+            page,
         };
     }, [page]);
 
@@ -43,7 +44,6 @@ export const PagingPage: React.FC = () => {
                 all={all}
                 data={items}
                 step={step}
-                page={page}
                 renderItem={FeedUi.renderItem}
                 sortOptions={FeedUi.sortOptions}
                 // renderPageItem={handleRenderPageItem}

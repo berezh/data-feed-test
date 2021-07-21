@@ -2,7 +2,7 @@ import { OrderDirection } from './base';
 import { FeedSortValue } from './value';
 export interface FeedFilterValues {
     search?: string;
-    page?: number;
+    page?: number | string;
     skip: number;
     order?: string;
     direction?: OrderDirection;

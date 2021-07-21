@@ -9,7 +9,7 @@ export interface LightDataFeedProps<T> {
     /** Count of items in one page */
     step?: number;
     /** Current Page */
-    page?: number;
+    page?: number | string;
     renderItem: (item: T) => React.ReactNode;
     /** Root class name */
     className?: string;
@@ -27,4 +27,4 @@ export interface LightDataFeedProps<T> {
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
 }
-export declare function LightDataFeed<T = any>({ data, all, step, page, renderItem, texts, className, dataClassName, loading, onChange, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;
+export declare function LightDataFeed<T = any>({ data, all, step, page: propPage, renderItem, texts, className, dataClassName, loading, onChange, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;
