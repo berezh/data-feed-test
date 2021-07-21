@@ -15,6 +15,15 @@
     .df-feed__page > *:not(:last-child) {
       margin-right: 10px; }
 
+.df-buttom-link {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--dfButtomLinkColor); }
+  .df-buttom-link--disabled {
+    cursor: default;
+    color: var(--dfButtomLinkDisabledColor); }
+
 :root {
   --dfColor: #333;
   --dfBorderColor: #e8e4eb;
@@ -57,10 +66,7 @@
   .df-filter > *:not(:last-child) {
     margin-bottom: var(--dbFilterSpacing); }
   .df-filter__search {
-    display: flex;
-    flex-direction: row; }
-    .df-filter__search > *:not(:last-child) {
-      margin-right: var(--dbFilterSpacing); }
+    display: flex; }
     .df-filter__search > * {
       flex: 1; }
   .df-filter__children {
@@ -79,15 +85,6 @@
   .df-filter__actions {
     display: flex;
     justify-content: flex-end; }
-
-.df-buttom-link {
-  display: inline;
-  text-decoration: underline;
-  cursor: pointer;
-  color: var(--dfButtomLinkColor); }
-  .df-buttom-link--disabled {
-    cursor: default;
-    color: var(--dfButtomLinkDisabledColor); }
 
 /* Responsive */
 .df-standard-row {
@@ -194,12 +191,6 @@
     overflow: hidden;
     text-overflow: ellipsis; }
 
-.df-field-select {
-  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
-  padding-left: var(--dfControlPadding);
-  padding-right: var(--dfControlPadding);
-  height: var(--dfControlHeight); }
-
 .df-field-input {
   border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
   padding-left: var(--dfControlPadding);
@@ -211,6 +202,19 @@
   flex-direction: row;
   align-items: center; }
   .filter-radio > *:not(:last-child) {
+    margin-right: 5px; }
+
+.df-field-select {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
+
+.df-field-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .df-field-checkbox__input {
     margin-right: 5px; }
 
 .df-sort__sort {
@@ -235,10 +239,3 @@
     border-bottom-color: var(--dfFontColor); }
   .df-sort__option > *:not(:last-child) {
     margin-right: 3px; }
-
-.df-field-checkbox {
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-  .df-field-checkbox__input {
-    margin-right: 5px; }

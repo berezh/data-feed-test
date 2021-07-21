@@ -51,7 +51,7 @@ export const BluePrintPage: React.FC = () => {
                 onChange={handleChange}
                 initialLoad={true}
                 texts={texts}
-                searchField={<BpFilterSearchField />}
+                renderSearchField={() => <BpFilterSearchField />}
             >
                 <BpFilterBoolField name="isEuro" label="Is Euro" />
                 <BpFilterSelectField

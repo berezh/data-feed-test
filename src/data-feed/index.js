@@ -359,7 +359,7 @@ var ButtonLink = function (_a) {
 };
 
 function FormComponent(_a) {
-    var handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, searchContent = _a.searchContent, total = _a.total, className = _a.className, texts = _a.texts, searchField = _a.searchField;
+    var handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, total = _a.total, className = _a.className, texts = _a.texts, renderSearchField = _a.renderSearchField;
     var dispatch = useDispatch();
     var handleClean = useCallback(function () {
         dispatch(reset(FILTER_FORM_NAME));
@@ -369,9 +369,7 @@ function FormComponent(_a) {
         React.createElement(FilterHiddenField, { name: "page" }),
         options.length ? (React.createElement("div", { className: 'df-filter__sort' },
             React.createElement(FilterSortField, { texts: texts, name: "sort", options: options }))) : null,
-        React.createElement("div", { className: 'df-filter__search' },
-            searchField ? searchField : React.createElement(FilterSearchField, null),
-            searchContent),
+        React.createElement("div", { className: 'df-filter__search' }, renderSearchField ? renderSearchField() : React.createElement(FilterSearchField, null)),
         children ? React.createElement("div", { className: 'df-filter__children' }, children) : null,
         React.createElement("div", { className: 'df-filter__bottom' },
             React.createElement("div", null, total ? ((texts === null || texts === void 0 ? void 0 : texts.total) || 'Total') + ": " + total : null),
@@ -422,9 +420,9 @@ var FeedActions = {
 };
 
 var DataFeed = function (_a) {
-    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.languageOptions, languageOptions = _c === void 0 ? [] : _c, _d = _a.showTotal, showTotal = _d === void 0 ? true : _d, texts = _a.texts, searchField = _a.searchField;
+    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.showTotal, showTotal = _c === void 0 ? true : _c, texts = _a.texts, renderSearchField = _a.renderSearchField;
     var dispatch = useDispatch();
-    var _e = useState(initialLoad), init = _e[0], setInit = _e[1];
+    var _d = useState(initialLoad), init = _d[0], setInit = _d[1];
     var debounceFilterChange = useDebouncedCallback(500, function (data) {
         if (init) {
             onChange(FilterUtil.toOuter(data));
@@ -470,9 +468,6 @@ var DataFeed = function (_a) {
         var page = (initialValues || {}).page;
         return page;
     }, [initialValues]);
-    var searchContent = useMemo(function () {
-        return languageOptions.length ? (React.createElement(FilterSelectField, { placeholder: 'Language', name: "languageCode", options: languageOptions })) : null;
-    }, [languageOptions]);
     useEffect(function () {
         var _a = initialValues || {}, _b = _a.skip, skip = _b === void 0 ? 0 : _b, rest = __rest(_a, ["skip"]);
         dispatch(initialize(FILTER_FORM_NAME, FilterUtil.toInner(__assign({ skip: skip }, rest))));
@@ -481,7 +476,7 @@ var DataFeed = function (_a) {
         dispatch(FeedActions.setCount({ form: FILTER_FORM_NAME, count: (data === null || data === void 0 ? void 0 : data.length) || 0 }));
     }, [data]);
     return (React.createElement(LightDataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, dataClassName: dataClassName, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
-        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, searchContent: searchContent, texts: texts, formName: FILTER_FORM_NAME, searchField: searchField }, children)));
+        React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, texts: texts, formName: FILTER_FORM_NAME, renderSearchField: renderSearchField }, children)));
 };
 
 var RowAttribute = function (_a) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FeedFilterValues, FeedSortOption, ValueOption } from '../../interfaces';
+import { FeedFilterValues, FeedSortOption } from '../../interfaces';
 import { LightDataFeedProps } from '../../light-feed';
 import { DataFeedTexts } from '../../texts';
 export interface DataFeedProps<T = any> extends Omit<LightDataFeedProps<T>, 'renderPageItem' | 'onChange' | 'page'> {
@@ -10,9 +10,8 @@ export interface DataFeedProps<T = any> extends Omit<LightDataFeedProps<T>, 'ren
     sortOptions?: FeedSortOption[];
     renderPageLink?: (page: number) => React.ReactNode;
     initialLoad?: boolean;
-    languageOptions?: ValueOption[];
     showTotal?: boolean;
     texts?: Partial<DataFeedTexts>;
-    searchField?: React.ReactElement;
+    renderSearchField?: () => React.ReactElement;
 }
 export declare const DataFeed: React.FC<DataFeedProps>;
