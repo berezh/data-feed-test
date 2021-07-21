@@ -33,14 +33,14 @@
   --dfButtomLinkDisabledColor: rgb(116, 116, 129);
   --dfLineBorderWidth: 1px;
   --dfLineBorderColor: #e9e9e9;
-  --dfRowSpacing: 0.75em;
+  --dfRowSpacing: 10px;
   --dfRowPadding: 1em;
   --dfRowBackgroundColorHover: transparent;
   --dfRowTopLeftFontSize: 12px;
-  --dfAttributeFontSize: 0.75em;
-  --dfAttributeLabelFontSize: 0.62em;
+  --dfAttributeFontSize: 12px;
+  --dfAttributeLabelFontSize: 10px;
   --dfAttributeLabelOpacity: 0.7;
-  --dfAttributeSpacing: 1em; }
+  --dfAttributeSpacing: 10px; }
 
 .df-filter {
   font-size: var(--dfFilterFontSize);
@@ -83,6 +83,33 @@
   .df-buttom-link--disabled {
     cursor: default;
     color: var(--dfButtomLinkDisabledColor); }
+
+/* Responsive */
+.df-attribute {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--dfAttributeFontSize); }
+  .df-attribute__icon {
+    margin-right: 0.4em;
+    display: flex; }
+  .df-attribute__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+    .df-attribute__text > *:not(:last-child) {
+      margin-bottom: 1px; }
+  .df-attribute__label {
+    font-size: var(--dfAttributeLabelFontSize);
+    opacity: var(--dfAttributeLabelOpacity);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .df-attribute__content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
 
 /* Responsive */
 .df-standard-row {
@@ -160,34 +187,6 @@
     position: absolute;
     top: 0;
     right: 0; }
-
-/* Responsive */
-.df-attribute {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--dfAttributeFontSize); }
-  .df-attribute__icon {
-    margin-right: 0.5em;
-    display: flex; }
-  .df-attribute__text {
-    flex: 1;
-    display: flex;
-    flex-direction: column; }
-    .df-attribute__text > *:not(:last-child) {
-      margin-bottom: 1px; }
-  .df-attribute__label {
-    font-size: var(--dfAttributeLabelFontSize);
-    opacity: var(--dfAttributeLabelOpacity);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; }
-  .df-attribute__content {
-    display: flex;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; }
 
 .df-field-select {
   border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);

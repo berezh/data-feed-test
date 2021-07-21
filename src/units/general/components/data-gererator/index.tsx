@@ -38,9 +38,10 @@ const euStates: EuState[] = EuStates.map<EuState>((x) => {
 });
 
 export const DataGenerator = {
-    loadEuState: (count: number, options: FeedFilterValues, page?: number, step?: number): Feed<EuState> => {
+    loadEuState: (count: number, options: FeedFilterValues): Feed<EuState> => {
         const {
             skip,
+            page,
             name,
             search,
             isEuro,
@@ -114,9 +115,10 @@ export const DataGenerator = {
 
         let items: EuState[] = [];
 
-        if (page && step) {
-            const startIndex = step * (page - 1);
-            items = filterItems.slice(startIndex, startIndex + step);
+        if (page) {
+            const currentPage = typeof page === 'string' ? parseInt(page) : page;
+            const startIndex = count * (currentPage - 1);
+            items = filterItems.slice(startIndex, startIndex + count);
         } else {
             items = filterItems.slice(skip, skip + count);
         }

@@ -80,7 +80,7 @@ export class FeedUi {
                     </a>,
                 ]}
             >
-                <div style={{ fontSize: 18 }}>{item.name}</div>
+                <div>{item.name}</div>
             </StandardRow>
         );
     }
