@@ -406,7 +406,9 @@ function LightDataFeed(_a) {
     }, [all, step, page]);
     return (React.createElement("div", { className: classNames('df-feed', className) },
         children,
-        React.createElement("div", { className: classNames('df-feed__data', dataClassName) }, data.map(function (item, i) { return (React.createElement("div", { key: i }, renderItem(item))); })),
+        React.createElement("div", { className: classNames('df-feed__data', dataClassName) }, data.map(function (item, i) {
+            return React.createElement(React.Fragment, { key: i }, renderItem(item));
+        })),
         data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
             React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, (texts === null || texts === void 0 ? void 0 : texts.loadMore) || 'Load more'))) : null,
         step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {

@@ -16,14 +16,14 @@
   --dfControlPadding: 5px;
   --dfButtomLinkColor: rgb(42, 41, 59);
   --dfButtomLinkDisabledColor: rgb(116, 116, 129);
-  --dfLineBorderWidth: 1px;
-  --dfLineBorderColor: #e9e9e9;
   --dfRowSpacing: 10px;
   --dfRowPadding: 15px;
   --dfRowHorizontalPadding: 0;
   --dfRowBackgroundColorHover: transparent;
   --dfRowTopLeftFontSize: 12px;
   --dfRowContentFontSize: inherit;
+  --dfRowBorderBottomWidth: 1px;
+  --dfRowBorderBottomColor: #e9e9e9;
   --dfRowActionFontSize: inherit;
   --dfAttributeColor: inherit;
   --dfAttributeFontSize: 12px;
@@ -33,10 +33,6 @@
 
 .df-feed {
   font-size: var(--dfFontSize); }
-  .df-feed__data > div {
-    border-bottom: var(--dfLineBorderWidth) solid var(--dfLineBorderColor); }
-    .df-feed__data > div:last-child {
-      border-bottom: none; }
   .df-feed__load {
     text-align: center;
     padding: 10px 0; }
@@ -47,37 +43,6 @@
     padding: 10px 0; }
     .df-feed__page > *:not(:last-child) {
       margin-right: 10px; }
-
-/* Responsive */
-.df-filter {
-  font-size: var(--dfFilterFontSize);
-  display: flex;
-  flex-direction: column;
-  background-color: var(--dbFilterBackgroundColor);
-  padding: var(--dbFilterPadding);
-  border: var(--dfBorderWidth) solid var(--dfBorderColor); }
-  .df-filter > *:not(:last-child) {
-    margin-bottom: var(--dbFilterSpacing); }
-  .df-filter__search {
-    display: flex; }
-    .df-filter__search > * {
-      flex: 1; }
-  .df-filter__children {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; }
-    .df-filter__children > * {
-      margin: var(--dbControlSpacing); }
-      .df-filter__children > *:first-child {
-        margin-left: 0; }
-  .df-filter__bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center; }
-  .df-filter__actions {
-    display: flex;
-    justify-content: flex-end; }
 
 .df-buttom-link {
   display: inline;
@@ -93,7 +58,10 @@
   padding: var(--dfRowPadding) var(--dfRowHorizontalPadding);
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  border-bottom: var(--dfRowBorderBottomWidth) solid var(--dfRowBorderBottomColor); }
+  .df-standard-row:last-child {
+    border-bottom: none; }
   .df-standard-row > *:not(:last-child) {
     margin-right: var(--dfRowSpacing); }
   .df-standard-row:hover {
@@ -156,7 +124,7 @@
     flex-wrap: wrap;
     font-size: var(--dfRowActionFontSize); }
     .df-standard-row__action-item {
-      margin: var(--dfAttributeSpacing) var(--dfAttributeSpacing) 0 0; }
+      margin: var(--dfAttributeSpacing) 0 0 var(--dfAttributeSpacing); }
       .df-standard-row__action-item:first-child {
         margin-left: 0; }
   .df-standard-row__top-right {
@@ -164,6 +132,37 @@
     position: absolute;
     top: 0;
     right: 0; }
+
+/* Responsive */
+.df-filter {
+  font-size: var(--dfFilterFontSize);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dbFilterBackgroundColor);
+  padding: var(--dbFilterPadding);
+  border: var(--dfBorderWidth) solid var(--dfBorderColor); }
+  .df-filter > *:not(:last-child) {
+    margin-bottom: var(--dbFilterSpacing); }
+  .df-filter__search {
+    display: flex; }
+    .df-filter__search > * {
+      flex: 1; }
+  .df-filter__children {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+    .df-filter__children > * {
+      margin: var(--dbControlSpacing); }
+      .df-filter__children > *:first-child {
+        margin-left: 0; }
+  .df-filter__bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
+  .df-filter__actions {
+    display: flex;
+    justify-content: flex-end; }
 
 /* Responsive */
 .df-attribute {
@@ -200,6 +199,27 @@
   height: var(--dfControlHeight); }
 
 /* Responsive */
+.filter-radio {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .filter-radio > *:not(:last-child) {
+    margin-right: 5px; }
+
+.df-field-input {
+  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
+  padding-left: var(--dfControlPadding);
+  padding-right: var(--dfControlPadding);
+  height: var(--dfControlHeight); }
+
+.df-field-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .df-field-checkbox__input {
+    margin-right: 5px; }
+
+/* Responsive */
 .df-sort__sort {
   display: flex;
   align-items: center; }
@@ -222,24 +242,3 @@
     border-bottom-color: var(--dfFontColor); }
   .df-sort__option > *:not(:last-child) {
     margin-right: 3px; }
-
-.df-field-input {
-  border: var(--dfControlBorderWidth) solid var(--dfControlBorderColor);
-  padding-left: var(--dfControlPadding);
-  padding-right: var(--dfControlPadding);
-  height: var(--dfControlHeight); }
-
-.df-field-checkbox {
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-  .df-field-checkbox__input {
-    margin-right: 5px; }
-
-/* Responsive */
-.filter-radio {
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-  .filter-radio > *:not(:last-child) {
-    margin-right: 5px; }
