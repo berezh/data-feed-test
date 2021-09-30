@@ -6,5 +6,4 @@ export declare const FeedActions: {
         form: string;
         count: number;
     }>;
-    setSkip: (payload: string) => import("redux-sputnik").ActionWith<string>;
 };

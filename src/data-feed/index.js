@@ -1,11 +1,12 @@
 /* eslint-disable */
-import { newActionType, newReducer, setState, newAction } from 'redux-sputnik';
-import { change, Field, reduxForm, reset, Form, initialize } from 'redux-form';
-import { takeEvery, put, select } from 'redux-saga/effects';
 import React, { useMemo, useCallback, useState, useRef, useEffect } from 'react';
+import { Field, reduxForm, reset, Form, change, initialize } from 'redux-form';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
+
+var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
+//# sourceMappingURL=const.js.map
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -45,34 +46,6 @@ function __rest(s, e) {
     return t;
 }
 
-function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-}
-
 function __spreadArrays() {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -80,52 +53,6 @@ function __spreadArrays() {
             r[k] = a[j];
     return r;
 }
-
-var prefix = '@feed';
-var FeedActionTypes = {
-    SET_COUNT: newActionType(prefix, 'SET_COUNT'),
-    SET_SKIP: newActionType(prefix, 'SET_SKIP'),
-};
-
-var _a;
-var FEED_INITIAL_STATE = {
-    count: {},
-};
-var feedReducer = newReducer(FEED_INITIAL_STATE, (_a = {},
-    _a[FeedActionTypes.SET_COUNT] = function (state, _a) {
-        var form = _a.form, count = _a.count;
-        state.count[form] = count;
-        return setState(state, function (_) { return _.count; }, __assign({}, state.count));
-    },
-    _a));
-
-function setSkip(_a) {
-    var count;
-    var payload = _a.payload;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0: return [4 /*yield*/, select(function (x) { return x.feed.count[payload]; }) || 0];
-            case 1:
-                count = _b.sent();
-                return [4 /*yield*/, put(change(payload, 'skip', count))];
-            case 2:
-                _b.sent();
-                return [2 /*return*/];
-        }
-    });
-}
-function feedSaga() {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, takeEvery(FeedActionTypes.SET_SKIP, setSkip)];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}
-
-var FILTER_FORM_NAME = 'FILTER_FORM_NAME';
 
 var CurrentComponent = function (_a) {
     var restinput = _a.input, className = _a.className, rest = __rest(_a, ["input", "className"]);
@@ -135,11 +62,13 @@ var FilterInputField = function (_a) {
     var props = __rest(_a, []);
     return React.createElement(Field, __assign({ component: CurrentComponent }, props));
 };
+//# sourceMappingURL=index.js.map
 
 var FilterSearchField = function (_a) {
     var _b = _a.name, name = _b === void 0 ? 'search' : _b, placeholder = _a.placeholder, props = __rest(_a, ["name", "placeholder"]);
     return React.createElement(FilterInputField, __assign({ placeholder: placeholder || 'Search', name: name }, props));
 };
+//# sourceMappingURL=index.js.map
 
 var CurrentComponent$1 = function (_a) {
     var _b = _a.input, value = _b.value, onChange = _b.onChange, options = _a.options, placeholder = _a.placeholder, className = _a.className;
@@ -241,6 +170,7 @@ var PageUtil = /** @class */ (function () {
     };
     return PageUtil;
 }());
+//# sourceMappingURL=page.js.map
 
 var FeedArrayUtil = {
     toArray: function (param) {
@@ -277,6 +207,7 @@ var FeedArrayUtil = {
         return result;
     },
 };
+//# sourceMappingURL=feed.js.map
 
 var CurrentComponent$2 = function (_a) {
     var _b = _a.input, inputName = _b.name, value = _b.value, onChange = _b.onChange, options = _a.options, texts = _a.texts;
@@ -318,6 +249,7 @@ var FilterHiddenField = function (_a) {
     var name = _a.name, props = __rest(_a, ["name"]);
     return React.createElement(Field, __assign({ name: name, component: CurrentComponent$3 }, props));
 };
+//# sourceMappingURL=index.js.map
 
 var CurrentComponent$4 = function (_a) {
     var _b = _a.input, inputValue = _b.value, inputName = _b.name, onChange = _b.onChange, options = _a.options;
@@ -344,6 +276,7 @@ var CurrentComponent$5 = function (_a) {
 var FilterCheckboxField = function (props) {
     return React.createElement(Field, __assign({ component: CurrentComponent$5 }, props));
 };
+//# sourceMappingURL=index.js.map
 
 var ButtonLink = function (_a) {
     var _b;
@@ -352,11 +285,12 @@ var ButtonLink = function (_a) {
         if (disabled !== true) {
             onClick();
         }
-    }, [disabled]);
+    }, [onClick, disabled]);
     return (React.createElement("div", { className: classNames('df-buttom-link', (_b = {},
             _b['df-buttom-link--disabled'] = disabled,
             _b)), onClick: handleClick }, children));
 };
+//# sourceMappingURL=index.js.map
 
 function FormComponent(_a) {
     var handleSubmit = _a.handleSubmit, children = _a.children, _b = _a.options, options = _b === void 0 ? [] : _b, total = _a.total, className = _a.className, texts = _a.texts, renderSearchField = _a.renderSearchField;
@@ -391,6 +325,7 @@ function useDebouncedCallback(wait, callback, deps) {
     if (deps === void 0) { deps = []; }
     return useCallback(debounce(callback, wait), deps);
 }
+//# sourceMappingURL=debounce.js.map
 
 function LightDataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, propPage = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
@@ -415,11 +350,7 @@ function LightDataFeed(_a) {
             return (React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : '...')));
         }))) : null));
 }
-
-var FeedActions = {
-    setCount: function (payload) { return newAction(FeedActionTypes.SET_COUNT, payload); },
-    setSkip: function (payload) { return newAction(FeedActionTypes.SET_SKIP, payload); },
-};
+//# sourceMappingURL=index.js.map
 
 var DataFeed = function (_a) {
     var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, onChange = _a.onChange, sortOptions = _a.sortOptions, renderPageLink = _a.renderPageLink, _b = _a.initialLoad, initialLoad = _b === void 0 ? true : _b, _c = _a.showTotal, showTotal = _c === void 0 ? true : _c, texts = _a.texts, renderSearchField = _a.renderSearchField;
@@ -443,8 +374,8 @@ var DataFeed = function (_a) {
             dispatch(change(FILTER_FORM_NAME, 'skip', 0));
         }
     }, [init, onChange]);
-    var handleFeedChange = useCallback(function () {
-        dispatch(FeedActions.setSkip(FILTER_FORM_NAME));
+    var handleFeedChange = useCallback(function (skip) {
+        dispatch(change(FILTER_FORM_NAME, 'skip', skip));
     }, []);
     var renderPageItem = useCallback(function (page, current) {
         if (page === null) {
@@ -474,9 +405,6 @@ var DataFeed = function (_a) {
         var _a = initialValues || {}, _b = _a.skip, skip = _b === void 0 ? 0 : _b, rest = __rest(_a, ["skip"]);
         dispatch(initialize(FILTER_FORM_NAME, FilterUtil.toInner(__assign({ skip: skip }, rest))));
     }, []);
-    useEffect(function () {
-        dispatch(FeedActions.setCount({ form: FILTER_FORM_NAME, count: (data === null || data === void 0 ? void 0 : data.length) || 0 }));
-    }, [data]);
     return (React.createElement(LightDataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, dataClassName: dataClassName, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts },
         React.createElement(FeedFilterForm, { total: showTotal ? all : undefined, onChange: handleFilterChange, options: sortOptions, texts: texts, formName: FILTER_FORM_NAME, renderSearchField: renderSearchField }, children)));
 };
@@ -492,6 +420,7 @@ var RowAttribute = function (_a) {
             label ? React.createElement("div", { className: "df-attribute__label" }, label) : null,
             React.createElement("div", { className: "df-attribute__content" }, content))));
 };
+//# sourceMappingURL=index.js.map
 
 var StandardRow = function (_a) {
     var children = _a.children, content = _a.content, leftContent = _a.leftContent, rightContent = _a.rightContent, attributes = _a.attributes, actions = _a.actions, attributeWidth = _a.attributeWidth, right = _a.right, left = _a.left, className = _a.className, contentClassName = _a.contentClassName, topRight = _a.topRight;
@@ -520,16 +449,18 @@ var StandardRow = function (_a) {
             topRight ? React.createElement("div", { className: "df-standard-row__top-right" }, topRight) : null),
         right ? React.createElement("div", { className: "df-standard-row__right" }, right) : null));
 };
+//# sourceMappingURL=index.js.map
 
-var _a$1;
-var defaultLocale = (_a$1 = {},
-    _a$1['sort'] = '',
-    _a$1['total'] = '',
-    _a$1['clean'] = '',
-    _a$1['search'] = '',
-    _a$1['loadMore'] = '',
-    _a$1['loading'] = '',
-    _a$1);
+var _a;
+var defaultLocale = (_a = {},
+    _a['sort'] = '',
+    _a['total'] = '',
+    _a['clean'] = '',
+    _a['search'] = '',
+    _a['loadMore'] = '',
+    _a['loading'] = '',
+    _a);
 // export type DataFeedText = keyof DataFeedTexts;
+//# sourceMappingURL=index.js.map
 
-export { DataFeed, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, RowAttribute, SortUtil, StandardRow, feedReducer, feedSaga };
+export { DataFeed, FILTER_FORM_NAME, FeedArrayUtil, FeedFilterForm, FilterCheckboxField, FilterHiddenField, FilterInputField, FilterRadioField, FilterSearchField, FilterSelectField, FilterSortField, FilterUtil, LightDataFeed, PageUtil, RowAttribute, SortUtil, StandardRow };
