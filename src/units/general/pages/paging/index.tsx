@@ -12,45 +12,45 @@ import { GeneralActions } from '../../redux';
 const step = 10;
 
 export const PagingPage: React.FC = () => {
-    const dispatch = useDispatch();
-    const { all, items } = useReduxSelector((x) => x.general.stateFeed);
-    const { search } = useLocation();
-    const { page } = parse(search, { parseNumbers: true }) as {
-        page?: number;
+  const dispatch = useDispatch();
+  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { search } = useLocation();
+  const { page } = parse(search, { parseNumbers: true }) as {
+    page?: number;
+  };
+
+  const handleChange = useCallback(
+    (options: FeedFilterValues) => {
+      dispatch(GeneralActions.loadStateFeedRequest(options));
+    },
+    [items]
+  );
+
+  const handleRenderPageLink = useCallback((page: number) => {
+    return <a href={`/paging?page=${page}`}>{page}</a>;
+  }, []);
+
+  const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
+    return {
+      direction: 'desc',
+      order: 'name',
+      page,
     };
+  }, [page]);
 
-    const handleChange = useCallback(
-        (options: FeedFilterValues) => {
-            dispatch(GeneralActions.loadStateFeedRequest(options));
-        },
-        [items]
-    );
-
-    const handleRenderPageLink = useCallback((page: number) => {
-        return <a href={`/paging?page=${page}`}>{page}</a>;
-    }, []);
-
-    const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
-        return {
-            direction: 'desc',
-            order: 'name',
-            page,
-        };
-    }, [page]);
-
-    return (
-        <MasterPage>
-            <DataFeed
-                all={all}
-                data={items}
-                step={step}
-                renderItem={FeedUi.renderItem}
-                sortOptions={FeedUi.sortOptions}
-                // renderPageItem={handleRenderPageItem}
-                renderPageLink={handleRenderPageLink}
-                initialValues={initialValues}
-                onChange={handleChange}
-            />
-        </MasterPage>
-    );
+  return (
+    <MasterPage>
+      <DataFeed
+        all={all}
+        data={items}
+        step={step}
+        renderItem={FeedUi.renderItem}
+        sortOptions={FeedUi.sortOptions}
+        // renderPageItem={handleRenderPageItem}
+        renderPageLink={handleRenderPageLink}
+        initialValues={initialValues}
+        onChange={handleChange}
+      />
+    </MasterPage>
+  );
 };

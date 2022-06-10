@@ -8,61 +8,61 @@ import { AppUrls } from '../../../../lib/urls';
 import './index.scss';
 
 export const Sidebar: React.FC = () => {
-    const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-    const options = useMemo<
-        {
-            path: PagePath;
-            title: string;
-        }[]
-    >(() => {
-        return [
-            {
-                path: AppUrls.default,
-                title: 'Default',
-            },
-            {
-                path: AppUrls.blueprint,
-                title: 'BluePrint',
-            },
-            {
-                path: AppUrls.paging,
-                title: 'Paging',
-            },
-            {
-                path: AppUrls.noInitialLoad,
-                title: 'No Initial Load',
-            },
-            {
-                path: AppUrls.noFilter,
-                title: 'No Filter',
-            },
-            // {
-            //     path: AppUrls.autoload,
-            //     title: 'Autoload'
-            // },
-            // {
-            //     path: AppUrls.autoloadFixed,
-            //     title: 'Autoload Fixed'
-            // },
-        ];
-    }, []);
+  const options = useMemo<
+    {
+      path: PagePath;
+      title: string;
+    }[]
+  >(() => {
+    return [
+      {
+        path: AppUrls.default,
+        title: 'Default',
+      },
+      {
+        path: AppUrls.blueprint,
+        title: 'BluePrint',
+      },
+      {
+        path: AppUrls.paging,
+        title: 'Paging',
+      },
+      {
+        path: AppUrls.noInitialLoad,
+        title: 'No Initial Load',
+      },
+      {
+        path: AppUrls.noFilter,
+        title: 'No Filter',
+      },
+      // {
+      //     path: AppUrls.autoload,
+      //     title: 'Autoload'
+      // },
+      // {
+      //     path: AppUrls.autoloadFixed,
+      //     title: 'Autoload Fixed'
+      // },
+    ];
+  }, []);
 
-    return (
-        <div className="sidebar">
-            {options.map((x, i) => {
-                return (
-                    <Link
-                        key={i}
-                        to={x.path.build()}
-                        className={classNames('sidebar__link', {
-                            ['sidebar__link--active']: x.path.isActive(pathname),
-                        })}
-                    >
-                        {x.title}
-                    </Link>
-                );
+  return (
+    <div className="sidebar">
+      {options.map((x, i) => {
+        return (
+          <Link
+            key={i}
+            to={x.path.build()}
+            className={classNames('sidebar__link', {
+              ['sidebar__link--active']: x.path.isActive(pathname),
             })}
-        </div>
-    );
+          >
+            {x.title}
+          </Link>
+        );
+      })}
+    </div>
+  );
 };
