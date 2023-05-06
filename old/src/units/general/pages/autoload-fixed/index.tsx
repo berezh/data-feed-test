@@ -1,19 +1,19 @@
-import React, { useRef, useCallback } from 'react';
-import moment from 'moment';
-import { Button, AnchorButton } from '@blueprintjs/core';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useCallback } from "react";
+import moment from "moment";
+import { Button, AnchorButton } from "@blueprintjs/core";
+import { useDispatch } from "react-redux";
+import { useReduxSelector } from "src/lib/hooks";
+import { BaseFeedParams } from "src/lib/interfaces";
 
-import { MasterPage } from '../../components/master-page';
-import { EuState } from '../../components/data-gererator';
-import { StandardRow, DataFeed } from '../../../../data-feed';
-import { useReduxSelector } from 'src/lib/hooks';
-import { BaseFeedParams } from 'src/lib/interfaces';
-import { GeneralActions } from '../../redux';
+import { MasterPage } from "../../components/master-page";
+import { EuState } from "../../components/data-gererator";
+import { StandardRow, DataFeed } from "../../../../data-feed";
+import { GeneralActions } from "../../redux";
 
 export const AutoloadFixedPage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
   const handleChange = useCallback((options: BaseFeedParams) => {
     dispatch(GeneralActions.loadStateFeedRequest(options));
@@ -21,7 +21,7 @@ export const AutoloadFixedPage: React.FC = () => {
 
   return (
     <MasterPage>
-      <div ref={containerRef} style={{ height: 500, overflow: 'auto' }}>
+      <div ref={containerRef} style={{ height: 500, overflow: "auto" }}>
         <DataFeed
           // containerRef={containerRef}
           // autoLoad={true}
@@ -34,7 +34,7 @@ export const AutoloadFixedPage: React.FC = () => {
                 topRight={moment(item.accession).fromNow()}
                 attributes={[
                   {
-                    label: 'Native Name',
+                    label: "Native Name",
                     content: item.nativeName,
                   },
                 ]}
@@ -49,13 +49,7 @@ export const AutoloadFixedPage: React.FC = () => {
                     }}
                     small={true}
                   />,
-                  <AnchorButton
-                    key="view-btn"
-                    icon="link"
-                    href="https://${item.code}.wikipedia.org/"
-                    target="blank"
-                    small={true}
-                  >
+                  <AnchorButton key="view-btn" icon="link" href="https://${item.code}.wikipedia.org/" target="blank" small={true}>
                     View
                   </AnchorButton>,
                 ]}

@@ -1,19 +1,19 @@
-import { parse } from 'query-string';
-import React, { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { parse } from "query-string";
+import React, { useCallback, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useReduxSelector } from "src/lib/hooks";
 
-import { useReduxSelector } from 'src/lib/hooks';
-import { FeedFilterValues, DataFeed } from '../../../../data-feed';
-import { FeedUi } from '../../components/feed-ui';
-import { MasterPage } from '../../components/master-page';
-import { GeneralActions } from '../../redux';
+import { FeedFilterValues, DataFeed } from "../../../../data-feed";
+import { FeedUi } from "../../components/feed-ui";
+import { MasterPage } from "../../components/master-page";
+import { GeneralActions } from "../../redux";
 
 const step = 10;
 
 export const PagingPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
   const { search } = useLocation();
   const { page } = parse(search, { parseNumbers: true }) as {
     page?: number;
@@ -32,8 +32,8 @@ export const PagingPage: React.FC = () => {
 
   const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
     return {
-      direction: 'desc',
-      order: 'name',
+      direction: "desc",
+      order: "name",
       page,
     };
   }, [page]);

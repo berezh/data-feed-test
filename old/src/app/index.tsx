@@ -1,11 +1,11 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { hot } from 'react-hot-loader';
+import React from "react";
+import { Provider } from "react-redux";
+import { hot } from "react-hot-loader";
 
-import './index.scss';
+import "./index.scss";
 
-import { Root } from './routes';
-import { store } from '../redux';
+import { Root } from "./routes";
+import { store } from "../redux";
 
 const AppComponent: React.FC = () => {
   return (

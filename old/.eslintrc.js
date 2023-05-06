@@ -1,5 +1,5 @@
 module.exports = {
-    ignorePatterns: ['**/data-feed', '**/data-feed-blueprintjs'],
-    extends: ['varp'],
-    rules: {},
+  ignorePatterns: ["**/data-feed", "**/data-feed-blueprintjs"],
+  extends: ["varp"],
+  rules: {},
 };

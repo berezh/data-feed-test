@@ -1,7 +1,7 @@
-import * as monolite from 'monolite';
+import * as monolite from "monolite";
 
-import { Feed } from '../interfaces';
-import { FeedUtil } from '../utils/feed-util';
+import { Feed } from "../interfaces";
+import { FeedUtil } from "../utils/feed-util";
 
 export class MonoliteHelper<T> {
   private state: T;
@@ -47,12 +47,8 @@ export function monoliteUtil<TState>(state: TState, accessor: (sourceState: Mono
   return result;
 }
 
-export function monoliteFeedCombine<TState, TFeedItem>(
-  state: TState,
-  feedAccessor: (state: TState) => Feed<TFeedItem>,
-  payload: Feed<TFeedItem>
-): TState {
-  return monoliteUtil(state, (unit) => {
+export function monoliteFeedCombine<TState, TFeedItem>(state: TState, feedAccessor: (state: TState) => Feed<TFeedItem>, payload: Feed<TFeedItem>): TState {
+  return monoliteUtil(state, unit => {
     return unit.set(feedAccessor, FeedUtil.combine(feedAccessor(state), payload));
   });
 }

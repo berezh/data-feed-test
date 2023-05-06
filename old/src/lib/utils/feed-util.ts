@@ -1,4 +1,4 @@
-import { Feed } from '../interfaces';
+import { Feed } from "../interfaces";
 
 function empty<TItem = any>(): Feed<TItem> {
   return {

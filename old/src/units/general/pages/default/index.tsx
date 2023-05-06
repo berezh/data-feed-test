@@ -1,23 +1,16 @@
-import React, { useMemo, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { BaseFeedParams } from "src/lib/interfaces";
+import { useReduxSelector } from "src/lib/hooks";
 
-import { MasterPage } from '../../components/master-page';
-import { BaseFeedParams } from 'src/lib/interfaces';
-import {
-  DataFeedTexts,
-  FeedFilterValues,
-  FilterCheckboxField,
-  DataFeed,
-  FilterSelectField,
-  FilterInputField,
-} from '../../../../data-feed';
-import { GeneralActions } from '../../redux';
-import { useReduxSelector } from 'src/lib/hooks';
-import { FeedUi } from '../../components/feed-ui';
+import { MasterPage } from "../../components/master-page";
+import { DataFeedTexts, FeedFilterValues, FilterCheckboxField, DataFeed, FilterSelectField, FilterInputField } from "../../../../data-feed";
+import { GeneralActions } from "../../redux";
+import { FeedUi } from "../../components/feed-ui";
 
 export const DefaultPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
   const handleChange = useCallback((options: BaseFeedParams) => {
     dispatch(GeneralActions.loadStateFeedRequest(options));
@@ -25,14 +18,14 @@ export const DefaultPage: React.FC = () => {
 
   const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
     return {
-      direction: 'desc',
-      order: 'population',
+      direction: "desc",
+      order: "population",
     };
   }, []);
 
   const texts = useMemo<Partial<DataFeedTexts>>(() => {
     return {
-      sort: 'Сорт',
+      sort: "Сорт",
     };
   }, []);
 
@@ -53,17 +46,17 @@ export const DefaultPage: React.FC = () => {
           name="language"
           placeholder="Select Language"
           options={[
-            { text: 'German', value: 'german' },
-            { text: 'English', value: 'english' },
+            { text: "German", value: "german" },
+            { text: "English", value: "english" },
           ]}
         />
         <FilterSelectField
           name="currency"
           placeholder="Select Language"
           options={[
-            { text: 'Euro', value: 'euro' },
-            { text: 'Krona', value: 'krona' },
-            { text: 'Kuna', value: 'kuna' },
+            { text: "Euro", value: "euro" },
+            { text: "Krona", value: "krona" },
+            { text: "Kuna", value: "kuna" },
           ]}
         />
         <FilterInputField className="custom-input" name="capital" label="Capital" placeholder="Enter Capital" />

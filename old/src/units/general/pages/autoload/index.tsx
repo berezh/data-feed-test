@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { useReduxSelector } from "src/lib/hooks";
+import { BaseFeedParams } from "src/lib/interfaces";
 
-import { FeedUi } from '../../components/feed-ui';
-import { MasterPage } from '../../components/master-page';
-import { DataFeed } from '../../../../data-feed';
-import { useReduxSelector } from 'src/lib/hooks';
-import { BaseFeedParams } from 'src/lib/interfaces';
-import { GeneralActions } from '../../redux';
+import { FeedUi } from "../../components/feed-ui";
+import { MasterPage } from "../../components/master-page";
+import { DataFeed } from "../../../../data-feed";
+import { GeneralActions } from "../../redux";
 
 export const AutoloadPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
   const handleChange = useCallback((options: BaseFeedParams) => {
     dispatch(GeneralActions.loadStateFeedRequest(options));

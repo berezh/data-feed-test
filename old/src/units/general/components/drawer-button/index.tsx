@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import './index.scss';
-import { Icon, Switch } from '@blueprintjs/core';
+import React, { useState } from "react";
+import "./index.scss";
+import { Icon, Switch } from "@blueprintjs/core";
 
-import { useInputCheckboxCallback } from '../hooks';
+import { useInputCheckboxCallback } from "../hooks";
 
 export interface ControlOptions {
   // header -------------------------
@@ -21,63 +21,54 @@ interface Props extends ControlOptions {
   onChange: (props: ControlOptions) => void;
 }
 
-export const DrawerButton: React.FC<Props> = (props) => {
-  const {
-    fixedHeader,
-    defaultHeader,
-    fixedFooter,
-    defaultFooter,
-    onChange,
-    showLeftSidebar,
-    showRightSidebar,
-    fixedSidebar,
-  } = props;
+export const DrawerButton: React.FC<Props> = props => {
+  const { fixedHeader, defaultHeader, fixedFooter, defaultFooter, onChange, showLeftSidebar, showRightSidebar, fixedSidebar } = props;
   const [open, setOpen] = useState(true);
 
   const handleFixedHeader = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, fixedHeader: checked });
     },
     [props]
   );
 
   const handleDefaultHeader = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, defaultHeader: checked });
     },
     [props]
   );
 
   const handleFixedFooter = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, fixedFooter: checked });
     },
     [props]
   );
 
   const handleDefaultFooter = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, defaultFooter: checked });
     },
     [props]
   );
 
   const handleLeftSidebar = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, showLeftSidebar: checked });
     },
     [props]
   );
 
   const handleRightSidebar = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, showRightSidebar: checked });
     },
     [props]
   );
 
   const handleFixedSidebar = useInputCheckboxCallback(
-    (checked) => {
+    checked => {
       onChange({ ...props, fixedSidebar: checked });
     },
     [props]

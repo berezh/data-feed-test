@@ -1,13 +1,13 @@
-import React from 'react';
-import { Layout } from 'react-html-layout';
+import React from "react";
+import { Layout } from "react-html-layout";
 
-import { Sidebar } from '../sidebar';
-import { Header } from '../header';
-import { Footer } from '../footer';
+import { Sidebar } from "../sidebar";
+import { Header } from "../header";
+import { Footer } from "../footer";
 
-import './index.scss';
+import "./index.scss";
 
-export const MasterPage: React.FC = (props) => {
+export const MasterPage: React.FC = props => {
   const { children } = props;
   return (
     <Layout

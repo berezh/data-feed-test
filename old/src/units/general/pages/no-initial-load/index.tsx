@@ -1,21 +1,15 @@
-import React, { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { useReduxSelector } from "src/lib/hooks";
 
-import { MasterPage } from '../../components/master-page';
-import { FeedUi } from '../../components/feed-ui';
-import {
-  FeedFilterValues,
-  FilterCheckboxField,
-  DataFeed,
-  FilterSearchField,
-  FilterSelectField,
-} from '../../../../data-feed';
-import { useReduxSelector } from 'src/lib/hooks';
-import { GeneralActions } from '../../redux';
+import { MasterPage } from "../../components/master-page";
+import { FeedUi } from "../../components/feed-ui";
+import { FeedFilterValues, FilterCheckboxField, DataFeed, FilterSearchField, FilterSelectField } from "../../../../data-feed";
+import { GeneralActions } from "../../redux";
 
 export const NoInitialLoadPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
   const handleChange = useCallback(
     (options: any) => {
@@ -26,8 +20,8 @@ export const NoInitialLoadPage: React.FC = () => {
 
   const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
     return {
-      direction: 'desc',
-      order: 'population',
+      direction: "desc",
+      order: "population",
     };
   }, []);
 
@@ -48,17 +42,17 @@ export const NoInitialLoadPage: React.FC = () => {
           name="language"
           placeholder="Select Language"
           options={[
-            { text: 'German', value: 'german' },
-            { text: 'English', value: 'english' },
+            { text: "German", value: "german" },
+            { text: "English", value: "english" },
           ]}
         />
         <FilterSelectField
           name="currency"
           placeholder="Select Language"
           options={[
-            { text: 'Euro', value: 'euro' },
-            { text: 'Krona', value: 'krona' },
-            { text: 'Kuna', value: 'kuna' },
+            { text: "Euro", value: "euro" },
+            { text: "Krona", value: "krona" },
+            { text: "Kuna", value: "kuna" },
           ]}
         />
         <FilterSearchField name="capital" label="Capital" placeholder="Enter Capital" />
