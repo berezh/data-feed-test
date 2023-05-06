@@ -8,11 +8,11 @@ import { Root } from './routes';
 import { store } from '../redux';
 
 const AppComponent: React.FC = () => {
-    return (
-        <Provider store={store}>
-            <Root />
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <Root />
+    </Provider>
+  );
 };
 
 export const App = hot(module)(AppComponent);

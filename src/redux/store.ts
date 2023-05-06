@@ -16,15 +16,15 @@ const middleware = composeWithDevTools(applyMiddleware(routerMiddleware(appHisto
 
 // mount it on the Store
 const store = createLocalStorageStore<ReduxState>(
-    {
-        key: 'data-feed',
-        version: 1,
-        filter: ({}: ReduxState) => {
-            return {};
-        },
+  {
+    key: 'data-feed',
+    version: 1,
+    filter: ({}: ReduxState) => {
+      return {};
     },
-    RootReducer(appHistory),
-    middleware as any
+  },
+  RootReducer(appHistory),
+  middleware as any
 );
 
 // then run the saga

@@ -8,11 +8,11 @@ import { Feed } from '../../../lib/interfaces';
 import { monoliteFeedCombine } from '../../../lib/monolite';
 
 const initialState: GeneralState = {
-    stateFeed: FeedUtil.empty(),
+  stateFeed: FeedUtil.empty(),
 };
 
 export const generalReducer = newReducer(initialState, {
-    [GeneralActionTypes.LOAD_STATE_FEED_SUCCESS]: (state, payload: Feed<EuState>) => {
-        return monoliteFeedCombine(state, (s) => s.stateFeed, payload);
-    },
+  [GeneralActionTypes.LOAD_STATE_FEED_SUCCESS]: (state, payload: Feed<EuState>) => {
+    return monoliteFeedCombine(state, (s) => s.stateFeed, payload);
+  },
 });
