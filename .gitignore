@@ -8,6 +8,8 @@
 # testing
 /coverage
 
+/src/data-feed/dist
+
 # next.js
 /.next/
 /out/
