@@ -1,2 +1,2 @@
-// export * from 'data-feed';
-export * from "./dist";
+ export * from 'data-feed';
+// export * from "./dist";

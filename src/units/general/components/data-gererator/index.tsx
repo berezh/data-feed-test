@@ -1,9 +1,9 @@
 import moment from "moment";
 import { orderBy } from "lodash";
+import { FeedFilterValues } from "src/data-feed/dist/data-feed/dist";
 
 import { EuStates } from "./data/eu-states";
 import { Feed } from "../../../../lib/interfaces";
-import { FeedFilterValues } from "../../../../data-feed";
 
 export interface EuState {
   name: string;
