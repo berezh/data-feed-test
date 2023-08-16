@@ -1,0 +1,6 @@
+@import "~estyle/index";
+@import "../styles";
+
+.root {
+  @include link;
+}

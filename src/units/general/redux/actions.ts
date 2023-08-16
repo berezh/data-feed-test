@@ -1,10 +1,10 @@
-import { newAction } from "redux-sputnik";
-
-import { GeneralActionTypes } from "./types";
 import { Feed } from "../../../lib/interfaces";
 import { EuState } from "../components/data-gererator";
+import { basicReduxAction } from "src/redux/utils/action";
+
+const { action } = basicReduxAction("general");
 
 export const GeneralActions = {
-  loadStateFeedRequest: (data: any) => newAction(GeneralActionTypes.LOAD_STATE_FEED_REQUEST, data),
-  loadStateFeedSuccess: (data: Feed<EuState>) => newAction(GeneralActionTypes.LOAD_STATE_FEED_SUCCESS, data),
+  loadStateFeedRequest: action<any>("loadStateFeedRequest"),
+  loadStateFeedSuccess: action<Feed<EuState>>("loadStateFeedSuccess"),
 };

@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import { PagePath } from "page-path";
 import React, { useMemo } from "react";
-import { Link, useLocation } from "react-router-dom";
-
-import { AppUrls } from "../../../../lib/urls";
+import { useRouter } from "next/router";
 
 import "./index.scss";
+import { AppLink } from "src/lib/link";
+import { AppUrls } from "src/lib/urls";
 
 export const Sidebar: React.FC = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
 
   const options = useMemo<
     {
@@ -52,15 +52,15 @@ export const Sidebar: React.FC = () => {
     <div className="sidebar">
       {options.map((x, i) => {
         return (
-          <Link
+          <AppLink
             key={i}
-            to={x.path.build()}
+            href={x.path.build()}
             className={classNames("sidebar__link", {
               ["sidebar__link--active"]: x.path.isActive(pathname),
             })}
           >
             {x.title}
-          </Link>
+          </AppLink>
         );
       })}
     </div>

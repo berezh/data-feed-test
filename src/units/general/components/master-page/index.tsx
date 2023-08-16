@@ -16,9 +16,6 @@ export const MasterPage: React.FC<Props> = ({ children }) => {
     <Layout
       header={<Header />}
       fixedHeader={true}
-      headerStyle={{
-        flex: 1,
-      }}
       fixedFooter={false}
       // leftSidebar={<Sidebar />}
       // leftSidebarStyle={{ backgroundColor: '#444' }}

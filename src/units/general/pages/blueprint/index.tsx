@@ -1,8 +1,8 @@
 import React, { useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
+
 import { BaseFeedParams } from "src/lib/interfaces";
 import { useReduxSelector } from "src/lib/hooks";
-
 import { MasterPage } from "../../components/master-page";
 import { DataFeedTexts, FeedFilterValues, DataFeed } from "../../../../data-feed";
 import { GeneralActions } from "../../redux";

@@ -1,12 +1,11 @@
 import { SagaIterator } from "redux-saga";
 import { put, debounce } from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { ActionWith } from "../../../redux/interfaces";
 import { DataGenerator } from "../components/data-gererator";
 import { GeneralActions } from "./actions";
-import { GeneralActionTypes } from "./types";
 
-function* loadStateFeed({ payload }: ActionWith): SagaIterator {
+function* loadStateFeed({ payload }: PayloadAction): SagaIterator {
   try {
     const feed = DataGenerator.loadEuState(10, payload);
     yield put(GeneralActions.loadStateFeedSuccess(feed));
@@ -16,5 +15,5 @@ function* loadStateFeed({ payload }: ActionWith): SagaIterator {
 }
 
 export function* generalSaga(): SagaIterator {
-  yield debounce(200, GeneralActionTypes.LOAD_STATE_FEED_REQUEST, loadStateFeed);
+  yield debounce(200, GeneralActions.loadStateFeedRequest, loadStateFeed);
 }
