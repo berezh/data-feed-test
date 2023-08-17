@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { BaseFeedParams } from "src/lib/interfaces";
 import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
-import { DataFeedTexts, FeedFilterValues, DataFeed } from "../../../../data-feed";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
+import { DataFeed, DataFeedTexts, FeedFilterValues } from "src/data-feed/index";
 
 export const DefaultPage: React.FC = () => {
   const dispatch = useDispatch();

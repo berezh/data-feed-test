@@ -223,8 +223,9 @@ function LightDataFeed(_a) {
 }
 
 var DataFeed = function (_a) {
-    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, renderPageLink = _a.renderPageLink, texts = _a.texts;
-    var handleFeedChange = React.useCallback(function () { }, []);
+    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, renderPageLink = _a.renderPageLink, texts = _a.texts, onChange = _a.onChange;
+    var handleFeedChange = React.useCallback(function (skip) {
+    }, [onChange]);
     var renderPageItem = React.useCallback(function (page, current) {
         if (page === null) {
             return React.createElement("span", null, "...");
