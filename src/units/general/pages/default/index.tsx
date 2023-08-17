@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { BaseFeedParams } from "src/lib/interfaces";
 import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
-import { DataFeedTexts, FeedFilterValues, FilterCheckboxField, DataFeed, FilterSelectField, FilterInputField } from "../../../../data-feed";
+import { DataFeedTexts, FeedFilterValues, DataFeed } from "../../../../data-feed";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
 
@@ -40,27 +40,7 @@ export const DefaultPage: React.FC = () => {
         onChange={handleChange}
         initialLoad={true}
         texts={texts}
-      >
-        <FilterCheckboxField name="isEuro" label="Is Euro" />
-        <FilterSelectField
-          name="language"
-          placeholder="Select Language"
-          options={[
-            { text: "German", value: "german" },
-            { text: "English", value: "english" },
-          ]}
-        />
-        <FilterSelectField
-          name="currency"
-          placeholder="Select Language"
-          options={[
-            { text: "Euro", value: "euro" },
-            { text: "Krona", value: "krona" },
-            { text: "Kuna", value: "kuna" },
-          ]}
-        />
-        <FilterInputField className="custom-input" name="capital" label="Capital" placeholder="Enter Capital" />
-      </DataFeed>
+      ></DataFeed>
     </MasterPage>
   );
 };

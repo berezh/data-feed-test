@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { useReduxSelector } from "src/lib/hooks";
 
+import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
 import { FeedUi } from "../../components/feed-ui";
-import { FeedFilterValues, FilterCheckboxField, DataFeed, FilterSearchField, FilterSelectField } from "../../../../data-feed";
+import { FeedFilterValues, DataFeed } from "../../../../data-feed";
 import { GeneralActions } from "../../redux";
 
 export const NoInitialLoadPage: React.FC = () => {

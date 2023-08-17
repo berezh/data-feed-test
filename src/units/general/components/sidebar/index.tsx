@@ -3,7 +3,7 @@ import { PagePath } from "page-path";
 import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 
-import "./index.scss";
+import s from "./index.module.scss";
 import { AppLink } from "src/lib/link";
 import { AppUrls } from "src/lib/urls";
 
@@ -49,14 +49,14 @@ export const Sidebar: React.FC = () => {
   }, []);
 
   return (
-    <div className="sidebar">
+    <div className={s.sidebar}>
       {options.map((x, i) => {
         return (
           <AppLink
             key={i}
             href={x.path.build()}
-            className={classNames("sidebar__link", {
-              ["sidebar__link--active"]: x.path.isActive(pathname),
+            className={classNames(s.sidebar__link, {
+              [s["sidebar__link--active"]]: x.path.isActive(pathname),
             })}
           >
             {x.title}

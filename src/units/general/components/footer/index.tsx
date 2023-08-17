@@ -1,10 +1,11 @@
 import React from "react";
-import "./index.scss";
+
+import s from "./index.module.scss";
 
 export class Footer extends React.PureComponent {
   public render(): React.ReactNode {
     return (
-      <div className="footer">
+      <div className={s.footer}>
         <b>Footer</b>
       </div>
     );

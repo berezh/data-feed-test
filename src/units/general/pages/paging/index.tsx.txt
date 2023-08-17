@@ -2,8 +2,8 @@ import { parse } from "query-string";
 import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useReduxSelector } from "src/lib/hooks";
 
+import { useReduxSelector } from "src/lib/hooks";
 import { FeedFilterValues, DataFeed } from "../../../../data-feed";
 import { FeedUi } from "../../components/feed-ui";
 import { MasterPage } from "../../components/master-page";

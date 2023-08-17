@@ -4,8 +4,7 @@ import { Layout } from "react-html-layout";
 import { Sidebar } from "../sidebar";
 import { Header } from "../header";
 import { Footer } from "../footer";
-
-import "./index.scss";
+import s from "./index.module.scss";
 
 interface Props {
   children: React.ReactNode;
@@ -22,11 +21,11 @@ export const MasterPage: React.FC<Props> = ({ children }) => {
       // fixedSidebar={true}
       footer={<Footer />}
     >
-      <div className="layout">
-        <div className="layout__sidebar">
+      <div className={s.layout}>
+        <div className={s.layout__sidebar}>
           <Sidebar />
         </div>
-        <div className="layout__content">
+        <div className={s.layout__content}>
           <div>{children}</div>
         </div>
       </div>

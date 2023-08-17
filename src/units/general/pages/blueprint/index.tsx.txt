@@ -7,7 +7,7 @@ import { MasterPage } from "../../components/master-page";
 import { DataFeedTexts, FeedFilterValues, DataFeed } from "../../../../data-feed";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
-import { BpFilterBoolField, BpFilterSearchField, BpFilterSelectField, BpFilterSelectItem, BpFilterTextField } from "../../../../data-feed-blueprintjs";
+// import { BpFilterBoolField, BpFilterSearchField, BpFilterSelectField, BpFilterSelectItem, BpFilterTextField } from "../../../../data-feed-blueprintjs";
 
 export const BluePrintPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -45,28 +45,7 @@ export const BluePrintPage: React.FC = () => {
         onChange={handleChange}
         initialLoad={true}
         texts={texts}
-        renderSearchField={() => <BpFilterSearchField />}
-      >
-        <BpFilterBoolField name="isEuro" label="Is Euro" />
-        <BpFilterSelectField
-          name="language"
-          placeholder="Select Language"
-          options={[
-            { text: "German", value: "german" },
-            { text: "English", value: "english" },
-          ]}
-        />
-        <BpFilterSelectField
-          name="currency"
-          renderItem={renderLanguageOption}
-          options={[
-            { text: "Euro", value: "euro" },
-            { text: "Krona", value: "krona" },
-            { text: "Kuna", value: "kuna" },
-          ]}
-        />
-        <BpFilterTextField name="capital" label="Capital" placeholder="Enter Capital" />
-      </DataFeed>
+      ></DataFeed>
     </MasterPage>
   );
 };

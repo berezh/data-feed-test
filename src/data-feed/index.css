@@ -1,0 +1,183 @@
+.df-standard-row {
+  padding: var(--dfRowPadding) var(--dfRowHorizontalPadding);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: var(--dfRowBorderBottomWidth) solid var(--dfRowBorderBottomColor);
+  gap: var(--dfRowSpacing);
+}
+.df-standard-row:last-child {
+  border-bottom: none;
+}
+.df-standard-row:hover {
+  background-color: var(--dfRowBackgroundColorHover);
+}
+.df-standard-row__left {
+  display: flex;
+}
+.df-standard-row__right {
+  display: flex;
+}
+.df-standard-row__middle {
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+.df-standard-row__middle-static {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.df-standard-row__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--dfRowContentFontSize);
+  gap: var(--dfRowSpacing);
+}
+.df-standard-row__content-left {
+  display: flex;
+}
+.df-standard-row__content-middle {
+  flex: 1;
+  display: flex;
+}
+.df-standard-row__content-right {
+  display: flex;
+}
+.df-standard-row__panel {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: var(--dfRowSpacing);
+}
+@media all and (max-width: 800px) {
+  .df-standard-row__panel {
+    flex-direction: column;
+  }
+}
+.df-standard-row__attribute {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0 !important;
+}
+.df-standard-row__attribute-item {
+  margin: var(--dfAttributeSpacing) var(--dfAttributeSpacing) 0 0;
+}
+.df-standard-row__attribute-item:last-child {
+  margin-right: 0;
+}
+.df-standard-row__action {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: var(--dfRowActionFontSize);
+}
+.df-standard-row__action-item {
+  margin: var(--dfAttributeSpacing) 0 0 var(--dfAttributeSpacing);
+}
+.df-standard-row__action-item:first-child {
+  margin-left: 0;
+}
+.df-standard-row__top-right {
+  font-size: var(--dfRowTopLeftFontSize);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+:root {
+  --dfColor: #333;
+  --dfBorderColor: #e8e4eb;
+  --dfBorderWidth: 1px;
+  --dfFontSize: inherit;
+  --dfFilterFontSize: inherit;
+  --dbFilterBackgroundColor: white;
+  --dbFilterPadding: 15px;
+  --dbFilterSpacing: 12px;
+  --dbSortFontSize: 12px;
+  --dbControlSpacing: 5px;
+  --dfControlBorderColor: #bebebe;
+  --dfControlBorderWidth: 1px;
+  --dfControlHeight: 26px;
+  --dfControlPadding: 5px;
+  --dfButtonLinkColor: rgb(42 41 59);
+  --dfButtonLinkDisabledColor: rgb(116 116 129);
+  --dfRowSpacing: 10px;
+  --dfRowPadding: 15px;
+  --dfRowHorizontalPadding: 0;
+  --dfRowBackgroundColorHover: transparent;
+  --dfRowTopLeftFontSize: 12px;
+  --dfRowContentFontSize: inherit;
+  --dfRowBorderBottomWidth: 1px;
+  --dfRowBorderBottomColor: #e9e9e9;
+  --dfRowActionFontSize: inherit;
+  --dfAttributeColor: inherit;
+  --dfAttributeFontSize: 12px;
+  --dfAttributeLabelFontSize: 10px;
+  --dfAttributeLabelOpacity: inherit;
+  --dfAttributeSpacing: 10px;
+}
+
+.df-feed {
+  color: var(--dfColor);
+  font-size: var(--dfFontSize);
+}
+.df-feed__load {
+  text-align: center;
+  padding: 10px 0;
+}
+.df-feed__page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.df-button-link {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--dfButtonLinkColor);
+}
+.df-button-link--disabled {
+  cursor: default;
+  color: var(--dfButtonLinkDisabledColor);
+}
+
+.df-attribute {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--dfAttributeFontSize);
+  color: var(--dfAttributeColor);
+}
+.df-attribute__icon {
+  margin-right: 0.4em;
+  display: flex;
+}
+.df-attribute__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.df-attribute__label {
+  font-size: var(--dfAttributeLabelFontSize);
+  opacity: var(--dfAttributeLabelOpacity);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.df-attribute__content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
