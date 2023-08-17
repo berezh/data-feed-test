@@ -1,13 +1,15 @@
 import { SagaIterator } from "redux-saga";
 import { AnyAction } from "redux";
-// import { all, fork } from 'redux-saga/effects';
+import { all, fork } from "redux-saga/effects";
+
+import { GeneralSaga } from "src/units/general/redux";
 
 // import { IntlSaga } from 'src/units/intl/redux/saga';
 // import { DemoSaga } from 'src/units/demo/redux/saga';
 // import { LocalSaga } from 'src/units/local/redux/saga';
 
 export function* RootSaga(): SagaIterator {
-  //   yield all([fork(IntlSaga)]);
+  yield all([fork(GeneralSaga)]);
   //   yield all([fork(DemoSaga)]);
   //   yield all([fork(LocalSaga)]);
 }

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { useReduxSelector } from "src/lib/hooks";
-import { LightDataFeed, StandardRow } from "../../../../data-feed";
+import { LightDataFeed, StandardRow } from "src/data-feed/index";
 import { EuState } from "../../components/data-gererator";
 import { MasterPage } from "../../components/master-page";
 import { GeneralActions } from "../../redux";
@@ -12,7 +12,7 @@ export const NoFilterPage: React.FC = () => {
   const dispatch = useDispatch();
   const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
-  const handleChange = useCallback(
+  const handleLoad = useCallback(
     (skip: number) => {
       dispatch(GeneralActions.loadStateFeedRequest({ skip }));
     },
@@ -26,7 +26,7 @@ export const NoFilterPage: React.FC = () => {
   return (
     <MasterPage>
       <LightDataFeed
-        all={all}
+        total={all}
         data={items}
         renderItem={(item: EuState) => {
           return (
@@ -43,7 +43,7 @@ export const NoFilterPage: React.FC = () => {
             </StandardRow>
           );
         }}
-        onChange={handleChange}
+        onLoad={handleLoad}
       />
     </MasterPage>
   );

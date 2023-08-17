@@ -193,38 +193,40 @@ var ButtonLink = function (_a) {
 };
 
 function LightDataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.all, all = _c === void 0 ? 0 : _c, step = _a.step, _d = _a.page, propPage = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, children = _a.children, renderPageItem = _a.renderPageItem;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onLoad = _a.onLoad, children = _a.children, renderPageItem = _a.renderPageItem;
     var loadRef = React.useRef(null);
-    var page = React.useMemo(function () {
-        return typeof propPage === "string" ? parseInt(propPage) : propPage;
-    }, [propPage]);
+    var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
-        onChange(data.length);
-    }, [data, onChange]);
+        onLoad(data.length);
+    }, [data, onLoad]);
     var pages = React.useMemo(function () {
-        return PageUtil.getPages(all, step, page);
-    }, [all, step, page]);
+        return PageUtil.getPages(total, pageItems, pageNumber);
+    }, [total, pageItems, pageNumber]);
     var loadMoreText = React.useMemo(function () {
         if (loading) {
             return texts.loading || "Loading";
         }
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
+    React.useEffect(function () {
+        onLoad(data === null || data === void 0 ? void 0 : data.length);
+    }, []);
     return (React.createElement("div", { className: classNames("df-feed", className) },
         children,
         React.createElement("div", { className: classNames("df-feed__data", dataClassName) }, data.map(function (item, i) {
             return React.createElement(React.Fragment, { key: i }, renderItem(item));
         })),
-        data.length < all && page === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
+        data.length < total && pageNumber === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
             React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, loadMoreText))) : null,
-        step && step < all && data.length <= step ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
-            return React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, page === p) : React.createElement("span", null, p ? p : "..."));
+        pageItems && pageItems < total && data.length <= pageItems ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
+            return React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, pageNumber === p) : React.createElement("span", null, p ? p : "..."));
         }))) : null));
 }
 
 var DataFeed = function (_a) {
-    var all = _a.all, data = _a.data, step = _a.step, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, renderPageLink = _a.renderPageLink, texts = _a.texts, onChange = _a.onChange;
+    var all = _a.total, data = _a.data, step = _a.pageItems, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, renderPageLink = _a.renderPageLink, texts = _a.texts, onChange = _a.onChange;
     var handleFeedChange = React.useCallback(function (skip) {
+        onChange === null || onChange === void 0 ? void 0 : onChange({ skip: skip });
     }, [onChange]);
     var renderPageItem = React.useCallback(function (page, current) {
         if (page === null) {
@@ -250,7 +252,7 @@ var DataFeed = function (_a) {
         var page = (initialValues || {}).page;
         return page;
     }, [initialValues]);
-    return (React.createElement(LightDataFeed, { all: all, data: data, step: step, page: currentPage, onChange: handleFeedChange, className: className, dataClassName: dataClassName, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts }, children));
+    return (React.createElement(LightDataFeed, { total: all, data: data, pageItems: step, currentPage: currentPage, onLoad: handleFeedChange, className: className, dataClassName: dataClassName, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts }, children));
 };
 
 var RowAttribute = function (_a) {

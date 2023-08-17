@@ -5,6 +5,6 @@ import { basicReduxAction } from "src/redux/utils/action";
 const { action } = basicReduxAction("general");
 
 export const GeneralActions = {
-  loadStateFeedRequest: action<any>("loadStateFeedRequest"),
+  loadStateFeedRequest: action<{ skip: number }>("loadStateFeedRequest"),
   loadStateFeedSuccess: action<Feed<EuState>>("loadStateFeedSuccess"),
 };

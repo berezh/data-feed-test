@@ -5,7 +5,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { DataGenerator } from "../components/data-gererator";
 import { GeneralActions } from "./actions";
 
-function* loadStateFeed({ payload }: PayloadAction): SagaIterator {
+function* loadStateFeed({ payload }: PayloadAction<{ skip: number }>): SagaIterator {
   try {
     const feed = DataGenerator.loadEuState(10, payload);
     yield put(GeneralActions.loadStateFeedSuccess(feed));
@@ -14,6 +14,6 @@ function* loadStateFeed({ payload }: PayloadAction): SagaIterator {
   }
 }
 
-export function* generalSaga(): SagaIterator {
+export function* GeneralSaga(): SagaIterator {
   yield debounce(200, GeneralActions.loadStateFeedRequest, loadStateFeed);
 }

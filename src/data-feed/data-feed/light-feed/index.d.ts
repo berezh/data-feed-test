@@ -5,11 +5,11 @@ export interface LightDataFeedProps<T> {
     /** Items data array */
     data?: T[];
     /** Total count of items */
-    all?: number;
+    total?: number;
     /** Count of items in one page */
-    step?: number;
+    pageItems?: number;
     /** Current Page */
-    page?: number | string;
+    currentPage?: number | string;
     renderItem: (item: T) => React.ReactNode;
     /** Root class name */
     className?: string;
@@ -20,11 +20,11 @@ export interface LightDataFeedProps<T> {
     filterLoading?: JSX.Element;
     /** Button to load new data */
     renderLoadMoreButton?: (loading: boolean) => JSX.Element;
-    onChange: (skip: number) => void;
+    onLoad: (skip: number) => void;
     children?: React.ReactNode;
     /** used with autoLoad property */
     containerRef?: React.RefObject<HTMLElement>;
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
 }
-export declare function LightDataFeed<T = any>({ data, all, step, page: propPage, renderItem, texts, className, dataClassName, loading, onChange, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;
+export declare function LightDataFeed<T = any>({ data, total, pageItems, currentPage, renderItem, texts, className, dataClassName, loading, onLoad, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;

@@ -47,6 +47,17 @@
   gap: 10px;
 }
 
+.df-button-link {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--dfButtonLinkColor);
+}
+.df-button-link--disabled {
+  cursor: default;
+  color: var(--dfButtonLinkDisabledColor);
+}
+
 .df-attribute {
   display: flex;
   flex-direction: row;
@@ -76,17 +87,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.df-button-link {
-  display: inline;
-  text-decoration: underline;
-  cursor: pointer;
-  color: var(--dfButtonLinkColor);
-}
-.df-button-link--disabled {
-  cursor: default;
-  color: var(--dfButtonLinkDisabledColor);
 }
 
 .df-standard-row {
