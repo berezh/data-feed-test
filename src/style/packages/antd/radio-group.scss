@@ -1,0 +1,9 @@
+.ant-radio-group {
+  .ant-radio-button-wrapper {
+    border: 1px solid var(--borderColor);
+
+    .ant-radio-button.ant-radio-button-checked + span {
+      color: var(--backgroundColor) !important;
+    }
+  }
+}

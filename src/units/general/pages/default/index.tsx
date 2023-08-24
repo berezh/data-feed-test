@@ -1,26 +1,18 @@
 import React, { useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { BaseFeedParams } from "src/lib/interfaces";
 import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
-import { DataFeed, DataFeedTexts, FeedFilterValues } from "src/data-feed/index";
+import { DataFeedTexts, LightDataFeed } from "src/data-feed/index";
 
 export const DefaultPage: React.FC = () => {
   const dispatch = useDispatch();
   const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
-  const handleChange = useCallback((options: BaseFeedParams) => {
-    dispatch(GeneralActions.loadStateFeedRequest(options));
-  }, []);
-
-  const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
-    return {
-      direction: "desc",
-      order: "population",
-    };
+  const handleChange = useCallback((skip: number) => {
+    dispatch(GeneralActions.loadStateFeedRequest({ skip }));
   }, []);
 
   const texts = useMemo<Partial<DataFeedTexts>>(() => {
@@ -31,16 +23,7 @@ export const DefaultPage: React.FC = () => {
 
   return (
     <MasterPage>
-      <DataFeed
-        all={all}
-        data={items}
-        renderItem={FeedUi.renderItem}
-        sortOptions={FeedUi.sortOptions}
-        initialValues={initialValues}
-        onChange={handleChange}
-        initialLoad={true}
-        texts={texts}
-      ></DataFeed>
+      <LightDataFeed total={all} data={items} renderItem={FeedUi.renderItem} onLoad={handleChange} texts={texts} />
     </MasterPage>
   );
 };

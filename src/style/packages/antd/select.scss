@@ -1,0 +1,17 @@
+.ant-select {
+  &.ant-select-focused {
+    box-shadow: none;
+  }
+
+  &-selector {
+    border-color: var(--borderColor) !important;
+  }
+}
+
+.ant-select-item {
+  &.ant-select-item-option-selected {
+    .ant-select-item-option-content {
+      color: var(--backgroundColor) !important;
+    }
+  }
+}

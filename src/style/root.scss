@@ -1,0 +1,26 @@
+@import "./font";
+@import "./packages/index";
+@import "~estyle/index";
+
+:root {
+  --coinIconColor: black;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color);
+  font-family: var(--fontFamily), Verdana, Geneva, Tahoma, sans-serif;
+  background-color: var(--backgroundColor);
+  scroll-behavior: smooth;
+}
+
+@include scrollbar(8px, 0, var(--scrollTrackColor), var(--scrollThumbColor), var(--scrollThumbHoverColor));
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+}
