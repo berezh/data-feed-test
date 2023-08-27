@@ -12,3 +12,7 @@ export interface InnerFeedFilterValues {
     sort: FeedSortValue;
     [key: string]: any;
 }
+export interface BasicFeedParams {
+    skip: number;
+    [key: string]: any;
+}

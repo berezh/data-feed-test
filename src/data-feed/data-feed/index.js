@@ -4,30 +4,6 @@
 var React = require('react');
 var classNames = require('classnames');
 
-var SortUtil = /** @class */ (function () {
-    function SortUtil() {
-    }
-    SortUtil.parseValue = function (value) {
-        var splits = (value || "").split(this.separator);
-        var mode = "asc";
-        if (splits.length > 1) {
-            mode = splits[1] === "asc" ? "asc" : "desc";
-        }
-        return splits.length
-            ? {
-                name: splits.length ? splits[0] : "",
-                mode: mode,
-            }
-            : undefined;
-    };
-    SortUtil.toValue = function (_a) {
-        var name = _a.name, mode = _a.mode;
-        return "".concat(name || "").concat(this.separator).concat(mode);
-    };
-    SortUtil.separator = "|";
-    return SortUtil;
-}());
-
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -77,6 +53,30 @@ function __spreadArray(to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 }
+
+var SortUtil = /** @class */ (function () {
+    function SortUtil() {
+    }
+    SortUtil.parseValue = function (value) {
+        var splits = (value || "").split(this.separator);
+        var mode = "asc";
+        if (splits.length > 1) {
+            mode = splits[1] === "asc" ? "asc" : "desc";
+        }
+        return splits.length
+            ? {
+                name: splits.length ? splits[0] : "",
+                mode: mode,
+            }
+            : undefined;
+    };
+    SortUtil.toValue = function (_a) {
+        var name = _a.name, mode = _a.mode;
+        return "".concat(name || "").concat(this.separator).concat(mode);
+    };
+    SortUtil.separator = "|";
+    return SortUtil;
+}());
 
 var FilterUtil = {
     toInner: function (data) {
@@ -192,13 +192,15 @@ var ButtonLink = function (_a) {
             _b)), onClick: handleClick }, children));
 };
 
-function LightDataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderItem = _a.renderItem, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onLoad = _a.onLoad, children = _a.children, renderPageItem = _a.renderPageItem;
+function DataFeed(_a) {
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams;
     var loadRef = React.useRef(null);
+    var _g = React.useState(initParams || { skip: 10 }), params = _g[0], setParams = _g[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
-        onLoad(data.length);
-    }, [data, onLoad]);
+        console.log("df: handleLoad", params, data);
+        setParams(__assign(__assign({}, params), { skip: data.length }));
+    }, [params, data]);
     var pages = React.useMemo(function () {
         return PageUtil.getPages(total, pageItems, pageNumber);
     }, [total, pageItems, pageNumber]);
@@ -209,12 +211,17 @@ function LightDataFeed(_a) {
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
     React.useEffect(function () {
-        onLoad(data === null || data === void 0 ? void 0 : data.length);
-    }, []);
+        console.log("df: change", params);
+        onChange(params);
+    }, [params]);
+    React.useEffect(function () {
+        console.log("df: init", data);
+    }, [data]);
+    var filterChangeHandler = React.useCallback(function () { }, []);
     return (React.createElement("div", { className: classNames("df-feed", className) },
-        children,
+        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(initParams || { skip: 10 }, filterChangeHandler)),
         React.createElement("div", { className: classNames("df-feed__data", dataClassName) }, data.map(function (item, i) {
-            return React.createElement(React.Fragment, { key: i }, renderItem(item));
+            return React.createElement(React.Fragment, { key: i }, renderRow(item));
         })),
         data.length < total && pageNumber === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
             React.createElement(ButtonLink, { onClick: handleLoad, disabled: loading }, loadMoreText))) : null,
@@ -222,38 +229,6 @@ function LightDataFeed(_a) {
             return React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, pageNumber === p) : React.createElement("span", null, p ? p : "..."));
         }))) : null));
 }
-
-var DataFeed = function (_a) {
-    var all = _a.total, data = _a.data, step = _a.pageItems, initialValues = _a.initialValues, children = _a.children, className = _a.className, dataClassName = _a.dataClassName, renderItem = _a.renderItem, renderRow = _a.renderRow, renderPageLink = _a.renderPageLink, texts = _a.texts, onChange = _a.onChange;
-    var handleFeedChange = React.useCallback(function (skip) {
-        onChange === null || onChange === void 0 ? void 0 : onChange({ skip: skip });
-    }, [onChange]);
-    var renderPageItem = React.useCallback(function (page, current) {
-        if (page === null) {
-            return React.createElement("span", null, "...");
-        }
-        else if (current) {
-            return React.createElement("b", null, page);
-        }
-        else {
-            return renderPageLink ? renderPageLink(page) : React.createElement("b", null, page);
-        }
-    }, [renderPageLink]);
-    var handleRenderItem = React.useCallback(function (item) {
-        if (renderItem) {
-            return renderItem(item);
-        }
-        else if (renderRow) {
-            return renderRow(item);
-        }
-        return "";
-    }, [renderItem, renderRow]);
-    var currentPage = React.useMemo(function () {
-        var page = (initialValues || {}).page;
-        return page;
-    }, [initialValues]);
-    return (React.createElement(LightDataFeed, { total: all, data: data, pageItems: step, currentPage: currentPage, onLoad: handleFeedChange, className: className, dataClassName: dataClassName, renderItem: handleRenderItem, renderPageItem: renderPageItem, texts: texts }, children));
-};
 
 var RowAttribute = function (_a) {
     var label = _a.label, content = _a.content, icon = _a.icon, width = _a.width, maxWidth = _a.maxWidth, className = _a.className;
@@ -309,7 +284,6 @@ var _a;
 exports.DataFeed = DataFeed;
 exports.FeedArrayUtil = FeedArrayUtil;
 exports.FilterUtil = FilterUtil;
-exports.LightDataFeed = LightDataFeed;
 exports.PageUtil = PageUtil;
 exports.RowAttribute = RowAttribute;
 exports.SortUtil = SortUtil;

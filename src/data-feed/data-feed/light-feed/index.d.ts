@@ -1,7 +1,8 @@
 import React from "react";
 import "./index.scss";
 import { DataFeedTexts } from "../texts";
-export interface LightDataFeedProps<T> {
+import { BasicFeedParams } from "../interfaces";
+export interface DataFeedProps<T> {
     /** Items data array */
     data?: T[];
     /** Total count of items */
@@ -10,7 +11,8 @@ export interface LightDataFeedProps<T> {
     pageItems?: number;
     /** Current Page */
     currentPage?: number | string;
-    renderItem: (item: T) => React.ReactNode;
+    renderRow: (item: T) => React.ReactNode;
+    renderFilter?: (initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => React.ReactNode;
     /** Root class name */
     className?: string;
     dataClassName?: string;
@@ -20,11 +22,11 @@ export interface LightDataFeedProps<T> {
     filterLoading?: JSX.Element;
     /** Button to load new data */
     renderLoadMoreButton?: (loading: boolean) => JSX.Element;
-    onLoad: (skip: number) => void;
-    children?: React.ReactNode;
+    onChange: (params: BasicFeedParams) => void;
     /** used with autoLoad property */
     containerRef?: React.RefObject<HTMLElement>;
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
+    initParams?: BasicFeedParams;
 }
-export declare function LightDataFeed<T = any>({ data, total, pageItems, currentPage, renderItem, texts, className, dataClassName, loading, onLoad, children, renderPageItem, }: LightDataFeedProps<T>): JSX.Element;
+export declare function DataFeed<T = any>({ data, total, pageItems, currentPage, renderRow, renderFilter, texts, className, dataClassName, loading, onChange, renderPageItem, initParams, }: DataFeedProps<T>): JSX.Element;

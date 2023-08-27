@@ -22,7 +22,7 @@ export class FeedUi {
     },
   ];
 
-  public static renderItem(item: EuState): React.ReactElement {
+  public static renderRow(item: EuState): React.ReactElement {
     return (
       <StandardRow
         topRight={moment(item.accession).fromNow()}
