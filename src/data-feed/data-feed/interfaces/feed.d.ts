@@ -13,6 +13,6 @@ export interface InnerFeedFilterValues {
     [key: string]: any;
 }
 export interface BasicFeedParams {
-    skip: number;
+    skip?: number;
     [key: string]: any;
 }

@@ -6,6 +6,7 @@ import { MasterPage } from "../../components/master-page";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
 import { DataFeedTexts, DataFeed, BasicFeedParams } from "src/data-feed/index";
+import { DefaultFilterForm } from "./filter";
 
 export const DefaultPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,13 @@ export const DefaultPage: React.FC = () => {
     };
   }, []);
 
+  const filterHandler = useCallback((initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => {
+    return <DefaultFilterForm initialValues={initParams} onChange={onChange} />;
+  }, []);
+
   return (
     <MasterPage>
-      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={texts} />
+      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={texts} renderFilter={filterHandler} />
     </MasterPage>
   );
 };

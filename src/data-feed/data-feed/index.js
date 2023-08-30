@@ -195,12 +195,13 @@ var ButtonLink = function (_a) {
 function DataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams;
     var loadRef = React.useRef(null);
-    var _g = React.useState(initParams || { skip: 10 }), params = _g[0], setParams = _g[1];
+    var _g = initParams || {}, initSkip = _g.skip, restParams = __rest(_g, ["skip"]);
+    var _h = React.useState(restParams || {}), params = _h[0], setParams = _h[1];
+    var _j = React.useState(initSkip || 0), skip = _j[0], setSkip = _j[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
-        console.log("df: handleLoad", params, data);
-        setParams(__assign(__assign({}, params), { skip: data.length }));
-    }, [params, data]);
+        setSkip(data.length);
+    }, [data]);
     var pages = React.useMemo(function () {
         return PageUtil.getPages(total, pageItems, pageNumber);
     }, [total, pageItems, pageNumber]);
@@ -211,15 +212,15 @@ function DataFeed(_a) {
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
     React.useEffect(function () {
-        console.log("df: change", params);
-        onChange(params);
-    }, [params]);
-    React.useEffect(function () {
-        console.log("df: init", data);
-    }, [data]);
-    var filterChangeHandler = React.useCallback(function () { }, []);
+        var changeParams = __assign(__assign({}, params), { skip: skip });
+        console.log("change params", changeParams);
+        onChange(changeParams);
+    }, [params, skip]);
+    var filterChangeHandler = React.useCallback(function (newParams) {
+        setParams(newParams);
+    }, [setParams]);
     return (React.createElement("div", { className: classNames("df-feed", className) },
-        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(initParams || { skip: 10 }, filterChangeHandler)),
+        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(params, filterChangeHandler)),
         React.createElement("div", { className: classNames("df-feed__data", dataClassName) }, data.map(function (item, i) {
             return React.createElement(React.Fragment, { key: i }, renderRow(item));
         })),

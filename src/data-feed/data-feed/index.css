@@ -1,3 +1,63 @@
+:root {
+  --dfColor: #333;
+  --dfBorderColor: #e8e4eb;
+  --dfBorderWidth: 1px;
+  --dfFontSize: inherit;
+  --dfFilterFontSize: inherit;
+  --dbFilterBackgroundColor: white;
+  --dbFilterPadding: 15px;
+  --dbFilterSpacing: 12px;
+  --dbSortFontSize: 12px;
+  --dbControlSpacing: 5px;
+  --dfControlBorderColor: #bebebe;
+  --dfControlBorderWidth: 1px;
+  --dfControlHeight: 26px;
+  --dfControlPadding: 5px;
+  --dfButtonLinkColor: rgb(42 41 59);
+  --dfButtonLinkDisabledColor: rgb(116 116 129);
+  --dfRowSpacing: 10px;
+  --dfRowPadding: 15px;
+  --dfRowHorizontalPadding: 0;
+  --dfRowBackgroundColorHover: transparent;
+  --dfRowTopLeftFontSize: 12px;
+  --dfRowContentFontSize: inherit;
+  --dfRowBorderBottomWidth: 1px;
+  --dfRowBorderBottomColor: #e9e9e9;
+  --dfRowActionFontSize: inherit;
+  --dfAttributeColor: inherit;
+  --dfAttributeFontSize: 12px;
+  --dfAttributeLabelFontSize: 10px;
+  --dfAttributeLabelOpacity: inherit;
+  --dfAttributeSpacing: 10px;
+}
+
+.df-feed {
+  color: var(--dfColor);
+  font-size: var(--dfFontSize);
+}
+.df-feed__load {
+  text-align: center;
+  padding: 10px 0;
+}
+.df-feed__page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.df-button-link {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--dfButtonLinkColor);
+}
+.df-button-link--disabled {
+  cursor: default;
+  color: var(--dfButtonLinkDisabledColor);
+}
+
 .df-standard-row {
   padding: var(--dfRowPadding) var(--dfRowHorizontalPadding);
   display: flex;
@@ -89,66 +149,6 @@
   position: absolute;
   top: 0;
   right: 0;
-}
-
-:root {
-  --dfColor: #333;
-  --dfBorderColor: #e8e4eb;
-  --dfBorderWidth: 1px;
-  --dfFontSize: inherit;
-  --dfFilterFontSize: inherit;
-  --dbFilterBackgroundColor: white;
-  --dbFilterPadding: 15px;
-  --dbFilterSpacing: 12px;
-  --dbSortFontSize: 12px;
-  --dbControlSpacing: 5px;
-  --dfControlBorderColor: #bebebe;
-  --dfControlBorderWidth: 1px;
-  --dfControlHeight: 26px;
-  --dfControlPadding: 5px;
-  --dfButtonLinkColor: rgb(42 41 59);
-  --dfButtonLinkDisabledColor: rgb(116 116 129);
-  --dfRowSpacing: 10px;
-  --dfRowPadding: 15px;
-  --dfRowHorizontalPadding: 0;
-  --dfRowBackgroundColorHover: transparent;
-  --dfRowTopLeftFontSize: 12px;
-  --dfRowContentFontSize: inherit;
-  --dfRowBorderBottomWidth: 1px;
-  --dfRowBorderBottomColor: #e9e9e9;
-  --dfRowActionFontSize: inherit;
-  --dfAttributeColor: inherit;
-  --dfAttributeFontSize: 12px;
-  --dfAttributeLabelFontSize: 10px;
-  --dfAttributeLabelOpacity: inherit;
-  --dfAttributeSpacing: 10px;
-}
-
-.df-feed {
-  color: var(--dfColor);
-  font-size: var(--dfFontSize);
-}
-.df-feed__load {
-  text-align: center;
-  padding: 10px 0;
-}
-.df-feed__page {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 10px 0;
-  gap: 10px;
-}
-
-.df-button-link {
-  display: inline;
-  text-decoration: underline;
-  cursor: pointer;
-  color: var(--dfButtonLinkColor);
-}
-.df-button-link--disabled {
-  cursor: default;
-  color: var(--dfButtonLinkDisabledColor);
 }
 
 .df-attribute {

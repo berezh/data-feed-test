@@ -1,0 +1,30 @@
+@import "~src/style/base";
+@import "~estyle/index";
+
+.root {
+  :global {
+    .ant-form-item {
+      margin-bottom: 10px !important;
+    }
+  }
+}
+
+.half {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+
+  @include children {
+    flex: 1;
+  }
+}
+
+.flex {
+  flex: 1;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 0;
+}
