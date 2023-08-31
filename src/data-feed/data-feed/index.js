@@ -193,11 +193,11 @@ var ButtonLink = function (_a) {
 };
 
 function DataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 300 : _g;
     var loadRef = React.useRef(null);
-    var _g = initParams || {}, initSkip = _g.skip, restParams = __rest(_g, ["skip"]);
-    var _h = React.useState(restParams || {}), params = _h[0], setParams = _h[1];
-    var _j = React.useState(initSkip || 0), skip = _j[0], setSkip = _j[1];
+    var _h = initParams || {}, initSkip = _h.skip, restParams = __rest(_h, ["skip"]);
+    var _j = React.useState(restParams || {}), params = _j[0], setParams = _j[1];
+    var _k = React.useState(initSkip || 0), skip = _k[0], setSkip = _k[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
         setSkip(data.length);
@@ -212,10 +212,13 @@ function DataFeed(_a) {
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
     React.useEffect(function () {
-        var changeParams = __assign(__assign({}, params), { skip: skip });
-        console.log("change params", changeParams);
-        onChange(changeParams);
-    }, [params, skip]);
+        var timer = setTimeout(function () {
+            var changeParams = __assign(__assign({}, params), { skip: skip });
+            console.info("df: change", changeParams);
+            onChange(changeParams);
+        }, changeDelay);
+        return function () { return clearTimeout(timer); };
+    }, [params, skip, changeDelay]);
     var filterChangeHandler = React.useCallback(function (newParams) {
         setParams(newParams);
     }, [setParams]);
@@ -282,7 +285,32 @@ var _a;
     _a);
 // export type DataFeedText = keyof DataFeedTexts;
 
+var DfSort = function (_a) {
+    var value = _a.value, options = _a.options, texts = _a.texts, onChange = _a.onChange;
+    var sortValue = React.useMemo(function () {
+        return value ? value : { mode: "asc", name: "" };
+    }, [value]);
+    var handleSort = React.useCallback(function (newName) {
+        var _a = value || {}, _b = _a.mode, mode = _b === void 0 ? "asc" : _b, name = _a.name;
+        var newValue = name === newName ? { name: name, mode: mode === "asc" ? "desc" : "asc" } : { name: newName, mode: mode };
+        onChange(newValue);
+    }, [sortValue, onChange, value]);
+    return (React.createElement(React.Fragment, null, options.length ? (React.createElement("div", { className: "df-sort__sort" },
+        React.createElement("div", { className: "df-sort__option" }, (texts === null || texts === void 0 ? void 0 : texts.sort) || "Sort: "),
+        React.createElement(React.Fragment, { key: "list" }, options.map(function (_a, i) {
+            var _b;
+            var label = _a.label, optionName = _a.name, icon = _a.icon;
+            var currentMode = optionName === sortValue.name ? sortValue.mode : undefined;
+            return (React.createElement("div", { key: i, className: classNames("df-sort__option", (_b = {},
+                    _b["df-sort__option--".concat(currentMode)] = !!currentMode,
+                    _b)), onClick: function () { return handleSort(optionName); } },
+                icon,
+                React.createElement("span", null, "".concat(label || optionName))));
+        })))) : null));
+};
+
 exports.DataFeed = DataFeed;
+exports.DfSort = DfSort;
 exports.FeedArrayUtil = FeedArrayUtil;
 exports.FilterUtil = FilterUtil;
 exports.PageUtil = PageUtil;

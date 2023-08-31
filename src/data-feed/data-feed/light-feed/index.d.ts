@@ -28,5 +28,6 @@ export interface DataFeedProps<T> {
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
     initParams?: BasicFeedParams;
+    changeDelay?: number;
 }
-export declare function DataFeed<T = any>({ data, total, pageItems, currentPage, renderRow, renderFilter, texts, className, dataClassName, loading, onChange, renderPageItem, initParams, }: DataFeedProps<T>): JSX.Element;
+export declare function DataFeed<T = any>({ data, total, pageItems, currentPage, renderRow, renderFilter, texts, className, dataClassName, loading, onChange, renderPageItem, initParams, changeDelay, }: DataFeedProps<T>): JSX.Element;
