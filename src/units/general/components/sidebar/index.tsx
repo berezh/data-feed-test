@@ -22,10 +22,6 @@ export const Sidebar: React.FC = () => {
         title: "Default",
       },
       {
-        path: AppUrls.blueprint,
-        title: "BluePrint",
-      },
-      {
         path: AppUrls.paging,
         title: "Paging",
       },

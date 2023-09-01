@@ -4,7 +4,7 @@ import { FeedSortOption, FeedSortValue } from "../interfaces";
 import { DataFeedTexts } from "../texts";
 interface Props {
     value?: FeedSortValue;
-    onChange: (newValue?: FeedSortValue) => void;
+    onChange?: (newValue?: FeedSortValue) => void;
     options: FeedSortOption[];
     texts?: Partial<DataFeedTexts>;
 }

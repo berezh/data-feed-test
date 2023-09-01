@@ -36,6 +36,7 @@ export const AppForm: React.FC<Props> = ({ form: propForm, children, className, 
 
   const handleValuesChange = useCallback(
     (changedValues: any, values: any) => {
+      // console.log("values changed", values);
       if (onValuesChange) {
         onValuesChange(changedValues, values);
       }
@@ -47,6 +48,7 @@ export const AppForm: React.FC<Props> = ({ form: propForm, children, className, 
 
   const handleFieldsChange = useCallback(
     (changedFields: FieldData[], allFields: FieldData[]) => {
+      // console.log("fields changed", allFields);
       onFieldsChange?.(changedFields, allFields);
 
       if (onChange) {

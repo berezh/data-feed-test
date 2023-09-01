@@ -4,7 +4,7 @@ import numeral from "numeral";
 import { Icon } from "@blueprintjs/core";
 
 import { EuState } from "../data-gererator";
-import { StandardRow, FeedSortOption } from "../../../../data-feed";
+import { FeedSortOption, StandardRow } from "src/data-feed";
 
 export class FeedUi {
   public static sortOptions: FeedSortOption[] = [

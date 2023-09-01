@@ -38,9 +38,8 @@ const euStates: EuState[] = EuStates.map<EuState>(x => {
 });
 
 export const DataGenerator = {
-  loadEuState: (count: number, options: FeedFilterValues): Feed<EuState> => {
-    console.log("filter", options);
-    const { skip, page, name, search, isEuro, language, currency, capital, order, direction, population1M, population10M, extraParam } = options;
+  loadEuState: (count: number, params: FeedFilterValues): Feed<EuState> => {
+    const { skip, page, name, search, isEuro, language, currency, capital, order, direction, population1M, population10M, extraParam } = params;
 
     // console.log('load', count, options);
 
@@ -90,7 +89,7 @@ export const DataGenerator = {
     //     }),
     // ];
     const all = filterItems.length;
-    console.info("data-generator", extraParam, options);
+    console.info("data-generator", extraParam, params);
 
     let items: EuState[] = [];
 

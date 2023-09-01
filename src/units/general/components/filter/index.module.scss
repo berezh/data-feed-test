@@ -2,25 +2,15 @@
 @import "~estyle/index";
 
 .root {
-  :global {
-    .ant-form-item {
-      margin-bottom: 10px !important;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.half {
+.action {
   display: flex;
   flex-direction: row;
-  gap: 15px;
-
-  @include children {
-    flex: 1;
-  }
-}
-
-.flex {
-  flex: 1;
+  justify-content: space-between;
 }
 
 .total {

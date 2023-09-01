@@ -203,9 +203,10 @@ function useDebouncedEffect(delay, callback, deps) {
 }
 
 function DataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 300 : _g;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 500 : _g, _h = _a.initialLoad, initialLoad = _h === void 0 ? true : _h;
     var loadRef = React.useRef(null);
-    var _h = React.useState(initParams || {}), allParams = _h[0], setAllParams = _h[1];
+    var _j = React.useState(initialLoad), init = _j[0], setInit = _j[1];
+    var _k = React.useState(initParams || {}), allParams = _k[0], setAllParams = _k[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
         setAllParams(__assign(__assign({}, allParams), { skip: data.length }));
@@ -220,9 +221,15 @@ function DataFeed(_a) {
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
     useDebouncedEffect(changeDelay, function () {
-        var skip = (allParams === null || allParams === void 0 ? void 0 : allParams.skip) || 0;
-        onChange(__assign(__assign({}, allParams), { skip: skip }));
-    }, [allParams]);
+        console.log("df: change:", init, allParams);
+        if (init) {
+            var skip = (allParams === null || allParams === void 0 ? void 0 : allParams.skip) || 0;
+            onChange(__assign(__assign({}, allParams), { skip: skip }));
+        }
+        else {
+            setInit(true);
+        }
+    }, [allParams, init]);
     var filterChangeHandler = React.useCallback(function (newParams) {
         setAllParams(__assign(__assign({}, newParams), { skip: 0 }));
     }, [setAllParams]);
@@ -252,7 +259,7 @@ function classNames() {
         else if (typeof name === "object") {
             var keys = Object.keys(name);
             var subNames = keys.filter(function (key) { return !!name[key]; });
-            return classNames(subNames);
+            return subNames.join(" ");
         }
         return (_a = name) === null || _a === void 0 ? void 0 : _a.toString();
     })
@@ -318,7 +325,7 @@ var DfSort = function (_a) {
     var handleSort = React.useCallback(function (newName) {
         var _a = value || {}, _b = _a.mode, mode = _b === void 0 ? "asc" : _b, name = _a.name;
         var newValue = name === newName ? { name: name, mode: mode === "asc" ? "desc" : "asc" } : { name: newName, mode: mode };
-        onChange(newValue);
+        onChange === null || onChange === void 0 ? void 0 : onChange(newValue);
     }, [sortValue, onChange, value]);
     return (React.createElement(React.Fragment, null, options.length ? (React.createElement("div", { className: "df-sort__sort" },
         React.createElement("div", { className: "df-sort__option" }, (texts === null || texts === void 0 ? void 0 : texts.sort) || "Sort: "),
