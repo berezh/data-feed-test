@@ -1,5 +1,5 @@
 export * from "./interfaces";
-export * from "./light-feed";
+export * from "./instance";
 export * from "./rows";
 export * from "./utils";
 export * from "./texts";

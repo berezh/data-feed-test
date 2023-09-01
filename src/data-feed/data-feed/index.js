@@ -2,7 +2,7 @@
 'use strict';
 
 var React = require('react');
-var classNames = require('classnames');
+var classNames$1 = require('classnames');
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -187,21 +187,29 @@ var ButtonLink = function (_a) {
             onClick();
         }
     }, [onClick, disabled]);
-    return (React.createElement("div", { className: classNames("df-button-link", (_b = {},
+    return (React.createElement("div", { className: classNames$1("df-button-link", (_b = {},
             _b["df-button-link--disabled"] = disabled,
             _b)), onClick: handleClick }, children));
 };
 
+function useDebouncedEffect(delay, callback, deps) {
+    if (deps === void 0) { deps = []; }
+    return React.useEffect(function () {
+        var timer = setTimeout(function () {
+            callback();
+        }, delay);
+        return function () { return clearTimeout(timer); };
+    }, __spreadArray([delay], deps, true));
+}
+
 function DataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 300 : _g;
     var loadRef = React.useRef(null);
-    var _h = initParams || {}, initSkip = _h.skip, restParams = __rest(_h, ["skip"]);
-    var _j = React.useState(restParams || {}), params = _j[0], setParams = _j[1];
-    var _k = React.useState(initSkip || 0), skip = _k[0], setSkip = _k[1];
+    var _h = React.useState(initParams || {}), allParams = _h[0], setAllParams = _h[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
-        setSkip(data.length);
-    }, [data]);
+        setAllParams(__assign(__assign({}, allParams), { skip: data.length }));
+    }, [allParams, data]);
     var pages = React.useMemo(function () {
         return PageUtil.getPages(total, pageItems, pageNumber);
     }, [total, pageItems, pageNumber]);
@@ -211,20 +219,16 @@ function DataFeed(_a) {
         }
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
-    React.useEffect(function () {
-        var timer = setTimeout(function () {
-            var changeParams = __assign(__assign({}, params), { skip: skip });
-            console.info("df: change", changeParams);
-            onChange(changeParams);
-        }, changeDelay);
-        return function () { return clearTimeout(timer); };
-    }, [params, skip, changeDelay]);
+    useDebouncedEffect(changeDelay, function () {
+        var skip = (allParams === null || allParams === void 0 ? void 0 : allParams.skip) || 0;
+        onChange(__assign(__assign({}, allParams), { skip: skip }));
+    }, [allParams]);
     var filterChangeHandler = React.useCallback(function (newParams) {
-        setParams(newParams);
-    }, [setParams]);
-    return (React.createElement("div", { className: classNames("df-feed", className) },
-        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(params, filterChangeHandler)),
-        React.createElement("div", { className: classNames("df-feed__data", dataClassName) }, data.map(function (item, i) {
+        setAllParams(__assign(__assign({}, newParams), { skip: 0 }));
+    }, [setAllParams]);
+    return (React.createElement("div", { className: classNames$1("df-feed", className) },
+        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(allParams, filterChangeHandler)),
+        React.createElement("div", { className: classNames$1("df-feed__data", dataClassName) }, data.map(function (item, i) {
             return React.createElement(React.Fragment, { key: i }, renderRow(item));
         })),
         data.length < total && pageNumber === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
@@ -232,6 +236,27 @@ function DataFeed(_a) {
         pageItems && pageItems < total && data.length <= pageItems ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
             return React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, pageNumber === p) : React.createElement("span", null, p ? p : "..."));
         }))) : null));
+}
+
+function classNames() {
+    var names = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        names[_i] = arguments[_i];
+    }
+    return names
+        .map(function (name) {
+        var _a;
+        if (typeof name === "string") {
+            return name;
+        }
+        else if (typeof name === "object") {
+            var keys = Object.keys(name);
+            var subNames = keys.filter(function (key) { return !!name[key]; });
+            return classNames(subNames);
+        }
+        return (_a = name) === null || _a === void 0 ? void 0 : _a.toString();
+    })
+        .join(" ");
 }
 
 var RowAttribute = function (_a) {
