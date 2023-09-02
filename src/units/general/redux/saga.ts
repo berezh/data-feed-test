@@ -1,5 +1,5 @@
 import { SagaIterator } from "redux-saga";
-import { put, debounce } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 import { DataGenerator } from "../components/data-gererator";
@@ -15,5 +15,5 @@ function* loadStateFeed({ payload }: PayloadAction<{ skip: number }>): SagaItera
 }
 
 export function* GeneralSaga(): SagaIterator {
-  yield debounce(200, GeneralActions.loadStateFeedRequest, loadStateFeed);
+  yield takeEvery(GeneralActions.loadStateFeedRequest, loadStateFeed);
 }

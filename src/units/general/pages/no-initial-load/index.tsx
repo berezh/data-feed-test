@@ -35,7 +35,7 @@ export const NoInitialLoadPage: React.FC = () => {
 
   return (
     <MasterPage>
-      <DataFeed initialLoad={false} total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={texts} renderFilter={filterHandler} />
+      {items?.length && <DataFeed initialLoad={false} total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={texts} renderFilter={filterHandler} />}
     </MasterPage>
   );
 };

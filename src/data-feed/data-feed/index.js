@@ -202,15 +202,35 @@ function useDebouncedEffect(delay, callback, deps) {
     }, __spreadArray([delay], deps, true));
 }
 
+// Our reducer function that uses a switch statement to handle our actions
+var dfReducer = function (state, action) {
+    var type = action.type, payload = action.payload;
+    switch (type) {
+        case "Init":
+            return __assign(__assign({}, state), { init: true });
+        case "Skip":
+            return __assign(__assign({}, state), { params: __assign(__assign({}, state.params), { skip: payload }) });
+        case "Filter":
+            var init = state.init;
+            if (init) {
+                var params = __assign(__assign(__assign({}, state.filterParams), payload), { skip: 0 });
+                return __assign(__assign({}, state), { params: params, filterParams: params });
+            }
+            else {
+                return __assign(__assign({}, state), { filterParams: __assign(__assign({}, payload), { skip: 0 }) });
+            }
+        default:
+            return state;
+    }
+};
 function DataFeed(_a) {
-    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 500 : _g, _h = _a.initialLoad, initialLoad = _h === void 0 ? true : _h;
+    var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 300 : _g, _h = _a.initialLoad, initialLoad = _h === void 0 ? true : _h;
     var loadRef = React.useRef(null);
-    var _j = React.useState(initialLoad), init = _j[0], setInit = _j[1];
-    var _k = React.useState(initParams || {}), allParams = _k[0], setAllParams = _k[1];
+    var _j = React.useReducer(dfReducer, { init: initialLoad, filterParams: initParams }), state = _j[0], dispatch = _j[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
-        setAllParams(__assign(__assign({}, allParams), { skip: data.length }));
-    }, [allParams, data]);
+        dispatch({ type: "Skip", payload: data.length });
+    }, [dispatch, data]);
     var pages = React.useMemo(function () {
         return PageUtil.getPages(total, pageItems, pageNumber);
     }, [total, pageItems, pageNumber]);
@@ -221,20 +241,18 @@ function DataFeed(_a) {
         return (texts === null || texts === void 0 ? void 0 : texts.loadMore) || "Load more";
     }, [texts, loading]);
     useDebouncedEffect(changeDelay, function () {
-        console.log("df: change:", init, allParams);
-        if (init) {
-            var skip = (allParams === null || allParams === void 0 ? void 0 : allParams.skip) || 0;
-            onChange(__assign(__assign({}, allParams), { skip: skip }));
+        if (state.init) {
+            onChange(__assign({}, state.params));
         }
         else {
-            setInit(true);
+            dispatch({ type: "Init", payload: null });
         }
-    }, [allParams, init]);
+    }, [state.params]);
     var filterChangeHandler = React.useCallback(function (newParams) {
-        setAllParams(__assign(__assign({}, newParams), { skip: 0 }));
-    }, [setAllParams]);
+        dispatch({ type: "Filter", payload: newParams });
+    }, [dispatch]);
     return (React.createElement("div", { className: classNames$1("df-feed", className) },
-        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(allParams, filterChangeHandler)),
+        React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(state.filterParams, filterChangeHandler)),
         React.createElement("div", { className: classNames$1("df-feed__data", dataClassName) }, data.map(function (item, i) {
             return React.createElement(React.Fragment, { key: i }, renderRow(item));
         })),

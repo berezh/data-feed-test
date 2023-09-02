@@ -47,6 +47,31 @@
   gap: 10px;
 }
 
+.df-sort__sort {
+  display: flex;
+  align-items: center;
+}
+.df-sort__option {
+  font-size: 12px;
+  display: flex;
+  margin: 0 8px 0 0;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  padding: 1px 0;
+  gap: 3px;
+}
+.df-sort__option--asc {
+  font-weight: bold;
+  border-top-color: var(--dfFontColor);
+}
+.df-sort__option--desc {
+  font-weight: bold;
+  border-bottom-color: var(--dfFontColor);
+}
+
 .df-button-link {
   display: inline;
   text-decoration: underline;
@@ -149,31 +174,6 @@
   position: absolute;
   top: 0;
   right: 0;
-}
-
-.df-sort__sort {
-  display: flex;
-  align-items: center;
-}
-.df-sort__option {
-  font-size: 12px;
-  display: flex;
-  margin: 0 8px 0 0;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-  padding: 1px 0;
-  gap: 3px;
-}
-.df-sort__option--asc {
-  font-weight: bold;
-  border-top-color: var(--dfFontColor);
-}
-.df-sort__option--desc {
-  font-weight: bold;
-  border-bottom-color: var(--dfFontColor);
 }
 
 .df-attribute {

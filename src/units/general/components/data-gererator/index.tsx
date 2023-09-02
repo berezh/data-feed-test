@@ -89,7 +89,6 @@ export const DataGenerator = {
     //     }),
     // ];
     const all = filterItems.length;
-    console.info("data-generator", extraParam, params);
 
     let items: EuState[] = [];
 
