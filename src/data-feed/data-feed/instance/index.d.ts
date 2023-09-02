@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 import { DataFeedTexts } from "../texts";
 import { BasicFeedParams } from "../interfaces";
-export interface DataFeedProps<T> {
+export interface DataFeedProps<T = any> {
     /** Items data array */
     data?: T[];
     /** Total count of items */

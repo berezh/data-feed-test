@@ -1,7 +1,7 @@
 import moment from "moment";
 import { orderBy } from "lodash";
-import { FeedFilterValues } from "data-feed";
 
+import { BasicFeedParams } from "src/data-feed";
 import { EuStates } from "./data/eu-states";
 import { Feed } from "../../../../lib/interfaces";
 
@@ -38,7 +38,7 @@ const euStates: EuState[] = EuStates.map<EuState>(x => {
 });
 
 export const DataGenerator = {
-  loadEuState: (count: number, params: FeedFilterValues): Feed<EuState> => {
+  loadEuState: (count: number, params: BasicFeedParams): Feed<EuState> => {
     const { skip, page, name, search, isEuro, language, currency, capital, order, direction, population1M, population10M, extraParam } = params;
 
     // console.log("load", params);

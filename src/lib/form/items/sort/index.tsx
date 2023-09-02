@@ -1,8 +1,7 @@
 import React from "react";
-import { FeedSortOption } from "data-feed";
 
+import { FeedSortOption, DfSort } from "src/data-feed";
 import { FormLine, FormLineProps } from "../line";
-import { DfSort } from "src/data-feed";
 
 interface Props extends FormLineProps {
   options: FeedSortOption[];

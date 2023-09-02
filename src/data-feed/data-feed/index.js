@@ -232,7 +232,7 @@ function DataFeed(_a) {
         else {
             dispatch({ type: "Init", payload: null });
         }
-    }, [onChange, state.params]);
+    }, [dispatch, onChange, state.params]);
     var filterChangeHandler = React.useCallback(function (newParams) {
         dispatch({ type: "Filter", payload: newParams });
     }, [dispatch]);
@@ -311,17 +311,13 @@ var StandardRow = function (_a) {
 
 var _a;
 (_a = {},
-    _a["sort"] = "",
-    _a["total"] = "",
-    _a["clean"] = "",
-    _a["search"] = "",
     _a["loadMore"] = "",
     _a["loading"] = "",
     _a);
 // export type DataFeedText = keyof DataFeedTexts;
 
 var DfSort = function (_a) {
-    var value = _a.value, options = _a.options, texts = _a.texts, onChange = _a.onChange;
+    var value = _a.value, options = _a.options, label = _a.label, onChange = _a.onChange;
     var sortValue = React.useMemo(function () {
         return value ? value : { mode: "asc", name: "" };
     }, [value]);
@@ -331,7 +327,7 @@ var DfSort = function (_a) {
         onChange === null || onChange === void 0 ? void 0 : onChange(newValue);
     }, [sortValue, onChange, value]);
     return (React.createElement(React.Fragment, null, options.length ? (React.createElement("div", { className: "df-sort__sort" },
-        React.createElement("div", { className: "df-sort__option" }, (texts === null || texts === void 0 ? void 0 : texts.sort) || "Sort: "),
+        React.createElement("div", { className: "df-sort__option" }, label || "Sort: "),
         React.createElement(React.Fragment, { key: "list" }, options.map(function (_a, i) {
             var _b;
             var label = _a.label, optionName = _a.name, icon = _a.icon;

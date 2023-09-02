@@ -18,7 +18,7 @@ export const DefaultPage: React.FC = () => {
 
   const texts = useMemo<Partial<DataFeedTexts>>(() => {
     return {
-      sort: "Сорт",
+      loading: "Загрузка",
     };
   }, []);
 
