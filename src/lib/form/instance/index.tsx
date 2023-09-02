@@ -29,7 +29,17 @@ interface Props {
   initialValues?: Store;
 }
 
-export const AppForm: React.FC<Props> = ({ form: propForm, children, className, onFinish, onValuesChange, onChange, onFieldsChange, onValid, initialValues }) => {
+export const AppForm: React.FC<Props> = ({
+  form: propForm,
+  children,
+  className,
+  onFinish,
+  onValuesChange,
+  onChange,
+  onFieldsChange,
+  onValid,
+  initialValues,
+}) => {
   const form = useForm(propForm);
   const [valid, setValid] = useState(false);
   const mount = useDidMount();

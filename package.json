@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.197",
     "@types/numeral": "^2.0.2",
-    "eslint-config-varp": "^1.6.0",
+    "eslint-config-varp": "^1.9.0",
     "sass": "^1.65.1"
   }
 }

@@ -37,7 +37,7 @@ export const DefaultFilterForm: React.FC<Props> = ({ onChange, initialValues, to
     <AppForm form={form} onChange={handleChange} initialValues={initialValues}>
       <div className={s.root}>
         <SortItem name="sort" options={FeedUi.sortOptions} />
-        <InputItem name="name" label="Name" maxLength={75} noStyle placeholder="Search" />
+        <InputItem name="search" label="Name" maxLength={75} noStyle placeholder="Search" />
         <div className={s.action}>
           <div>{`Total: ${total}`}</div>
           <Button onClick={handleClean} type="link">

@@ -41,7 +41,7 @@ export const DataGenerator = {
   loadEuState: (count: number, params: FeedFilterValues): Feed<EuState> => {
     const { skip, page, name, search, isEuro, language, currency, capital, order, direction, population1M, population10M, extraParam } = params;
 
-    // console.log('load', count, options);
+    // console.log("load", params);
 
     let filterItems: EuState[] = orderBy(euStates, order, direction) as any;
 
@@ -50,7 +50,7 @@ export const DataGenerator = {
     }
 
     if (search) {
-      filterItems = filterItems.filter(x => x.name.toLowerCase().includes((search as string).toLowerCase()));
+      filterItems = filterItems.filter(x => x.name.toLowerCase().includes(search?.toLowerCase()));
     }
 
     if (population1M === true) {

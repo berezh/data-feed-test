@@ -1,50 +1,29 @@
-import moment from "moment";
-import React, { useCallback, useEffect } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 import { useReduxSelector } from "src/lib/hooks";
-import { LightDataFeed, StandardRow } from "src/data-feed/index";
-import { EuState } from "../../components/data-gererator";
 import { MasterPage } from "../../components/master-page";
 import { GeneralActions } from "../../redux";
+import { FeedUi } from "../../components/feed-ui";
+import { DataFeedTexts, DataFeed } from "src/data-feed/index";
 
 export const NoFilterPage: React.FC = () => {
   const dispatch = useDispatch();
   const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
-  const handleLoad = useCallback(
-    (skip: number) => {
-      dispatch(GeneralActions.loadStateFeedRequest({ skip }));
-    },
-    [items, all]
-  );
+  const handleChange = useCallback((params: any) => {
+    dispatch(GeneralActions.loadStateFeedRequest(params));
+  }, []);
 
-  useEffect(() => {
-    dispatch(GeneralActions.loadStateFeedRequest({ skip: 0 }));
+  const texts = useMemo<Partial<DataFeedTexts>>(() => {
+    return {
+      sort: "Сорт",
+    };
   }, []);
 
   return (
     <MasterPage>
-      <LightDataFeed
-        total={all}
-        data={items}
-        renderItem={(item: EuState) => {
-          return (
-            <StandardRow
-              topRight={moment(item.accession).fromNow()}
-              attributes={[
-                {
-                  label: "Native Name",
-                  content: item.nativeName,
-                },
-              ]}
-            >
-              {item.name}
-            </StandardRow>
-          );
-        }}
-        onLoad={handleLoad}
-      />
+      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={texts} />
     </MasterPage>
   );
 };

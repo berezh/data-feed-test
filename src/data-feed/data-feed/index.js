@@ -78,29 +78,6 @@ var SortUtil = /** @class */ (function () {
     return SortUtil;
 }());
 
-var FilterUtil = {
-    toInner: function (data) {
-        if (data) {
-            var order = data.order, direction = data.direction, rest = __rest(data, ["order", "direction"]);
-            var sort = {
-                name: order || "",
-                mode: direction || "asc",
-            };
-            return __assign(__assign({}, rest), { sort: sort });
-        }
-        return {};
-    },
-    toOuter: function (_a) {
-        var sort = _a.sort, rest = __rest(_a, ["sort"]);
-        var newValues = __assign({}, rest);
-        if (sort) {
-            newValues.order = sort.name;
-            newValues.direction = sort.mode;
-        }
-        return newValues;
-    },
-};
-
 var EDGE_COUNT = 2;
 var PageUtil = /** @class */ (function () {
     function PageUtil() {
@@ -223,10 +200,18 @@ var dfReducer = function (state, action) {
             return state;
     }
 };
+function initState(initialLoad, initParams) {
+    var params = __assign(__assign({}, initParams), { skip: 0 });
+    return {
+        init: initialLoad,
+        filterParams: params,
+        params: initialLoad ? params : undefined,
+    };
+}
 function DataFeed(_a) {
     var _b = _a.data, data = _b === void 0 ? [] : _b, _c = _a.total, total = _c === void 0 ? 0 : _c, pageItems = _a.pageItems, _d = _a.currentPage, currentPage = _d === void 0 ? 1 : _d, renderRow = _a.renderRow, renderFilter = _a.renderFilter, _e = _a.texts, texts = _e === void 0 ? {} : _e, className = _a.className, dataClassName = _a.dataClassName, _f = _a.loading, loading = _f === void 0 ? false : _f, onChange = _a.onChange, renderPageItem = _a.renderPageItem, initParams = _a.initParams, _g = _a.changeDelay, changeDelay = _g === void 0 ? 300 : _g, _h = _a.initialLoad, initialLoad = _h === void 0 ? true : _h;
     var loadRef = React.useRef(null);
-    var _j = React.useReducer(dfReducer, { init: initialLoad, filterParams: initParams }), state = _j[0], dispatch = _j[1];
+    var _j = React.useReducer(dfReducer, initState(initialLoad, initParams)), state = _j[0], dispatch = _j[1];
     var pageNumber = typeof currentPage === "string" ? parseInt(currentPage) : currentPage;
     var handleLoad = React.useCallback(function () {
         dispatch({ type: "Skip", payload: data.length });
@@ -247,7 +232,7 @@ function DataFeed(_a) {
         else {
             dispatch({ type: "Init", payload: null });
         }
-    }, [state.params]);
+    }, [onChange, state.params]);
     var filterChangeHandler = React.useCallback(function (newParams) {
         dispatch({ type: "Filter", payload: newParams });
     }, [dispatch]);
@@ -362,7 +347,6 @@ var DfSort = function (_a) {
 exports.DataFeed = DataFeed;
 exports.DfSort = DfSort;
 exports.FeedArrayUtil = FeedArrayUtil;
-exports.FilterUtil = FilterUtil;
 exports.PageUtil = PageUtil;
 exports.RowAttribute = RowAttribute;
 exports.SortUtil = SortUtil;

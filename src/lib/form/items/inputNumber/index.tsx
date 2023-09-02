@@ -17,7 +17,16 @@ interface Props extends FormLineProps {
 export const InputNumberItem: React.FC<Props> = ({ min, max, placeholder, disabled, onKeyDown, bordered, maxLength, ...props }) => {
   return (
     <FormLine {...props}>
-      <InputNumber min={min} max={max} placeholder={placeholder} disabled={disabled} onKeyDown={onKeyDown} bordered={bordered} className={s.input} maxLength={maxLength} />
+      <InputNumber
+        min={min}
+        max={max}
+        placeholder={placeholder}
+        disabled={disabled}
+        onKeyDown={onKeyDown}
+        bordered={bordered}
+        className={s.input}
+        maxLength={maxLength}
+      />
     </FormLine>
   );
 };
