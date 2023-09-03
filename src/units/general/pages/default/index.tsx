@@ -1,11 +1,11 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
-import { DataFeedTexts, DataFeed, BasicFeedParams } from "src/data-feed/index";
+import { DataFeed, BasicFeedParams } from "src/data-feed/index";
 import { DefaultFilterForm } from "../../components/filter";
 
 export const DefaultPage: React.FC = () => {
@@ -14,12 +14,6 @@ export const DefaultPage: React.FC = () => {
 
   const handleChange = useCallback((params: any) => {
     dispatch(GeneralActions.loadStateFeedRequest(params));
-  }, []);
-
-  const texts = useMemo<Partial<DataFeedTexts>>(() => {
-    return {
-      loading: "Загрузка",
-    };
   }, []);
 
   const filterHandler = useCallback(
@@ -31,7 +25,7 @@ export const DefaultPage: React.FC = () => {
 
   return (
     <MasterPage>
-      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={texts} renderFilter={filterHandler} />
+      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={FeedUi.texts} renderFilter={filterHandler} />
     </MasterPage>
   );
 };

@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
 import { FeedUi } from "../../components/feed-ui";
-import { BasicFeedParams, DataFeed, DataFeedTexts } from "../../../../data-feed";
+import { BasicFeedParams, DataFeed } from "../../../../data-feed";
 import { GeneralActions } from "../../redux";
 import { DefaultFilterForm } from "../../components/filter";
 
@@ -14,12 +14,6 @@ export const NoInitialLoadPage: React.FC = () => {
 
   const handleChange = useCallback((params: any) => {
     dispatch(GeneralActions.loadStateFeedRequest(params));
-  }, []);
-
-  const texts = useMemo<Partial<DataFeedTexts>>(() => {
-    return {
-      sort: "Сорт",
-    };
   }, []);
 
   const filterHandler = useCallback(
@@ -42,7 +36,7 @@ export const NoInitialLoadPage: React.FC = () => {
           data={items}
           renderRow={FeedUi.renderRow}
           onChange={handleChange}
-          texts={texts}
+          texts={FeedUi.texts}
           renderFilter={filterHandler}
         />
       )}

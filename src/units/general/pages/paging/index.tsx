@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
 
@@ -6,7 +6,7 @@ import { useReduxSelector } from "src/lib/hooks";
 import { MasterPage } from "../../components/master-page";
 import { GeneralActions } from "../../redux";
 import { FeedUi } from "../../components/feed-ui";
-import { DataFeedTexts, DataFeed, BasicFeedParams } from "src/data-feed/index";
+import { DataFeed, BasicFeedParams } from "src/data-feed/index";
 import { DefaultFilterForm } from "../../components/filter";
 import { AppUrls } from "src/lib/urls";
 import s from "./index.module.scss";
@@ -25,12 +25,6 @@ export const PagingPage: React.FC = () => {
     },
     [page]
   );
-
-  const texts = useMemo<Partial<DataFeedTexts>>(() => {
-    return {
-      sort: "Сорт",
-    };
-  }, []);
 
   const filterHandler = useCallback(
     (initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => {
@@ -57,7 +51,7 @@ export const PagingPage: React.FC = () => {
         pageItems={10}
         renderRow={FeedUi.renderRow}
         onChange={handleChange}
-        texts={texts}
+        texts={FeedUi.texts}
         renderFilter={filterHandler}
         renderPageItem={handleRenderPageLink}
       />

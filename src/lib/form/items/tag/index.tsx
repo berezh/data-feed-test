@@ -9,7 +9,7 @@ interface TagProps {
 }
 
 const TagComponent: React.FC<TagProps> = ({ value, renderTag }) => {
-  return renderTag ? <>{renderTag(value)}</> : value;
+  return renderTag ? <>{renderTag(value)}</> : <>{value}</>;
 };
 
 interface Props {

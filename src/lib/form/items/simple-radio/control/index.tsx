@@ -16,7 +16,7 @@ interface Props {
 export const SimpleRadioControl: React.FC<Props> = ({ label, value, id, onChange, options, className }) => {
   const handleClick = useCallback(
     (newValue: string) => {
-      onChange(newValue === value ? undefined : newValue);
+      onChange?.(newValue === value ? undefined : newValue);
     },
     [onChange, value]
   );

@@ -39,7 +39,7 @@ const euStates: EuState[] = EuStates.map<EuState>(x => {
 
 export const DataGenerator = {
   loadEuState: (count: number, params: BasicFeedParams): Feed<EuState> => {
-    const { skip, page, name, search, isEuro, language, currency, capital, order, direction, population1M, population10M, extraParam } = params;
+    const { skip = 0, page, name, search, isEuro, language, currency, capital, order, direction, population1M, population10M, extraParam } = params;
 
     // console.log("load", params);
 

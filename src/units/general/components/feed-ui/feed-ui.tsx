@@ -4,7 +4,7 @@ import numeral from "numeral";
 import { Icon } from "@blueprintjs/core";
 
 import { EuState } from "../data-gererator";
-import { FeedSortOption, StandardRow } from "src/data-feed";
+import { DataFeedTexts, FeedSortOption, StandardRow } from "src/data-feed";
 
 export class FeedUi {
   public static sortOptions: FeedSortOption[] = [
@@ -21,6 +21,13 @@ export class FeedUi {
       name: "area",
     },
   ];
+
+  public static get texts(): Partial<DataFeedTexts> {
+    return {
+      loadMore: "Больше",
+      loading: "Загрузка",
+    };
+  }
 
   public static renderRow(item: EuState): React.ReactElement {
     return (
