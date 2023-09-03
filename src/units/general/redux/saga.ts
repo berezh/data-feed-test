@@ -1,20 +1,21 @@
-import { SagaIterator } from 'redux-saga';
-import { put, debounce } from 'redux-saga/effects';
+import { SagaIterator } from "redux-saga";
+import { put, takeEvery } from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { ActionWith } from '../../../redux/interfaces';
-import { DataGenerator } from '../components/data-gererator';
-import { GeneralActions } from './actions';
-import { GeneralActionTypes } from './types';
+import { DataGenerator } from "../components/data-gererator";
+import { GeneralActions } from "./actions";
+import { PAGE_ITEMS } from "src/consts/feed";
+import { EuFeedParams } from "src/lib/interfaces";
 
-function* loadStateFeed({ payload }: ActionWith): SagaIterator {
+function* loadStateFeed({ payload }: PayloadAction<EuFeedParams>): SagaIterator {
   try {
-    const feed = DataGenerator.loadEuState(10, payload);
+    const feed = DataGenerator.loadEuState(PAGE_ITEMS, payload);
     yield put(GeneralActions.loadStateFeedSuccess(feed));
   } catch (exception) {
     console.error(exception);
   }
 }
 
-export function* generalSaga(): SagaIterator {
-  yield debounce(200, GeneralActionTypes.LOAD_STATE_FEED_REQUEST, loadStateFeed);
+export function* GeneralSaga(): SagaIterator {
+  yield takeEvery(GeneralActions.loadStateFeedRequest, loadStateFeed);
 }

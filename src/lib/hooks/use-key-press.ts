@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from "react";
 
 export const KeyboardCode = {
   backspace: 8,
@@ -19,10 +19,10 @@ export function useKeyPressCallback(callback: (keyCode: number, event: KeyboardE
   }, deps);
 
   useEffect(() => {
-    window.addEventListener('keydown', handleUserKeyPress);
+    window.addEventListener("keydown", handleUserKeyPress);
 
     return () => {
-      window.removeEventListener('keydown', handleUserKeyPress);
+      window.removeEventListener("keydown", handleUserKeyPress);
     };
   }, [handleUserKeyPress]);
 }

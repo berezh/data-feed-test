@@ -1,0 +1,38 @@
+@import "~estyle/index";
+
+.root {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 5px;
+}
+
+.group {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.option {
+  cursor: pointer;
+  padding: 0.2em 0.5em;
+  border: 1px solid var(--borderColor);
+  border-right: none;
+
+  &:last-child {
+    border-right: 1px solid var(--borderColor);
+  }
+
+  &:hover {
+    background-color: var(--hoverBackgroundColor);
+  }
+
+  &__active {
+    border: 1px solid var(--color);
+    background-color: var(--color);
+    color: var(--backgroundColor);
+
+    &:hover {
+      background-color: var(--color);
+    }
+  }
+}

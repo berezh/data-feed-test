@@ -1,0 +1,34 @@
+@import "./font";
+@import "./packages/index";
+@import "~estyle/index";
+@import "src/data-feed/data-feed/index.css";
+
+:root {
+  --coinIconColor: black;
+  --fontFamily: Roboto;
+
+  // base
+  --backgroundColor: "#fff";
+  --borderColor: "#dadada";
+  --hoverBackgroundColor: "#F2F2F2";
+  --backgroundAltColor: "#fafafa";  
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color);
+  font-family: var(--fontFamily), Verdana, Geneva, Tahoma, sans-serif;
+  background-color: var(--backgroundColor);
+  scroll-behavior: smooth;
+}
+
+@include scrollbar(8px, 0, var(--scrollTrackColor), var(--scrollThumbColor), var(--scrollThumbHoverColor));
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+}

@@ -1,0 +1,8 @@
+@import "~estyle/index";
+@import "../styles";
+
+.root {
+  display: inline;
+
+  @include link;
+}

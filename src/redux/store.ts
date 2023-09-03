@@ -1,33 +1,32 @@
-import { createHashHistory } from 'history';
-import { routerMiddleware } from 'connected-react-router';
-import { applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { createLocalStorageStore } from 'redux-sputnik';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore, Store } from "@reduxjs/toolkit";
+import { createWrapper, MakeStore } from "next-redux-wrapper";
+import createSagaMiddleware from "redux-saga";
 
-import { RootSaga } from './saga';
-import { RootReducer } from './reducer';
-import { ReduxState } from './interfaces';
+import { RootReducer } from "./redux";
+import { RootSaga } from "./saga";
+import { ReduxState } from "./interfaces";
 
-const appHistory = createHashHistory();
-const sagaMiddleware = createSagaMiddleware();
+// export const ReduxStore = configureStore({
+//   //   reducer: counterSlice.reducer,
+// });
 
-const middleware = composeWithDevTools(applyMiddleware(routerMiddleware(appHistory), sagaMiddleware));
+export const makeStore: MakeStore<any> = () => {
+  const middleware = [];
 
-// mount it on the Store
-const store = createLocalStorageStore<ReduxState>(
-  {
-    key: 'data-feed',
-    version: 1,
-    filter: ({}: ReduxState) => {
-      return {};
-    },
-  },
-  RootReducer(appHistory),
-  middleware as any
-);
+  // 1: Create the middleware
+  const sagaMiddleware = createSagaMiddleware();
+  middleware.push(sagaMiddleware);
 
-// then run the saga
-sagaMiddleware.run(RootSaga);
+  // 2: Add an extra parameter for applying middleware:
+  const store = configureStore({ reducer: RootReducer, middleware: middleware });
 
-export { appHistory, store };
+  // 3: Run your sagas on server
+  (store as any).sagaTask = sagaMiddleware.run(RootSaga);
+
+  // 4: now return the store:
+  return store;
+};
+
+export const ReduxWrapper = createWrapper<Store<ReduxState>>(makeStore, {
+  debug: false,
+});

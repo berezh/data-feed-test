@@ -1,68 +1,75 @@
-import React from 'react';
-import moment from 'moment';
-import numeral from 'numeral';
-import { Icon } from '@blueprintjs/core';
+import React from "react";
+import moment from "moment";
+import numeral from "numeral";
+import { Icon } from "@blueprintjs/core";
 
-import { EuState } from '../data-gererator';
-import { StandardRow, FeedSortOption } from '../../../../data-feed';
+import { EuState } from "../data-gererator";
+import { DataFeedTexts, FeedSortOption, StandardRow } from "src/data-feed";
 
 export class FeedUi {
   public static sortOptions: FeedSortOption[] = [
     {
-      label: 'Name',
-      name: 'name',
+      label: "Name",
+      name: "name",
     },
     {
-      label: 'Population',
-      name: 'population',
+      label: "Population",
+      name: "population",
     },
     {
-      label: 'Area',
-      name: 'area',
+      label: "Area",
+      name: "area",
     },
   ];
 
-  public static renderItem(item: EuState): React.ReactElement {
+  public static get texts(): Partial<DataFeedTexts> {
+    return {
+      loadMore: "Больше",
+      loading: "Загрузка",
+    };
+  }
+
+  public static renderRow(item: EuState): React.ReactElement {
     return (
       <StandardRow
         topRight={moment(item.accession).fromNow()}
         attributes={[
           {
-            label: 'Native Name',
+            label: "Native Name",
             content: item.nativeName,
           },
           {
-            label: 'Capital',
+            label: "Capital",
             content: item.capital,
           },
           {
-            label: 'Population',
+            label: "Population",
             content: item.population,
           },
           {
-            label: 'Area (km²)',
+            label: "Area (km²)",
             content: item.area,
           },
           {
             icon: <Icon icon="dollar" />,
-            label: 'GDP (Milions)',
-            content: numeral(item.totalGdp).format('$0,0'),
+            label: "GDP (Milions)",
+            content: numeral(item.totalGdp).format("$0,0"),
           },
           {
             icon: <Icon icon="dollar" />,
-            content: numeral(item.capitalGdp).format('0,0'),
+            content: numeral(item.capitalGdp).format("0,0"),
           },
           {
-            label: 'Currency',
+            label: "Currency",
             content: item.currency,
           },
           {
-            label: 'EP seats',
+            label: "EP seats",
             content: item.epSeats,
           },
           {
-            label: 'Lanugages',
-            content: item.languages.join(', '),
+            label: "Lanugages",
+            content: item.languages.join(", "),
             maxWidth: 100,
           },
         ]}

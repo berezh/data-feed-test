@@ -1,0 +1,24 @@
+:root {
+  --dfFontSize: 14px;
+  --dfColor: var(--color);
+  --dfBorderColor: var(--borderColor);
+  --dfBorderWidth: 1px;
+  --dbFilterBackgroundColor: var(--backgroundColor);
+  --dbFilterPadding: 10px;
+  --dbFilterSpacing: 10px;
+  --dbSortFontSize: 12px;
+  --dbControlSpacing: 5px;
+  --dfControlBorderColor: var(--borderColor);
+  --dfControlBorderWidth: 1px;
+  --dfControlHeight: 26px;
+  --dfControlPadding: 5px;
+  --dfButtomLinkColor: var(--linkColor);
+  --dfButtomLinkDisabledColor: var(--passiveColor);
+  --dfLineBorderWidth: 1px;
+  --dfLineBorderColor: var(--borderColor);
+  --dfRowContentFontSize: 18px;
+  --dfRowBackgroundColorHover: inherit;
+  --dfAttributeColor: var(--passiveColor);
+  --dfAttributeFontSize: 14px;
+  --dfRowBorderBottomColor: var(--borderColor);
+}

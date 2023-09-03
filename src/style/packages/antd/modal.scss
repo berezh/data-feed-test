@@ -1,0 +1,9 @@
+.ant-modal {
+  .ant-modal-content {
+    padding: 0;
+
+    >button {
+      display: none;
+    }
+  }
+}

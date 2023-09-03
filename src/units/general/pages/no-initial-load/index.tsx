@@ -1,68 +1,45 @@
-import React, { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { MasterPage } from '../../components/master-page';
-import { FeedUi } from '../../components/feed-ui';
-import {
-  FeedFilterValues,
-  FilterCheckboxField,
-  DataFeed,
-  FilterSearchField,
-  FilterSelectField,
-} from '../../../../data-feed';
-import { useReduxSelector } from 'src/lib/hooks';
-import { GeneralActions } from '../../redux';
+import { useReduxSelector } from "src/lib/hooks";
+import { MasterPage } from "../../components/master-page";
+import { FeedUi } from "../../components/feed-ui";
+import { BasicFeedParams, DataFeed } from "../../../../data-feed";
+import { GeneralActions } from "../../redux";
+import { DefaultFilterForm } from "../../components/filter";
 
 export const NoInitialLoadPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
-  const handleChange = useCallback(
-    (options: any) => {
-      dispatch(GeneralActions.loadStateFeedRequest(options));
+  const handleChange = useCallback((params: any) => {
+    dispatch(GeneralActions.loadStateFeedRequest(params));
+  }, []);
+
+  const filterHandler = useCallback(
+    (initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => {
+      return <DefaultFilterForm initialValues={initParams} onChange={onChange} total={all} />;
     },
-    [items, all]
+    [all]
   );
 
-  const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
-    return {
-      direction: 'desc',
-      order: 'population',
-    };
+  useEffect(() => {
+    dispatch(GeneralActions.loadStateFeedRequest({ skip: 0 }));
   }, []);
 
   return (
     <MasterPage>
-      <DataFeed
-        all={all}
-        data={items}
-        initialLoad={false}
-        onChange={handleChange}
-        sortOptions={FeedUi.sortOptions}
-        renderItem={FeedUi.renderItem}
-        showTotal={true}
-        initialValues={initialValues}
-      >
-        <FilterCheckboxField name="isEuro" label="Is Euro" />
-        <FilterSelectField
-          name="language"
-          placeholder="Select Language"
-          options={[
-            { text: 'German', value: 'german' },
-            { text: 'English', value: 'english' },
-          ]}
+      {items?.length && (
+        <DataFeed
+          initialLoad={false}
+          total={all}
+          data={items}
+          renderRow={FeedUi.renderRow}
+          onChange={handleChange}
+          texts={FeedUi.texts}
+          renderFilter={filterHandler}
         />
-        <FilterSelectField
-          name="currency"
-          placeholder="Select Language"
-          options={[
-            { text: 'Euro', value: 'euro' },
-            { text: 'Krona', value: 'krona' },
-            { text: 'Kuna', value: 'kuna' },
-          ]}
-        />
-        <FilterSearchField name="capital" label="Capital" placeholder="Enter Capital" />
-      </DataFeed>
+      )}
     </MasterPage>
   );
 };

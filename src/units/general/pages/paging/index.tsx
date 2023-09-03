@@ -1,55 +1,59 @@
-import { parse } from 'query-string';
-import React, { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import classNames from "classnames";
 
-import { useReduxSelector } from 'src/lib/hooks';
-import { FeedFilterValues, DataFeed } from '../../../../data-feed';
-import { FeedUi } from '../../components/feed-ui';
-import { MasterPage } from '../../components/master-page';
-import { GeneralActions } from '../../redux';
-
-const step = 10;
+import { useReduxSelector } from "src/lib/hooks";
+import { MasterPage } from "../../components/master-page";
+import { GeneralActions } from "../../redux";
+import { FeedUi } from "../../components/feed-ui";
+import { DataFeed, BasicFeedParams } from "src/data-feed/index";
+import { DefaultFilterForm } from "../../components/filter";
+import { AppUrls } from "src/lib/urls";
+import s from "./index.module.scss";
+import { useRouterQuery } from "src/lib/hooks/param-router";
+import { PageQuery } from "src/lib/urls/interfaces";
 
 export const PagingPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
-  const { search } = useLocation();
-  const { page } = parse(search, { parseNumbers: true }) as {
-    page?: number;
-  };
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
+
+  const { page } = useRouterQuery<PageQuery>();
 
   const handleChange = useCallback(
-    (options: FeedFilterValues) => {
-      dispatch(GeneralActions.loadStateFeedRequest(options));
+    (params: any) => {
+      dispatch(GeneralActions.loadStateFeedRequest({ ...params, page }));
     },
-    [items]
+    [page]
   );
 
-  const handleRenderPageLink = useCallback((page: number) => {
-    return <a href={`/paging?page=${page}`}>{page}</a>;
-  }, []);
+  const filterHandler = useCallback(
+    (initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => {
+      return <DefaultFilterForm initialValues={initParams} onChange={onChange} total={all} />;
+    },
+    [all]
+  );
 
-  const initialValues = useMemo<Partial<FeedFilterValues>>(() => {
-    return {
-      direction: 'desc',
-      order: 'name',
-      page,
-    };
-  }, [page]);
+  const handleRenderPageLink = useCallback((p: number | null, current: boolean) => {
+    const url = AppUrls.paging.build({ page: p?.toString() });
+    return (
+      <a href={url} className={classNames(s.link, { [s.link__current]: current })}>
+        {p}
+      </a>
+    );
+  }, []);
 
   return (
     <MasterPage>
       <DataFeed
-        all={all}
+        currentPage={page}
+        total={all}
         data={items}
-        step={step}
-        renderItem={FeedUi.renderItem}
-        sortOptions={FeedUi.sortOptions}
-        // renderPageItem={handleRenderPageItem}
-        renderPageLink={handleRenderPageLink}
-        initialValues={initialValues}
+        pageItems={10}
+        renderRow={FeedUi.renderRow}
         onChange={handleChange}
+        texts={FeedUi.texts}
+        renderFilter={filterHandler}
+        renderPageItem={handleRenderPageLink}
       />
     </MasterPage>
   );

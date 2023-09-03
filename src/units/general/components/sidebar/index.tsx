@@ -1,14 +1,14 @@
-import classNames from 'classnames';
-import { PagePath } from 'page-path';
-import React, { useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import classNames from "classnames";
+import { PagePath } from "page-path";
+import React, { useMemo } from "react";
+import { useRouter } from "next/router";
 
-import { AppUrls } from '../../../../lib/urls';
-
-import './index.scss';
+import s from "./index.module.scss";
+import { AppLink } from "src/lib/link";
+import { AppUrls } from "src/lib/urls";
 
 export const Sidebar: React.FC = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
 
   const options = useMemo<
     {
@@ -19,23 +19,19 @@ export const Sidebar: React.FC = () => {
     return [
       {
         path: AppUrls.default,
-        title: 'Default',
-      },
-      {
-        path: AppUrls.blueprint,
-        title: 'BluePrint',
+        title: "Default",
       },
       {
         path: AppUrls.paging,
-        title: 'Paging',
+        title: "Paging",
       },
       {
         path: AppUrls.noInitialLoad,
-        title: 'No Initial Load',
+        title: "No Initial Load",
       },
       {
         path: AppUrls.noFilter,
-        title: 'No Filter',
+        title: "No Filter",
       },
       // {
       //     path: AppUrls.autoload,
@@ -49,18 +45,18 @@ export const Sidebar: React.FC = () => {
   }, []);
 
   return (
-    <div className="sidebar">
+    <div className={s.sidebar}>
       {options.map((x, i) => {
         return (
-          <Link
+          <AppLink
             key={i}
-            to={x.path.build()}
-            className={classNames('sidebar__link', {
-              ['sidebar__link--active']: x.path.isActive(pathname),
+            href={x.path.build()}
+            className={classNames(s.sidebar__link, {
+              [s["sidebar__link--active"]]: x.path.isActive(pathname),
             })}
           >
             {x.title}
-          </Link>
+          </AppLink>
         );
       })}
     </div>

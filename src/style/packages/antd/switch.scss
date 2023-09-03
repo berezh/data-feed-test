@@ -1,0 +1,7 @@
+.ant-switch {
+  &-handle {
+    &::before {
+      background-color: var(--backgroundColor) !important;
+    }
+  }
+}

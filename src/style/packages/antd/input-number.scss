@@ -1,0 +1,7 @@
+.ant-input-number {
+  border: 1px solid var(--borderColor) !important;
+
+  &.ant-input-number-focused {
+    box-shadow: 0 0 0 2px var(--passiveColor) !important;
+  }
+}

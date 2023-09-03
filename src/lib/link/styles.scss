@@ -1,0 +1,14 @@
+@import "~estyle/index";
+
+@mixin link {
+  color: var(--linkColor) !important;
+  text-decoration: none;
+
+  // text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--linkColor);
+    text-decoration: underline;
+  }
+}

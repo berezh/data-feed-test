@@ -1,50 +1,23 @@
-import moment from 'moment';
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 
-import { useReduxSelector } from 'src/lib/hooks';
-import { LightDataFeed, StandardRow } from '../../../../data-feed';
-import { EuState } from '../../components/data-gererator';
-import { MasterPage } from '../../components/master-page';
-import { GeneralActions } from '../../redux';
+import { useReduxSelector } from "src/lib/hooks";
+import { MasterPage } from "../../components/master-page";
+import { GeneralActions } from "../../redux";
+import { FeedUi } from "../../components/feed-ui";
+import { DataFeed } from "src/data-feed/index";
 
 export const NoFilterPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector((x) => x.general.stateFeed);
+  const { all, items } = useReduxSelector(x => x.general.stateFeed);
 
-  const handleChange = useCallback(
-    (skip: number) => {
-      dispatch(GeneralActions.loadStateFeedRequest({ skip }));
-    },
-    [items, all]
-  );
-
-  useEffect(() => {
-    dispatch(GeneralActions.loadStateFeedRequest({ skip: 0 }));
+  const handleChange = useCallback((params: any) => {
+    dispatch(GeneralActions.loadStateFeedRequest(params));
   }, []);
 
   return (
     <MasterPage>
-      <LightDataFeed
-        all={all}
-        data={items}
-        renderItem={(item: EuState) => {
-          return (
-            <StandardRow
-              topRight={moment(item.accession).fromNow()}
-              attributes={[
-                {
-                  label: 'Native Name',
-                  content: item.nativeName,
-                },
-              ]}
-            >
-              {item.name}
-            </StandardRow>
-          );
-        }}
-        onChange={handleChange}
-      />
+      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={FeedUi.texts} />
     </MasterPage>
   );
 };

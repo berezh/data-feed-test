@@ -1,9 +1,12 @@
-export interface BaseFeedParams {
+import { OrderDirection } from "src/data-feed";
+
+export interface EuFeedParams {
+  search?: string;
   page?: number | string;
   skip: number;
-  search?: string;
-  orderColumn?: string;
-  orderMode?: number;
+  order?: string;
+  direction?: OrderDirection;
+  [key: string]: any;
 }
 
 export interface Feed<T = any> {
@@ -11,3 +14,12 @@ export interface Feed<T = any> {
   all: number;
   items: T[];
 }
+
+// export interface FeedFilterValues {
+//   search?: string;
+//   page?: number | string;
+//   skip: number;
+//   order?: string;
+//   direction?: OrderDirection;
+//   [key: string]: any;
+// }
