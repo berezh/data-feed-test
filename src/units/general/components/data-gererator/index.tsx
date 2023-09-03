@@ -88,22 +88,22 @@ export const DataGenerator = {
     //         return i + 1 > skip && i + 1 < skip + count;
     //     }),
     // ];
-    const all = filterItems.length;
+    const total = filterItems.length;
 
-    let items: EuState[] = [];
+    let data: EuState[] = [];
 
     if (page) {
       const currentPage = typeof page === "string" ? parseInt(page) : page;
       const startIndex = count * (currentPage - 1);
-      items = filterItems.slice(startIndex, startIndex + count);
+      data = filterItems.slice(startIndex, startIndex + count);
     } else {
-      items = filterItems.slice(skip, skip + count);
+      data = filterItems.slice(skip, skip + count);
     }
 
     return {
-      items,
+      data,
       skip: skip + count,
-      all,
+      total,
     };
   },
 };

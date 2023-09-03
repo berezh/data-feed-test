@@ -10,7 +10,7 @@ import { DefaultFilterForm } from "../../components/filter";
 
 export const DefaultPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector(x => x.general.stateFeed);
+  const { total, data } = useReduxSelector(x => x.general.stateFeed);
 
   const handleChange = useCallback((params: any) => {
     dispatch(GeneralActions.loadStateFeedRequest(params));
@@ -18,14 +18,14 @@ export const DefaultPage: React.FC = () => {
 
   const filterHandler = useCallback(
     (initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => {
-      return <DefaultFilterForm initialValues={initParams} onChange={onChange} total={all} />;
+      return <DefaultFilterForm initialValues={initParams} onChange={onChange} total={total} />;
     },
-    [all]
+    [total]
   );
 
   return (
     <MasterPage>
-      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={FeedUi.texts} renderFilter={filterHandler} />
+      <DataFeed total={total} data={data} renderRow={FeedUi.renderRow} onChange={handleChange} texts={FeedUi.texts} renderFilter={filterHandler} />
     </MasterPage>
   );
 };

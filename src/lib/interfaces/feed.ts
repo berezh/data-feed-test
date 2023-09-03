@@ -11,8 +11,8 @@ export interface EuFeedParams {
 
 export interface Feed<T = any> {
   skip: number;
-  all: number;
-  items: T[];
+  total: number;
+  data: T[];
 }
 
 // export interface FeedFilterValues {

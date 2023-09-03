@@ -9,7 +9,7 @@ import { DataFeed } from "src/data-feed/index";
 
 export const NoFilterPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector(x => x.general.stateFeed);
+  const { total, data } = useReduxSelector(x => x.general.stateFeed);
 
   const handleChange = useCallback((params: any) => {
     dispatch(GeneralActions.loadStateFeedRequest(params));
@@ -17,7 +17,7 @@ export const NoFilterPage: React.FC = () => {
 
   return (
     <MasterPage>
-      <DataFeed total={all} data={items} renderRow={FeedUi.renderRow} onChange={handleChange} texts={FeedUi.texts} />
+      <DataFeed total={total} data={data} renderRow={FeedUi.renderRow} onChange={handleChange} texts={FeedUi.texts} />
     </MasterPage>
   );
 };

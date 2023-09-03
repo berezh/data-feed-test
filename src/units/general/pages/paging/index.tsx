@@ -15,7 +15,7 @@ import { PageQuery } from "src/lib/urls/interfaces";
 
 export const PagingPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { all, items } = useReduxSelector(x => x.general.stateFeed);
+  const { total, data } = useReduxSelector(x => x.general.stateFeed);
 
   const { page } = useRouterQuery<PageQuery>();
 
@@ -28,9 +28,9 @@ export const PagingPage: React.FC = () => {
 
   const filterHandler = useCallback(
     (initParams: BasicFeedParams, onChange: (changedParams: BasicFeedParams) => void) => {
-      return <DefaultFilterForm initialValues={initParams} onChange={onChange} total={all} />;
+      return <DefaultFilterForm initialValues={initParams} onChange={onChange} total={total} />;
     },
-    [all]
+    [total]
   );
 
   const handleRenderPageLink = useCallback((p: number | null, current: boolean) => {
@@ -46,8 +46,8 @@ export const PagingPage: React.FC = () => {
     <MasterPage>
       <DataFeed
         currentPage={page}
-        total={all}
-        data={items}
+        total={total}
+        data={data}
         pageItems={10}
         renderRow={FeedUi.renderRow}
         onChange={handleChange}
