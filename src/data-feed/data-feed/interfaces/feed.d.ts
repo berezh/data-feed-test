@@ -1,5 +1,5 @@
 export interface BasicFeedParams {
-    skip?: number;
-    page?: number | string;
+    skip: number;
+    page?: number;
     [key: string]: any;
 }

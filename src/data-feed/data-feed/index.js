@@ -2,7 +2,6 @@
 'use strict';
 
 var React = require('react');
-var classNames$1 = require('classnames');
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -156,6 +155,27 @@ var FeedArrayUtil = {
     },
 };
 
+function classNames() {
+    var names = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        names[_i] = arguments[_i];
+    }
+    return names
+        .map(function (name) {
+        var _a;
+        if (typeof name === "string") {
+            return name;
+        }
+        else if (typeof name === "object") {
+            var keys = Object.keys(name);
+            var subNames = keys.filter(function (key) { return !!name[key]; });
+            return subNames.join(" ");
+        }
+        return (_a = name) === null || _a === void 0 ? void 0 : _a.toString();
+    })
+        .join(" ");
+}
+
 var ButtonLink = function (_a) {
     var _b;
     var children = _a.children, disabled = _a.disabled, onClick = _a.onClick;
@@ -164,7 +184,7 @@ var ButtonLink = function (_a) {
             onClick();
         }
     }, [onClick, disabled]);
-    return (React.createElement("div", { className: classNames$1("df-button-link", (_b = {},
+    return (React.createElement("div", { className: classNames("df-button-link", (_b = {},
             _b["df-button-link--disabled"] = disabled,
             _b)), onClick: handleClick }, children));
 };
@@ -236,9 +256,9 @@ function DataFeed(_a) {
     var filterChangeHandler = React.useCallback(function (newParams) {
         dispatch({ type: "Filter", payload: newParams });
     }, [dispatch]);
-    return (React.createElement("div", { className: classNames$1("df-feed", className) },
+    return (React.createElement("div", { className: classNames("df-feed", className) },
         React.createElement(React.Fragment, null, renderFilter === null || renderFilter === void 0 ? void 0 : renderFilter(state.filterParams, filterChangeHandler)),
-        React.createElement("div", { className: classNames$1("df-feed__data", dataClassName) }, data.map(function (item, i) {
+        React.createElement("div", { className: classNames("df-feed__data", dataClassName) }, data.map(function (item, i) {
             return React.createElement(React.Fragment, { key: i }, renderRow(item));
         })),
         data.length < total && pageNumber === 1 ? (React.createElement("div", { className: "df-feed__load", ref: loadRef },
@@ -246,27 +266,6 @@ function DataFeed(_a) {
         pageItems && pageItems < total && data.length <= pageItems ? (React.createElement("div", { className: "df-feed__page" }, pages.map(function (p, i) {
             return React.createElement("div", { key: i }, renderPageItem ? renderPageItem(p, pageNumber === p) : React.createElement("span", null, p ? p : "..."));
         }))) : null));
-}
-
-function classNames() {
-    var names = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        names[_i] = arguments[_i];
-    }
-    return names
-        .map(function (name) {
-        var _a;
-        if (typeof name === "string") {
-            return name;
-        }
-        else if (typeof name === "object") {
-            var keys = Object.keys(name);
-            var subNames = keys.filter(function (key) { return !!name[key]; });
-            return subNames.join(" ");
-        }
-        return (_a = name) === null || _a === void 0 ? void 0 : _a.toString();
-    })
-        .join(" ");
 }
 
 var RowAttribute = function (_a) {

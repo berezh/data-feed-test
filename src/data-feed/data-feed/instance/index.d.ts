@@ -27,7 +27,7 @@ export interface DataFeedProps<T = any> {
     containerRef?: React.RefObject<HTMLElement>;
     renderPageItem?: (page: number | null, current: boolean) => React.ReactNode;
     texts?: Partial<DataFeedTexts>;
-    initParams?: BasicFeedParams;
+    initParams?: Partial<BasicFeedParams>;
     changeDelay?: number;
     initialLoad?: boolean;
 }
